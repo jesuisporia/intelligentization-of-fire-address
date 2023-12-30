@@ -1,0 +1,185 @@
+<div id="wrapper">
+
+    <div class="normalheader transition">
+        <div class="hpanel">
+            <div class="panel-body">
+                <a class="small-header-action" href="#">
+                    <div class="clip-header">
+                        <i class="fa fa-arrow-up"></i>
+                    </div>
+                </a>
+
+                <div id="hbreadcrumb" class="pull-left m-t-lg">
+                    <ol class="hbreadcrumb breadcrumb">
+                        <li><a href="/admin/home">پیشخوان</a></li>
+                        <li>
+                            <span>جزئیات خودرو عملیاتی</span>
+                        </li>
+                        <li class="active">
+                            <span>جزییات کد ۷۸</span>
+                        </li>
+                    </ol>
+                </div>
+                <h2 class="font-light m-b-xs">
+                    جزئیات کد ۷۸
+                </h2>
+                <small>تمام فعالیت های  کد ۷۸</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+
+        <div class="row">
+
+            <div class="col-md-8">
+
+                <div class="font-bold m-b-sm">
+                    نمودار فعالیت های کد ۷۸
+                </div>
+
+                <div class="hpanel">
+                    <div class="panel-body">
+
+                        <div class="pull-left">
+                            <button class="btn btn-success btn-xs"> فعال</button>
+                            <button class="btn btn-default btn-xs"> <i class="fa fa-pencil"></i> ویرایش</button>
+                        </div>
+                        <h2 class="m-t-none">جزئیات  کد ۷۸ </h2>
+                        <small>
+                            در نمودار زیر جزئیات عملیاتهایی را مشاهده میکنید که آتش نشان  در آن شرکت
+                            داشته. برای مشاهده اطلاعات بیشتر میتوانید از اطلاعات کادر سمت چپ استفاده نمایید یا در پایین
+                            همین صفحه جزئیات را مشاهده نمایید. همچنین در آینده قابلیت ارسال پیام خصوصی برای کاربران
+                            ایجاد میشود.این بخش در حال تکمیل شده میباشد.
+                        </small>
+                        <div class="small m-t-xs">
+                        </div>
+
+
+
+                        <div class="m-t-md"><iframe class="chartjs-hidden-iframe" tabindex="-1"
+                                style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
+                            <canvas id="lineOptions" height="125" width="629"
+                                style="display: block; width: 629px; height: 125px;"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="col-md-4">
+
+                <div class="font-bold m-b-sm">
+                    خلاصه وضعیت
+                </div>
+
+                <div class="hpanel stats">
+                    <div class="panel-body">
+
+                        <div>
+                            <strong>تعداد کل عملیات شرکت کرده</strong>
+                        </div>
+
+                        <p>
+                            در کادر زیر خلاصه ای از وضعیت <strong>تعداد عملیات</strong> شرکت کرده آتش نشان
+                        </p>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <small>امروز</small>
+                                <h4 class="m-t-xs">۱۷۰۲۰<i class="fa fa-level-up text-success"></i></h4>
+                            </div>
+                            <div class="col-xs-6">
+                                <small>آخرین هفته</small>
+                                <h4 class="m-t-xs">۵۸۰۹۰<i class="fa fa-level-up text-success"></i></h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <small>دیروز</small>
+                                <h4 class="m-t-xs">۶۲۰۲۰<i class="fa fa-level-up text-success"></i></h4>
+                            </div>
+                            <div class="col-xs-6">
+                                <small>آخرین ماه</small>
+                                <h4 class="m-t-xs">۱۴۰۷۰<i class="fa fa-level-up text-success"></i></h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+            </div>
+
+
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="hpanel">
+
+                    <div class="panel-body">
+
+                        <p>
+                            را مشاهده میکنید. بخش جست و جو در حال تکمیل شده میباشد.
+                        </p>
+
+                        <div class="table-responsive">
+                            <table class="table table-hover table-bordered table-striped">
+                                <tbody>
+  
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+<script>
+    $(function () {
+
+        /**
+         * Options for Line chart
+         */
+        var lineData = {
+            labels: ["فروردین", "اردیبهشت", "خرداد", "تیر"],
+            datasets: [{
+                label: "تعداد عملیات شرکت کرده",
+                backgroundColor: "rgba(98,203,49,0.5)",
+                borderColor: "rgba(98,203,49,0.7)",
+                pointBackgroundColor: "rgba(98,203,49,1)",
+                pointBorderColor: "#fff",
+                pointHoverBackgroundColor: "#fff",
+                pointHoverBorderColor: "rgba(26,179,148,1)",
+                data: [17, 21, 19, 24]
+            }]
+        };
+
+        var lineOptions = {
+            responsive: true,
+            legend: {
+                display: false
+            }
+        };
+
+        var ctx = document.getElementById("lineOptions").getContext("2d");
+        new Chart(ctx, {
+            type: 'line',
+            data: lineData,
+            options: lineOptions
+        });
+
+
+    });
+</script>

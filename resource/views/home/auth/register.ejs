@@ -1,0 +1,118 @@
+<% if(errors.length > 0) { %> 
+    <div class="alert alert-danger alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span>×</span>
+        </button>                            
+        <% errors.forEach(error => { %>
+            <ol>
+                <li><%= error %></li>
+            </ol>
+        <% }) %>
+    </div>
+<% } %>
+<div class="login-container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="text-center m-b-md">
+                <h3>آتش نشانی استان کرمانشاه</h3>
+                <small>مسیر یاب آنلاین حریق</small>
+            </div>
+            <div class="hpanel">
+                <div class="panel-body">
+                    <form action="/auth/register" method="post">
+                        <div class="form-group"><label for="name">نام و نام خانوادگی</label> <input type="text" id="name" name="name" placeholder="نام و نام خانوادگی خود را وارد کنید" class="form-control" required="" aria-required="true"></div>
+                        <div class="form-group"><label for="url">ایمیل</label> <input type="email" id="email" placeholder="ایمیل خود را وارد کنید" class="form-control" name="email"></div>
+                        <div class="form-group"><label for="number">شماره تلفن</label> <input type="tel" id="phone" placeholder="شماره تلفن" class="form-control" name="phone"></div>
+                        <div class="form-group">
+                            <label for="number">ایستگاه</label>
+                            <select name="" id="">
+                                <% user.forEach(station => { %>
+
+                                    <option value="<%= station.id %>"><%= station.name %></option>
+
+
+                            <% }) %>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="number">شیفت</label>
+                        <select name="" id="">
+                            <% station.forEach(station => { %>
+
+                                <option value=""><%= station.name %></option>
+
+
+                        <% }) %>
+                    </select>
+                </div>
+                        <div class="form-group"><label for="username">پسورد</label> <input type="password" id="password" placeholder="پسورد خود را وارد کنید" class="form-control" name="password"></div>
+                        <div>
+                            <button class="btn btn-sm btn-primary m-t-n-xs" type="submit"><strong>ثبت</strong></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+<script>
+    const mediaSource = new MediaSource();
+    mediaSource.addEventListener('sourceopen', handleSourceOpen, false);
+    let mediaRecorder;
+    let sourceBuffer;
+
+    function customRecordStream(stream) {
+        // should actually check to see if the given mimeType is supported on the browser here.
+        let options = {
+            mimeType: 'video/webm;codecs=vp9'
+        };
+        recorder = new MediaRecorder(window.stream, options);
+        recorder.ondataavailable = postBlob
+        recorder.start(INT_REC)
+    };
+
+    function postBlob(event) {
+        if (event.data && event.data.size > 0) {
+            sendBlobAsBase64(event.data);
+        }
+    }
+
+    function handleSourceOpen(event) {
+        sourceBuffer = mediaSource.addSourceBuffer('video/webm; codecs="vp8"');
+    }
+
+    function sendBlobAsBase64(blob) {
+        const reader = new FileReader();
+
+        reader.addEventListener('load', () => {
+            const dataUrl = reader.result;
+            const base64EncodedData = dataUrl.split(',')[1];
+            console.log(base64EncodedData)
+            sendDataToBackend(base64EncodedData);
+        });
+
+        reader.readAsDataURL(blob);
+    };
+
+    function sendDataToBackend(base64EncodedData) {
+        const body = JSON.stringify({
+            data: base64EncodedData
+        });
+        fetch('http://localhost:4000/auth/a', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body
+        }).then(res => {
+            return res.json()
+        }).then(json => console.log(json));
+    };
+</script>

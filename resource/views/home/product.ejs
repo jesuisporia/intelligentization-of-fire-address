@@ -1,0 +1,115 @@
+
+
+    <section class="single-header">
+        <div class="imageHeader">
+            <img src="./../../../../images/bg-footer.png" alt="Notebook">
+
+        </div>
+    </section>
+<section class="main">
+
+    <div class="content">
+        
+        <div class="product-container">
+            <% product.forEach(post => { %> 
+        
+        
+        <a href="/detail-product/<%= post.slug %>">
+          <div class="item">
+            
+            <img src="<%= post.images %>" alt="Notebook">
+            <div class="content">
+              <h1><%= post.title %></h1>
+            </div>
+        </div>
+        
+        </a>
+        
+            <% }) %>
+        
+          </div>
+        
+        
+        
+
+        
+
+    </div>
+
+    <div class="sidebar">
+
+        <div class="filter">
+            <h5>پنل کاربری</h5>
+
+            <ul>
+                <li><a href="">اطلاعات کاربری</a></li>
+                <li><a href="">ویرایش اطلاعات</a></li>
+                <li><a href="">تغییر رمز عبور</a></li>
+                <li><a href="">پیام ها</a></li>
+                <li><a href="">عضویت ویژه</a></li>
+                <li><a href="">بوکمارک ها</a></li>
+                <li><a href="">نظرات ثبت شده</a></li>
+            </ul>
+        </div>
+    </div>
+
+
+
+
+    <div class="comment_wrapper">
+        <form action="/comment" method="post">
+    
+            <input type="hidden" name="parent" value="">
+            <input type="hidden" name="post" value="">
+    
+            <div class="form-group">
+                <label for="message-text" class="control-label">متن پاسخ:</label>
+                <textarea class="form-control" id="message-text" name="comment"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">ارسال</button>
+                <button type="button" class="btn btn-default mr-2 ml-0" data-dismiss="modal">انصراف</button>
+            </div>
+        </form>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="product-container">
+        <% similar.forEach(post => { %> 
+    
+          <a href="<%= post.slug %>">
+    
+      <div class="item">
+        
+        <img src="<%= post.images %>" alt="Notebook">
+        <div class="content">
+          <h1><%= post.title %></h1>
+        </div>
+    </div>
+    </a>
+    
+    
+    
+        <% }) %>
+    
+      </div>
+
+
+</section>
+
+
+
+
+

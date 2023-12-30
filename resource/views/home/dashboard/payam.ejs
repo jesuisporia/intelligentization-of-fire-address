@@ -1,0 +1,59 @@
+<section class="single-header">
+    <div class="imageHeader">
+        <img src="./../../../../images/bg-footer.png" alt="Notebook">
+
+    </div>
+</section>
+
+
+
+
+<section class="main">
+
+    <div class="content dashboard">
+
+
+        <div class="desc payam">
+            <h1>مشخصات کاربری
+            </h1>
+            <p class="alert-info">در زیر اطلاعات کاربری شما نمایش داده میشود, بزودی بخش های دیگری هم به پنل کاربری اضافه میشود.            </p>
+            
+            <h2>پیام ها</h2>
+            <%- include(viewPath('layouts/pagination') ,{ pagination : payam}) %>
+
+            <table class="w3-table-all w3-centered">
+                <tr>
+                  <th>پیام ها</th>
+                  <th>تاریخ</th>
+                  <th>مدیریت</th>
+                </tr>
+
+                            
+            <% payam.docs.forEach(post => { %>
+                <tr>
+                    <td><%= post.payam.substr(0,20) %></td>
+                    <td>Smith</td>
+                    <td><a href="">حذف</a></td>
+                  </tr>
+            
+
+                <% }) %>
+
+
+              </table>
+            
+            
+
+            
+        </div>
+        
+
+    </div>
+
+    <%- include(viewPath('home/dashboard/sidbardashboard')) %>
+
+
+
+</section>
+
+

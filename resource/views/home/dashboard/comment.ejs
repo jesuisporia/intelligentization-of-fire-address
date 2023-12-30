@@ -1,0 +1,52 @@
+
+<section class="single-header">
+    <div class="imageHeader">
+        <img src="./../../../../images/bg-footer.png" alt="Notebook">
+
+    </div>
+</section>
+
+
+
+
+<section class="main">
+
+    <div class="content dashboard">
+
+
+        <div class="desc">
+            <h1>نظرات ثبت شده
+
+            </h1>
+            <p class="alert-warning">شما تاکنون ۰ نظر در سرزمین چوب ایران ثبت کرده اید
+
+            </p>
+            <div class="history">
+                <% comment.docs.forEach(post => { %>
+                
+                <div class="item">
+            
+                    <img src="<%= post.productid.images %>" alt="Notebook">
+                      <h1><%= post.productid.title %></h1>
+                </div>
+
+                <% }) %>
+
+            </div>
+
+            
+        </div>
+        
+
+    </div>
+
+    <%- include(viewPath('home/dashboard/sidbardashboard')) %>
+
+
+
+
+</section>
+
+
+
+

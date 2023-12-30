@@ -1,0 +1,211 @@
+<div class="progress">
+  <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"
+    style="width:100%">
+    <span class="sr-only"></span>
+  </div>
+</div>
+<div class="mask" id="mask">
+</div>
+<!-- Start Top Panel -->
+<div class="top-panel">
+  <div class="container">
+    <div class="row">
+
+      <!-- Start Menu -->
+      <div class="col-md-8">
+        <div class="user-menu">
+          <div class="user-name">
+            <a href="#"><%= auth.user.name %> </a>
+          </div>
+
+        </div>
+      </div>
+      <!-- End Menu -->
+      <div class="col-md-4">
+        <div class="icon-collapse" id="icon_collapse">
+          <div class="bar1"></div>
+          <div class="bar2"></div>
+          <div class="bar3"></div>
+        </div>
+        <img src="./img/logo.png" class="logo" alt="">
+        <h1 class="title">آتش نشانی</h1>
+        <h2 class="description">استان کرمانشاه</h2>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- End Top Panel -->
+
+<div id="break">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <nav class="break-nav box">
+          <div class="break-wrap">
+            <a href="#">صفحه اصلی</a>
+            <i></i>
+            پیشخوان
+          </div>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Start Main -->
+<main class="main">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md-9">
+        <div class="content" style="
+        height: unset;
+        margin-bottom: 10px;
+    ">
+          <header class="title">
+            <h3>لیست گزارشات</h3>
+            <!-- <hr> -->
+            <div class="table-responsive">
+              <table cellpadding="1" cellspacing="1" class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>محل وقوع حادثه</th>
+                    <th>شیفت</th>
+                    <th>تعداد مامورین اعزامی</th>
+                    <th>تاریخ بروز حادثه </th>
+                    <th>زمان </th>
+                    <th>ویرایش</th>
+                    <th>چاپ</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                  <% reportregister.docs.forEach(report => { %>
+ 
+                  <tr>
+                    <td>
+
+                      <h6 style="color: green;"><%= report.accidentaddress %></h6>
+
+
+
+                    </td>
+
+                    <td>
+
+                      <h6 style="color: green;"><%= report.inputRelatedService %></h6>
+
+
+
+                    </td>
+                    <td>
+
+                      <h6 style="color: green;"><%= report.numberofdispatchofficers %></h6>
+
+
+                    </td>
+                    <td><%= datas(report.createdAt).format('jD jMMMM jYYYY') %></td>
+                    <td>
+                      <%= datas(report.createdAt).fromNow() %>
+                    </td>
+                    <td> <a href="/dashboard/report/<%= report._id %>/edit"
+                      class="btn w-xs btn-info btn-xs">ویرایش</a></td>
+                    <td><a href="/dashboard/report/<%= report.id %>"><button type="button" class="btn-default">چاپ</button></a></td>
+
+                  </tr>
+
+
+                  <% }) %>
+
+
+                </tbody>
+              </table>
+            </div>
+
+
+            <div class="pagi" style="
+            text-align: left;
+        ">
+              <%- include(viewPath('layouts/pagination') ,{ pagination : reportregister}) %>
+
+            </div>
+          </header>
+
+
+          <div id="app"></div>
+
+
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <%- include(viewPath('/home/dashboard/menu')) -%>
+
+      </div>
+    </div>
+  </div>
+</main>
+<!-- End Main -->
+<!-- Start Footer -->
+<footer id="panel-footer" class="clear-fix">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="pull-left">طراحی شده توسط پوریا یاوری</div>
+        <div class="pull-right">امروز سه شنبه | 26 خردا 99 | ساعت : 14:25</div>
+
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script type="text/javascript">
+  var myVar = setInterval(function () {
+    myTimer()
+  }, 1);
+  var count = 0;
+
+  function myTimer() {
+    if (count < 100) {
+      $('.progress').css('width', count + "%");
+      count += 0.05;
+      //  document.getElementById("demo").innerHTML = Math.round(count) +"%";
+      // code to do when loading
+    } else if (count > 99) {
+      // code to do after loading
+      // count = 0;
+
+
+    }
+  }
+</script>
+
+
+
+
+<script type="text/javascript">
+  window.onload = function () {
+    var mobilemenu = document.getElementById('sidebar-panel');
+    var iconcollapse = document.getElementById('icon_collapse');
+    var back = document.getElementById('mask');
+    back.onclick = hidemaster;
+
+    function hidemaster() {
+      mobilemenu.style.right = "0px"
+      back.style.display = "none";
+      mobilemenu.style.visibility = "hidden";
+
+    }
+    iconcollapse.onclick = showmaster;
+
+    function showmaster() {
+      back.style.display = "block";
+      mobilemenu.style.visibility = "visible";
+      mobilemenu.style.right = "0px"
+    }
+
+  }
+</script>

@@ -1,0 +1,164 @@
+<section class="single-header">
+    <div class="imageHeaders">
+
+
+    </div>
+</section>
+<div class="widget">
+    <div class="tit">
+
+        <h1><%= count %> مورد یافت شد</h1>
+    </div>
+
+
+</div>
+<section class="main">
+
+
+    <div class="content">
+        <div class="filters">
+            <div class="breadcrumb">
+                <a href="/" class="nuxt-link-active">خانه</a>
+                <i class="material-icons">chevron_left
+                </i>
+                <span>گالری تصاویر</span>
+            </div>
+            <div class="fil">
+                <span class="bold">مرتب&zwnj;سازی براساس:</span>
+                <select>
+                    <option value="latest">جدیدترین</option>
+                    <option value="view">پربازدیدترین</option>
+                </select>
+            </div>
+        </div>
+        <div class="picture-container">
+
+                <% picture.forEach(post => { %>
+
+
+
+                <div class="column item">
+                    <img src="<%= post.images %>" onclick="openModal();currentSlide(1)" class="hover-shadow">
+                    <div class="content">
+                        <h1><%= post.title %></h1>
+                    </div>                
+                </div>
+
+
+
+
+                <% }) %>
+
+
+            <div id="myModal" class="modal">
+                <span class="close cursor" onclick="closeModal()">&times;</span>
+                <div class="modal-content">
+                <% picture.forEach(post => { %>
+
+                    <div class="mySlides">
+                        <img src="<%= post.images %>" style="width:100%">
+                    </div>
+                    <% }) %>
+                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                </div>
+            </div>
+
+
+        </div>
+
+
+
+
+
+
+    </div>
+
+    <div class="sidebar">
+
+        <div class="filter">
+
+            <form action="/action_page.php">
+                <h5>مدل</h5>
+
+                <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+                <label for="vehicle1">مدرن</label><br>
+                <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+                <label for="vehicle2">کلاسیک</label><br>
+
+                <h5>رنگ بندی</h5>
+
+                <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+                <label for="vehicle3">قرمز</label><br><br>
+
+
+                <h5>دسته بندی</h5>
+                <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+                <label for="vehicle3">درب</label><br>
+                <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+                <label for="vehicle3">کابینت</label><br>
+
+
+                <input type="submit" class="loginbtn" value="فیلتر">
+            </form>
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+</section>
+
+<script>
+    // Open the Modal
+    function openModal() {
+        document.getElementById("myModal").style.display = "block";
+    }
+
+    // Close the Modal
+    function closeModal() {
+        document.getElementById("myModal").style.display = "none";
+    }
+
+    var slideIndex = 1;
+    showSlides(slideIndex);
+
+    // Next/previous controls
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    // Thumbnail image controls
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("demo");
+        var captionText = document.getElementById("caption");
+        if (n > slides.length) {
+            slideIndex = 1
+        }
+        if (n < 1) {
+            slideIndex = slides.length
+        }
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        // dots[slideIndex - 1].className += " active";
+        // captionText.innerHTML = dots[slideIndex - 1].alt;
+    }
+</script>

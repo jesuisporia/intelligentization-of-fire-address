@@ -1,0 +1,24 @@
+grunt.initConfig({
+  mongobackup: {
+    dump : {
+      options: {
+        host : 'localhost',
+        out : './dumps/mongo'
+      }
+    },
+    restore: {
+      options: {
+        db : 'testdb',
+        host : 'localhost',
+        drop : true,
+        path : './dumps/mongo/testdb'
+      }
+    },
+    import: {
+      // options
+    },
+    export: {
+      // options
+    }
+  }
+});

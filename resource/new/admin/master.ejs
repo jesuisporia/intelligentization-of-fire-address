@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title><%- defineContent('title') || 'پنل مدیریت'  %></title>
+    <!-- Favicon-->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/dist/css/mapp.min.css">
+    <link rel="stylesheet" href="/dist/css/fa/style.css" data-locale="true">
+    
+    <link rel="stylesheet" href="/app/css/app.css">
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <!-- <script src="/js/jquery.min.js"></script> -->
+    <!-- <script src="/js/bootstrap.min.js"></script> -->
+    <link href="/css/font-awesome.css" rel="stylesheet">
+    <!-- <link href="/css/style.css" rel="stylesheet"> -->
+
+    <link rel="stylesheet" href="/css/sweetalert2.min.css">
+
+
+    <link href="/plugins/dropzone/dropzone.css" rel="stylesheet">
+
+
+
+
+
+
+
+    <!-- Vendor styles -->
+    <link rel="stylesheet" href="/vendor/fontawesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="/vendor/metisMenu/dist/metisMenu.css" />
+    <link rel="stylesheet" href="/vendor/animate.css/animate.css" />
+    <link rel="stylesheet" href="/vendor/bootstrap/dist/css/bootstrap.css" />
+	<link rel="stylesheet" href="/vendor/bootstrap-rtl/dist/css/bootstrap-rtl.css" />
+
+    <!-- App styles -->
+    <link rel="stylesheet" href="/fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css" />
+    <link rel="stylesheet" href="/fonts/pe-icon-7-stroke/css/helper.css" />
+    <link rel="stylesheet" href="/styles/style-rtl.css">
+
+    <%- style %>
+
+</head>
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+    <body class="light-skin fixed-navbar sidebar-scroll">
+
+
+<!-- Header -->
+<div id="header">
+    <div class="color-line">
+    </div>
+    <div id="logo" class="light-version">
+        <span>
+            آتش نشانی استان کرمانشاه        </span>
+    </div>
+    <nav role="navigation">
+        <div class="header-link hide-menu"><i class="fa fa-bars"></i></div>
+        <div class="small-logo">
+            <span class="text-primary">آتش نشانی استان کرمانشاه</span>
+        </div>
+
+        <div class="mobile-menu">
+            <button type="button" class="navbar-toggle mobile-menu-toggle" data-toggle="collapse" data-target="#mobile-collapse">
+                <i class="fa fa-chevron-down"></i>
+            </button>
+            <div class="collapse mobile-navbar" id="mobile-collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a class="" href="login.html">ورود</a>
+                    </li>
+                    <li>
+                        <a class="" href="login.html">خروج</a>
+                    </li>
+                    <li>
+                        <a class="" href="profile.html">پروفایل</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="navbar-right">
+            <ul class="nav navbar-nav no-borders">
+
+                
+                <li class="dropdown">
+                    <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+                        <i class="pe-7s-keypad"></i>
+                    </a>
+
+                    <div class="dropdown-menu hdropdown bigmenu animated flipInX">
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <a href="projects.html">
+                                        <i class="pe pe-7s-portfolio text-info"></i>
+                                        <h5>کارمند ها</h5>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="mailbox.html">
+                                        <i class="pe pe-7s-mail text-warning"></i>
+                                        <h5>پیام ها</h5>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="contacts.html">
+                                        <i class="pe pe-7s-users text-success"></i>
+                                        <h5>آتش نشانان</h5>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="forum.html">
+                                        <i class="pe pe-7s-comment text-info"></i>
+                                        <h5>مکالمات</h5>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="analytics.html">
+                                        <i class="pe pe-7s-graph1 text-danger"></i>
+                                        <h5>اطلاعات و آمار</h5>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="file_manager.html">
+                                        <i class="pe pe-7s-box1 text-success"></i>
+                                        <h5>گالری تصاویر</h5>
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </li>
+
+
+                <li class="dropdown">
+                    <a href="/logout">
+                        <i class="pe-7s-upload pe-rotate-90"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+
+<!-- Navigation -->
+<aside id="menu">
+    <div id="navigation">
+
+
+        <ul class="nav" id="side-menu">
+            <li class="active">
+                <a href="/admin/home"> <span class="nav-label">پیشخوان</span> <span class="label label-success pull-left">۱.۰</span> </a>
+            </li>
+
+            <li>
+                <a href="#"><span class="nav-label">لیست آتش نشانها</span><span class="fa arrow"></span> </a>
+                <ul class="nav nav-second-level">
+                    <li><a href="/admin/user"> تمام آتش نشانها</a></li>
+                    <li><a href="/admin/user/create">افزودن آتش نشان</a></li>
+                </ul>
+            </li>
+            <li><a href="/admin/station"> لیست ایستگاه ها</a></li>
+
+            <!-- <li><a href="/admin/sharvand">شهروند مسئول</a></li> -->
+
+            <li>
+                <a href="#"><span class="nav-label">گزارشات</span><span class="fa arrow"></span> </a>
+                <ul class="nav nav-second-level">
+                    <li><a href="/admin/report/create"> ثبت گزارش</a></li>
+                    <li><a href="/admin/report">لیست گزارشات</a></li>
+                    <li><a href="/admin/report/search">جستجو گزارش</a></li>
+                    <li><a href="/admin/category">تمام دسته های حوادث</a></li>
+                    <li><a href="/admin/category/create">افزودن دسته حوادث</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="/admin/reports"> <span class="nav-label">تماس گیرنده ها</span></a>
+            </li>
+            <li><a href="/admin/daragat">درجات</a></li>
+
+            <!-- <li><a href="/admin/contact">دفترچه تلفن</a></li>
+            <li><a href="notes.html">پایگاه داده</a></li> -->
+
+            <!-- <li>
+                <a href="#"><span class="nav-label">لیست مدیران</span><span class="fa arrow"></span> </a>
+                <ul class="nav nav-second-level">
+
+                    <li><a href="/admin/manager"> تمام مدیران</a></li>
+                    <li><a href="/admin/manager/create">افزودن مدیر</a></li>
+
+                </ul>
+            </li> -->
+
+            <li><a href="/admin/accident">واحد حوادث</a></li>
+
+            <li>
+                <a href="/admin/amar"> <span class="nav-label">اطلاعات و آمار</span> <span class="label label-success pull-left">ویژه</span></a>
+            </li>
+
+            <!-- <li>
+                <a href="/admin/payam"> <span class="nav-label">پیام ها</span></a>
+            </li> -->
+   
+
+
+                    <!-- <li><a href="/admin/station/create">افزودن ایستگاه</a></li> -->
+
+        
+            <li>
+                <a href="/admin/fire"> <span class="nav-label">عملیاتها</span></a>
+            </li>
+
+
+
+            <li>
+                <a aria-disabled="true" href="/admin/gis"> <span class="nav-label">پنل جی ای اس</span></a>
+            </li>
+            <li><a href="/admin/activity">فعالیت کاربران در سامانه</a></li>
+            <li><a href="/admin/Training-to-work-with-the-system">آموزش کار با سامانه</a></li>
+            
+        </ul>
+    </div>
+</aside>
+
+    <%- body %>
+
+
+<!-- Vendor scripts -->
+<script type="text/javascript" src="/dist/js/jquery-3.2.1.min.js"></script>
+
+
+
+
+
+
+<script type="text/javascript" src="/dist/js/jquery-3.2.1.min.js"></script>
+
+<script src="/vendor/jquery-ui/jquery-ui.min.js"></script>
+<script src="/vendor/slimScroll/jquery.slimscroll.min.js"></script>
+<script src="/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/vendor/jquery-flot/jquery.flot.js"></script>
+<script src="/vendor/jquery-flot/jquery.flot.resize.js"></script>
+<script src="/vendor/jquery-flot/jquery.flot.pie.js"></script>
+<script src="/vendor/flot.curvedlines/curvedLines.js"></script>
+<script src="/vendor/jquery.flot.spline/index.js"></script>
+<script src="/vendor/metisMenu/dist/metisMenu.min.js"></script>
+<script src="/vendor/iCheck/icheck.min.js"></script>
+<script src="/vendor/peity/jquery.peity.min.js"></script>
+<script src="/vendor/sparkline/index.js"></script>
+
+<!-- App scripts -->
+<script src="/scripts/homer.js"></script>
+
+ 
+<script type="text/javascript" src="/dist/js/mapp.env.js"></script>
+<script type="text/javascript" src="/dist/js/mapp.min.js"></script>
+
+<script src="/js/socket.io.js"></script>
+
+<script src="/vendor/chartjs/Chart.min.js"></script>
+
+<script src="/js/sweetalert.min.js" type="text/javascript"></script>
+<script src="/plugins/dropzone/dropzone.js"></script>
+    <%- script %>
+
+
+
+
+
+
+</body>
+
+</html>

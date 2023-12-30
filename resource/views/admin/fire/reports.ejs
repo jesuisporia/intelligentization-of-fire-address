@@ -1,0 +1,222 @@
+<!-- Main Wrapper -->
+<div id="wrapper">
+
+    <div class="content">
+
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="hpanel">
+                    <div class="panel-body">
+                        <h3>ارسال پیام</h3>
+                        <form action="/admin/phone" id="phone">
+                            <input type="tel" name="phone"
+                                placeholder="لطفا شماره همراه گزارش دهنده را در این قسمت وارد کنید"
+                                class="form-control m-b">
+                            <button class="btn btn-primary" type="submit">ارسال</button>
+                        </form>
+                    </div>
+                </div>
+                <div id="tt">
+
+                </div>
+                <div class="hpanel">
+                    <div class="panel-heading">
+                        <div class="panel-tools">
+                            <a class="showhide"><i class="fa fa-chevron-up"></i></a>
+                            <a class="closebox"><i class="fa fa-times"></i></a>
+                        </div>
+                        لیست ۵۰ گزارش حریق اخیر
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table cellpadding="1" cellspacing="1" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>توکن</th>
+                                        <th>آدرس</th>
+                                        <th>وضعیت کاربر</th>
+                                        <th>وضعیت عملیات</th>
+                                        <th>شماره تلفن</th>
+                                        <th>زمان تماس</th>
+                                        <th>ایستگاه یک</th>
+                                        <th>ایستگاه هفت</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <% map.forEach(map => { %>
+                                    <tr>
+                                        <td id="token" class="ttt"><%= map.token %></td>
+                                        <td id="token" class="ttt"><%= map.address %></td>
+                                        <td>
+                                            <% if (map.visit) { %>
+                                            <h6 id="green" style="color: green;">انتخاب شده</h6>
+
+                                            <% } else{ %>
+                                            <h6 id="red" style="color: red;">انتخاب نشده</h6>
+                                            <% } %>
+
+                                        </td>
+                                        <td>
+                                            <% if (map.approved) { %>
+                                            <h6 style="color: green;">اتمام عملیات</h6>
+
+                                            <% } else{ %>
+                                            <h6 style="color: red;">در حال عملیات</h6>
+                                            <% } %>
+                                        </td>
+                                        <td><%= map.phone %></td>
+                                        <td id="token" class="ttt"><%= datas(map.createdAt).fromNow() %></td>
+
+                                        <td><a href="/admin/one/5ef81eb649c936237dcf84c4/<%= map.token %>"><button
+                                                    type="button" class="btn btn-outline btn-info">یک</button></a></td>
+                                        <td><a href="/admin/seven/5ef81ecb49c936237dcf84c6/<%= map.token %>"><button
+                                                    type="button" class="btn btn-outline btn-info">هفت</button></a></td>
+
+                                    </tr>
+
+                                    <% }) %>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                    <div class="panel-footer">
+                        این بخش در حال کامل شدن می باشد.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="hpanel hgreen contact-panel">
+                    <div class="panel-body">
+                        <span class="label label-success pull-left">جدید</span>
+                        <img alt="logo" class="img-circle m-b" src="images/profile.jpg">
+                        <h3><a href="#">پوریا یاوری</a></h3>
+                        <div class="text-muted font-bold m-b-xs">کرمانشاه</div>
+                        <p>
+                            چهاراه راهنمایی و رانندگی خیابان شهید حمالی لطف کوی دل انگیز فرعی نیک جوب پلاک 29
+                        </p>
+                    </div>
+                    <div class="panel-footer contact-footer">
+                        <div class="row">
+                            <div class="col-md-4 border-right"> <div class="contact-stat"><span>عملیاتها:</span> <strong>۲۰۰</strong></div> </div>
+                            <div class="col-md-4 border-right"> <div class="contact-stat"><span>پیام ها:</span> <strong>۳۰۰</strong></div> </div>
+                            <div class="col-md-4"> <div class="contact-stat"><span>توانایی:</span> <strong>۴۰۰</strong></div> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="hpanel hyellow contact-panel">
+                    <div class="panel-body">
+                        <span class="label label-success pull-left">جدید</span>
+                        <img alt="logo" class="img-circle m-b" src="images/a1.jpg">
+                        <h3><a href="#">وحید رستمی </a></h3>
+                        <div class="text-muted font-bold m-b-xs">کرمانشاه</div>
+                        <p>
+                            چهاراه راهنمایی و رانندگی خیابان شهید حمالی لطف کوی دل انگیز فرعی نیک جوب پلاک 29
+                        </p>
+                    </div>
+                    <div class="panel-footer contact-footer">
+                        <div class="row">
+                            <div class="col-md-4 border-right"> <div class="contact-stat"><span>عملیاتها:</span> <strong>۲۰۰</strong></div> </div>
+                            <div class="col-md-4 border-right"> <div class="contact-stat"><span>پیام ها:</span> <strong>۳۰۰</strong></div> </div>
+                            <div class="col-md-4"> <div class="contact-stat"><span>توانایی:</span> <strong>۴۰۰</strong></div> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="hpanel hviolet contact-panel">
+                    <div class="panel-body">
+                        <span class="label label-success pull-left">جدید</span>
+                        <img alt="logo" class="img-circle m-b" src="images/a3.jpg">
+                        <h3><a href="#">پدرام نظری</a></h3>
+                        <div class="text-muted font-bold m-b-xs">کرمانشاه</div>
+                        <p>
+                            چهاراه راهنمایی و رانندگی خیابان شهید حمالی لطف کوی دل انگیز فرعی نیک جوب پلاک 29
+                        </p>
+                    </div>
+                    <div class="panel-footer contact-footer">
+                        <div class="row">
+                            <div class="col-md-4 border-right"> <div class="contact-stat"><span>عملیاتها:</span> <strong>۲۰۰</strong></div> </div>
+                            <div class="col-md-4 border-right"> <div class="contact-stat"><span>پیام ها:</span> <strong>۳۰۰</strong></div> </div>
+                            <div class="col-md-4"> <div class="contact-stat"><span>توانایی:</span> <strong>۴۰۰</strong></div> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="hpanel hblue contact-panel">
+                    <div class="panel-body">
+                        <span class="label label-success pull-left">جدید</span>
+                        <img alt="logo" class="img-circle m-b" src="images/a7.jpg">
+                        <h3><a href="#">سید یزدان صالح</a></h3>
+                        <div class="text-muted font-bold m-b-xs">کرمانشاه</div>
+                        <p>
+                            چهاراه راهنمایی و رانندگی خیابان شهید حمالی لطف کوی دل انگیز فرعی نیک جوب پلاک 29
+                        </p>
+                    </div>
+                    <div class="panel-footer contact-footer">
+                        <div class="row">
+                            <div class="col-md-4 border-right"> <div class="contact-stat"><span>عملیاتها:</span> <strong>۲۰۰</strong></div> </div>
+                            <div class="col-md-4 border-right"> <div class="contact-stat"><span>پیام ها:</span> <strong>۳۰۰</strong></div> </div>
+                            <div class="col-md-4"> <div class="contact-stat"><span>توانایی:</span> <strong>۴۰۰</strong></div> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+<script>
+    $("#phone").submit(function (e) {
+
+        e.preventDefault(); // avoid to execute the actual submit of the form.
+
+        var form = $(this);
+        var url = form.attr('action');
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: form.serialize(), // serializes the form's elements.
+            success: function (data) {
+                alert('پیامک با موفقیت ارسال شد'); // show response from the php script.
+            }
+        });
+
+
+    });
+</script>
+
+<script>
+    var socket = io();
+    var tkn = document.getElementById('token').innerHTML;
+    var green = document.getElementById('green');
+    var red = document.getElementById('red');
+
+    socket.on('temp', function (temp) {
+        var sound = new Audio('/fire.mp3');
+        sound.play();
+
+        // visit = temp.temp.visit;
+        // if (temp.temp.token === tkn) {
+        //     red.style.color = 'green';
+        //     red.innerHTML = 'انتخاب شده'
+        // }
+        var html = '';
+
+
+    });
+</script>

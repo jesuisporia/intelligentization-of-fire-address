@@ -1,0 +1,92 @@
+<section class="content">
+    <%- include(viewPath('layouts/error-messages')) -%>
+
+    <div class="row clearfix">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="body">
+                <div class="block-header">
+                    <h2>ارسال پیام</h2>
+                </div>
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="/admin">
+                            <i class="material-icons">home</i> خانه
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="/admin/users">
+                            <i class="material-icons">library_books</i> کاربران
+                        </a>
+                    </li>
+                    <li class="active">
+                        <i class="material-icons">library_books</i> ارسال پیام
+                    </li>
+                </ol>
+                
+            </div>
+        </div>
+
+        
+        
+        
+    </div>
+    <div class="row clearfix">
+
+
+        
+        <form action="/admin/user/sendpayam" method="post">
+        
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="header">
+                    <h2>متن پیام</h2>
+                    
+                </div>
+                <div class="body">
+                    <div class="row clearfix">
+                        <div class="col-md-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input name="payam" id="payam" cols="30" rows="10"></input>
+                                    <label class="form-label">متن پیام </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+            
+        </div>
+
+        <input name="user" value="<%= user.id %>">
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+        <button style=" margin-bottom: 150px; " type="submit" class="btn btn-block btn-lg btn-primary waves-effect">افزودن</button>
+    
+        </div>
+    </form>
+        
+        
+    </div>
+</section>
+
+<script>
+    new Dropzone("#a", { 
+    url: "/admin/upload-image",
+
+    init: function () {
+      this.on("success", function (file, responseText) {
+      document.getElementById("images").setAttribute("value", '/'+responseText.path.substring(7));
+
+
+      });
+    }
+});
+
+</script>

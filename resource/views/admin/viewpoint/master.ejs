@@ -1,0 +1,106 @@
+<div class="row clearfix">
+
+
+
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box bg-red hover-expand-effect">
+            <div class="content">
+                <div class="text">زباله دان</div>
+                <div class="number count-to" data-from="0" data-to="125" data-speed="15" data-fresh-interval="20">
+                    <%= alltrashviewpoint %></div>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box bg-orange hover-expand-effect">
+            <div class="content">
+                <div class="text">منتشر نشده شده</div>
+                <div class="number count-to" data-from="0" data-to="257" data-speed="1000" data-fresh-interval="20">
+                    <%= alldraftviewpoint%></div>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box bg-light-green hover-expand-effect">
+            <div class="content">
+                <div class="text"> منتشر شده</div>
+                <div class="number count-to" data-from="0" data-to="243" data-speed="1000" data-fresh-interval="20">
+                    <%= allshowviewpoint %></div>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box bg-cyan hover-expand-effect">
+            <div class="content">
+                <div class="text">همه </div>
+                <div class="number count-to" data-from="0" data-to="4" data-speed="100" data-fresh-interval="20"><%= allviewpoint %>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<div class="row clearfix">
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2>
+                    نظرات کاربران
+
+                </h2>
+                <ul class="header-dropdown m-r--5">
+                    <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                            aria-haspopup="true" aria-expanded="false">
+                            <i class="material-icons">more_vert</i>
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a href="/admin/viewpoint" class=" waves-effect waves-block">
+                                    نظرات منتشر شده</a>
+                            </li>
+                            <li><a href="/admin/viewpoint/approved" class=" waves-effect waves-block">نظرات منتشر نشده</a>
+                            </li>
+                            <li><a href="/admin/viewpoint/trash" class=" waves-effect waves-block">
+                                   زباله دان</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12 pull-right text-right">
+        <div class="body lablepicture">
+
+            <a href="/admin/viewpoint/"><span class="label bg-light-green">نظرات منتشر شده</span></a>
+            <a href="/admin/viewpoint/approved"><span class="label bg-orange">نظرات منتشر نشده</span></a>
+            <a href="/admin/viewpoint/trash"><span class="label bg-red">زباله دان</span></a>
+
+        </div>
+    </div>
+    
+    <div class="col-xs-5 col-sm-3 col-md-3 col-lg-3">
+        <div class="demo-google-material-icon">
+            <form action="/admin/viewpoint/search" method="get">
+
+            <input id="search" name="search" type="text" class="form-control" style=" direction: rtl; font-family: IRANSans; font-size: 12px; " placeholder="چی میخای فقط بنویس(:">
+            <button type="submit" class="btn bg-blue waves-effect">
+                <i class="material-icons">search</i>
+                <span>جستجو</span>
+            </button>
+        </form>
+
+        </div>
+    </div>
+
+</div>

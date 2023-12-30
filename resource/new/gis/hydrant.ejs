@@ -1,0 +1,357 @@
+
+
+
+
+<link rel="stylesheet" href="/build/ol.css" type="text/css">
+<link rel="stylesheet" href="/build/samples.css" type="text/css" />
+
+<style>
+  .map {
+    height: 100vh;
+    width: 100%;
+  }
+
+  .ol-attribution.ol-uncollapsible {
+    bottom: 0;
+    right: 0;
+    border-radius: 4px 0 0;
+    display: none !important;
+  }
+</style>
+
+
+
+
+
+<div id="wrapper">
+
+
+    <div class="content">
+
+        <div class="row">
+
+            <div class="col-md-12">
+
+             
+
+                <div class="hpanel">
+                    <div class="panel-body">
+
+                        <div id="map">
+
+                        </div>
+                        
+                    </div>
+                </div>
+
+
+            </div>
+
+
+
+        </div>
+ 
+        <div class="row">
+          <div class="col-lg-12">
+
+
+              <div class="hpanel">
+                  <div class="panel-heading">
+                      <div class="panel-tools">
+                          <a class="showhide"><i class="fa fa-chevron-up"></i></a>
+                          <a class="closebox"><i class="fa fa-times"></i></a>
+                      </div>
+                      جدول لیست هایدرانت
+                  </div>
+                  <div class="panel-body">
+                      <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+
+                          <div class="row">
+                              <div class="col-sm-12">
+                                  <table id="example2"
+                                      class="table table-striped table-bordered table-hover dataTable no-footer"
+                                      role="grid" aria-describedby="example2_info">
+                                      <thead>
+                                          <tr role="row">
+                                            <th class="sorting_asc" tabindex="0" aria-controls="example2"
+                                            rowspan="1" colspan="1" aria-sort="ascending"
+                                            aria-label="نام: activate to sort column descending"
+                                            style="width: 150px;">ردیف</th>
+
+
+                                            <th class="sorting_asc" tabindex="0" aria-controls="example2"
+                                            rowspan="1" colspan="1" aria-sort="ascending"
+                                            aria-label="نام: activate to sort column descending"
+                                            style="width: 150px;">آدرس</th>
+                                        
+                                              <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
+                                                  colspan="1"
+                                                  aria-label="شروع تاریخ: activate to sort column ascending"
+                                                  style="width: 109px;">ویرایش</th>
+                                              <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
+                                                  colspan="1" aria-label="حقوق: activate to sort column ascending"
+                                                  style="width: 81px;">حذف</th>
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+
+
+
+                                        <% var counter=1; %>
+
+                                        <% hydrants.forEach(hydrant => { %>
+                                          <tr role="row" class="odd">
+                                              <td class="sorting_1"><%= counter %></td>
+                                              <td class="sorting_1"><%= hydrant.address %></td>
+                
+                                              <td><a href="" class="btn btn-info active btn-xs">ویرایش</a></td>
+                                              <td><a href="" class="btn btn-danger active btn-xs">حذف</a></td>
+                                           
+                                          </tr>
+                                          <%  counter++;  %>
+                                          <% }) %>
+
+                                      </tbody>
+                                  </table>
+                              </div>
+                          </div>
+
+                      </div>
+
+                  </div>
+              </div>
+          </div>
+
+      </div>
+    </div>
+
+
+</div>
+
+
+
+
+<script src="/build/ol.js"></script>
+<!-- <script src="/build/OpenLayers.js"></script> -->
+
+
+
+
+<script type="text/javascript">
+
+
+var vectorLayer = new ol.layer.Vector({ // VectorLayer({
+    source: new ol.source.Vector(),
+  });
+  var map = new ol.Map({
+    layers: [
+      new ol.layer.Tile({ // TileLayer({
+        source: new ol.source.OSM()
+      }),
+      vectorLayer,
+    ],
+    target: 'map',
+    view: new ol.View({
+      center: ol.proj.transform([47.10, 34.33], 'EPSG:4326', 'EPSG:3857'),
+zoom: 12
+    })
+  });
+
+
+
+
+
+
+//   var map = new ol.Map({
+//     layers: [osm_default],
+//     target: 'map',
+//     view: new ol.View({
+//       center: ol.proj.transform([47.10, 34.33], 'EPSG:4326', 'EPSG:3857'),
+//       zoom: 12.5
+//     })
+//   });
+
+
+
+
+
+  console.log(map.getInteractions());
+  var dblClickInteraction;
+  // find DoubleClickZoom interaction
+  map.getInteractions().getArray().forEach(function(interaction) {
+    if (interaction instanceof ol.interaction.DoubleClickZoom) {
+      dblClickInteraction = interaction;
+    }
+  });
+  // remove from map
+  map.removeInteraction(dblClickInteraction)
+  var vectorSource = vectorLayer.getSource();
+
+  function addMarker(coordinates) {
+    console.log(coordinates);
+    var marker = new ol.Feature(new ol.geom.Point(coordinates));
+    var zIndex = 1;
+    marker.setStyle(new ol.style.Style({
+      image: new ol.style.Icon(({
+        anchor: [0.5, 36],
+        anchorXUnits: "fraction",
+        anchorYUnits: "pixels",
+        opacity: 1,
+        src: "/hydrant.png",
+        zIndex: zIndex
+      })),
+      zIndex: zIndex
+    }));
+    vectorSource.addFeature(marker);
+  }
+  map.on('dblclick', function(evt) {
+    var lat = ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326');
+    var parametros = {"lat":lat[0], "lng":lat[1]};
+
+
+    $.ajax({
+        data: parametros,
+        url: '/admin/gis/hydrant/store',
+        type: 'post',
+        context: this,
+        error: function (response) {
+            alert("An error has occurred! Try Again!");
+        },
+        success: function (response) {
+            if($.trim(response) == 'bien') { 
+                alert("success");
+                this.submit(); // submit, bypassing jquery bound event
+            } 
+            else {
+                alert("ثبت شد!");
+                $("#ajax_call_val").html('<div id="validation"><ul>'+response+'</ul></div>');
+            }
+        }
+    });
+
+
+
+
+    addMarker(evt.coordinate);
+  });
+
+
+
+
+  function toRad(x) {return x * Math.PI / 180;}
+
+function SphericalCosinus(lat1, lon1, lat2, lon2) {
+
+    var R = 6371; // km
+    var dLon = toRad(lon2 - lon1),
+        lat1 = toRad(lat1),
+        lat2 = toRad(lat2),
+        d = Math.acos(Math.sin(lat1)*Math.sin(lat2) + Math.cos(lat1)*Math.cos(lat2) * Math.cos(dLon)) * R;
+
+
+    return d;
+}
+
+var a = SphericalCosinus(47.06343612670898,34.35593779445772,47.07613906860352,34.3165318616619)
+console.log(a)
+
+
+
+
+//   var Geographic  = new OpenLayers.Projection("EPSG:4326"); 
+// var Mercator = new OpenLayers.Projection("EPSG:900913");
+
+
+//   function distanceBetweenPoints(latlng1, latlng2){
+//         var point1 = new OpenLayers.Geometry.Point(latlng1.lon, latlng1.lat).transform(Geographic, Mercator);
+//         console.log(point1)
+//         var point2 = new OpenLayers.Geometry.Point(latlng2.lon, latlng2.lat).transform(Geographic, Mercator);       
+//         return point1.distanceTo(point2);
+//     }
+// var a = distanceBetweenPoints(47.05828628540039, 47.05828628540030)
+// console.log(a)
+//   var south = 47.10;
+//   var west = 34.33;
+//   var north = 49.6;
+//   var east = 34.33;
+  // [maxx, maxy, minx, miny]
+//   var extent = ol.proj.transformExtent([east, north, west, south], 'EPSG:4326', 'EPSG:3857');
+//   map.getView().fit(extent, {
+//     size: map.getSize(),
+//     padding: [5, 5, 5, 5]
+//   });
+//   var osm_default = new ol.layer.Tile({
+//     source: new ol.source.OSM()
+//   });
+
+// var geojson = {"type":"FeatureCollection","features":[{"type":"Feature","id":null,"geometry":{"type":"LineString","coordinates":[[698282.236,377375.758],[698289.591,377372.136],[698183.88,377182.298],[698182.72,377197.045],[698282.236,377375.758]]},"crs":{"type":"EPSG","properties":{"code":"4326"}},"geometry_name":"wkb_geometry","properties":{"ogc_fid":"","area_id":null,"building_id":null,"type":null,"area":null,"owner":null,"description":null,"administration":null,"address":null,"property":null,"layer":"Green Area","extendedentity":null,"linetype":null,"entityhandle":null,"text":null,"wkb_geometry":"01020000000500000000FED478544F2541002731087F081741408D972E634F25418195438B70081741295C8FC28F4E254181E92631790517410AD7A3708D4E2541027B142EB405174100FED478544F2541002731087F081741"}},{"type":"Feature","id":null,"geometry":{"type":"LineString","coordinates":[[698289.591,377372.136],[698295.211,377369.369],[698184.767,377171.028],[698183.88,377182.298],[698289.591,377372.136]]},"crs":{"type":"EPSG","properties":{"code":"4326"}},"geometry_name":"wkb_geometry","properties":{"ogc_fid":"","area_id":null,"building_id":null,"type":null,"area":null,"owner":null,"description":null,"administration":null,"address":null,"property":null,"layer":"Green Area","extendedentity":null,"linetype":null,"entityhandle":null,"text":null,"wkb_geometry":"010200000005000000408D972E634F25418195438B700817411E31086C6E4F2541C022DB79650817416039B488914E25414108AC1C4C051741295C8FC28F4E254181E9263179051741408D972E634F25418195438B70081741"}}]};
+
+// var features = new ol.format.GeoJSON().readFeatures(geojson);
+
+// features.forEach(function(feature){ feature.setId(undefined) });
+
+// var map = new ol.Map({
+//   layers: [
+//       new ol.layer.Tile({
+//           source: new ol.source.OSM(),
+//       }),
+//       new ol.layer.Vector({
+//           source: new ol.source.Vector({
+//               features: features
+//           })
+//       })
+//   ],
+//   target: 'map',
+//   view: new ol.View({
+//     center: [698282.236, 377375.758],
+//     zoom: 18
+//   })
+// })
+
+
+
+
+
+
+//   var map = new ol.Map({
+//     layers: [osm_default],
+//     target: 'map',
+//     view: new ol.View({
+//       center: ol.proj.transform([47.10, 34.33], 'EPSG:4326', 'EPSG:3857'),
+//       zoom: 12.5
+//     })
+//   });
+
+
+
+
+
+//   map.on('dblclick', function (evt) {
+//     console.log(ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326'));
+//     addMarker(evt.coordinate);
+//   });
+
+
+
+
+//   function addMarker(coordinates) {
+//     console.log(coordinates);
+//     var marker = new ol.Feature(new ol.geom.Point(coordinates));
+//     var zIndex = 1;
+//     marker.setStyle(new ol.style.Style({
+//       image: new ol.style.Icon(({
+//         anchor: [0.5, 36], 
+//         anchorXUnits: "fraction",
+//         anchorYUnits: "pixels",
+//         opacity: 1,
+//         src: "mapIcons/pinother.png", 
+//         zIndex: zIndex
+//       })),
+//       zIndex: zIndex
+//     }));
+//     vectorSource.addFeature(marker);
+//   }
+
+
+
+</script>

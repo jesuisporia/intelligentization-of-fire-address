@@ -1,0 +1,151 @@
+<section class="content">
+    <div class="container-fluid">
+        <!-- Image Gallery -->
+        <div class="block-header">
+            <h2>
+                گالری تصاویر کتابخانه
+            </h2>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="header">
+                        <h2>
+                            گالری تصاویر
+
+                        </h2>
+                        <ul class="header-dropdown m-r--5">
+                            <li class="dropdown">
+                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"
+                                    role="button" aria-haspopup="true" aria-expanded="false">
+                                    <i class="material-icons">more_vert</i>
+                                </a>
+                                <ul class="dropdown-menu pull-right">
+                                    <li><a href="/admin/gallerypicture/tableview" class=" waves-effect waves-block">نمایش جدولی</a>
+                                    </li>
+                                    <li><a href="/admin/gallerypicture" class=" waves-effect waves-block">نمایش ستونی</a>
+                                    </li>
+                                    <li><a href="/admin/gallerypicture/create" class=" waves-effect waves-block">افزودن تصویر
+                                            جدید</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+
+
+                </div>
+            </div>
+
+
+
+
+            <div class="col-md-6">
+                <div class="body">
+                    <nav>
+                        <ul class="pagination">
+                            <li class="disabled">
+                                <a href="javascript:void(0);">
+                                    <i class="material-icons">chevron_left</i>
+                                </a>
+                            </li>
+                            <li class="active"><a href="javascript:void(0);">1</a></li>
+                            <li><a href="javascript:void(0);" class="waves-effect">2</a></li>
+                            <li><a href="javascript:void(0);" class="waves-effect">3</a></li>
+                            <li><a href="javascript:void(0);" class="waves-effect">4</a></li>
+                            <li><a href="javascript:void(0);" class="waves-effect">5</a></li>
+                            <li>
+                                <a href="javascript:void(0);" class="waves-effect">
+                                    <i class="material-icons">chevron_right</i>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                <div class="body">
+                    <div id="aniimated-thumbnials" class="list-unstyled row clearfix">
+                        <% posts.docs.forEach(post => { %>
+
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 pull-right">
+
+
+                            <div class="card">
+                                <div class="header">
+                                    <ul class="header-dropdown m-r--5" style=" margin: 0; padding: 0; ">
+                                        <li class="dropdown"><a href="../../images/image-gallery/1.jpg"
+                                                data-sub-html="Demo Description">
+                                            </a><a href="javascript:void(0);" class="dropdown-toggle"
+                                                data-toggle="dropdown" role="button" aria-haspopup="true"
+                                                aria-expanded="false">
+                                                <i class="material-icons">more_vert</i>
+                                            </a>
+                                            <ul class="dropdown-menu pull-right">
+                                                <li><a href="/admin/gallerypicture/edite/<%= post._id %>"
+                                                        class=" waves-effect waves-block">ویرایش</a></li>
+                                                <li><a href="/admin/gallerypicture/<%= post._id %>"
+                                                        class=" waves-effect waves-block">حذف</a></li>
+                                                <li><a href="javascript:void(0);"
+                                                        class=" waves-effect waves-block">جزئیات</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="body">
+                                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                                        <!-- Indicators -->
+
+
+                                        <!-- Wrapper for slides -->
+                                        <div class="carousel-inner" role="listbox">
+
+                                            <div class="item active">
+                                                <img src="<%= post.images %>" style=" height: 130px; ">
+                                            </div>
+
+                                        </div>
+
+                                        <!-- Controls -->
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <% }) %>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="body">
+                    <nav>
+                        <ul class="pagination">
+                            <li class="disabled">
+                                <a href="javascript:void(0);">
+                                    <i class="material-icons">chevron_left</i>
+                                </a>
+                            </li>
+                            <li class="active"><a href="javascript:void(0);">1</a></li>
+                            <li><a href="javascript:void(0);" class="waves-effect">2</a></li>
+                            <li><a href="javascript:void(0);" class="waves-effect">3</a></li>
+                            <li><a href="javascript:void(0);" class="waves-effect">4</a></li>
+                            <li><a href="javascript:void(0);" class="waves-effect">5</a></li>
+                            <li>
+                                <a href="javascript:void(0);" class="waves-effect">
+                                    <i class="material-icons">chevron_right</i>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

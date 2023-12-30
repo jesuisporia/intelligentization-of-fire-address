@@ -1,0 +1,103 @@
+<% if(errors.length > 0) { %>
+<div class="alert alert-danger alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span>×</span>
+    </button>
+    <% errors.forEach(error => { %>
+    <ol>
+        <li><%= error %></li>
+    </ol>
+    <% }) %>
+</div>
+<% } %>
+<div class="login-container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="text-center m-b-md">
+                <h3>آتش نشانی استان کرمانشاه</h3>
+                <small>مسیر یاب آنلاین حریق</small>
+            </div>
+            <div class="hpanel">
+                <div class="panel-body">
+                    <form action="/auth/login" method="post" id="loginForm">
+                        <div class="form-group">
+                            <label class="control-label" for="username">نام کاربری</label>
+                            <input type="email" placeholder="example@gmail.com" title="نام کاربری خود را وارد کنید"
+                                required="" value="" name="email" id="email" class="form-control">
+                            <span class="help-block small">نام کاربری شما یکتا باشد.</span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="password">رمز عبور</label>
+                            <input type="password" title="رمز عبور خود را وارد کنید" placeholder="******" required=""
+                                value="" name="password" id="password" class="form-control">
+                            <span class="help-block small">رمز شما قدرتمند است</span>
+                        </div>
+                        <div class="checkbox">
+                            <div class="icheckbox_square-green checked" style="position: relative;"><input
+                                    type="checkbox" class="i-checks" checked=""
+                                    style="position: absolute; opacity: 0;"><ins class="iCheck-helper"
+                                    style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+                            </div>
+                            مرا بخاطر بسپار
+                            <p class="help-block small">(اگر این گوشی یا کامپیوتر خصوصی شماست)</p>
+                        </div>
+                        <button class="btn btn-success btn-block">ورود</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<video autoplay="true" id="video"></video>
+<script src="/js/socket.io.js"></script>
+<!-- 
+<script>
+            const socket = io();
+
+var constraints = { audio: true };
+navigator.mediaDevices.getUserMedia(constraints).then(function(mediaStream) {
+    var mediaRecorder = new MediaRecorder(mediaStream);
+    mediaRecorder.onstart = function(e) {
+        this.chunks = [];
+    };
+    mediaRecorder.ondataavailable = function(e) {
+        this.chunks.push(e.data);
+    };
+    mediaRecorder.onstop = function(e) {
+        var blob = new Blob(this.chunks, { 'type' : 'audio/ogg; codecs=opus' });
+        socket.emit('radio', blob);
+    };
+
+    // Start recording
+    mediaRecorder.start();
+
+    // Stop recording after 5 seconds and broadcast it to server
+    setTimeout(function() {
+        mediaRecorder.stop()
+    }, 5000);
+});
+
+// When the client receives a voice message it will play the sound
+socket.on('voice', function(arrayBuffer) {
+    console.log(arrayBuffer)
+    console.log('aaaaaaaaaaaa')
+    var blob = new Blob([arrayBuffer], { 'type' : 'audio/ogg; codecs=opus' });
+    console.log(blob)
+
+    var audio = document.createElement('audio');
+    console.log(audio)
+    audio.src = window.URL.createObjectURL(blob);
+    audio.play();
+});
+</script> -->
+
+
+
+
+
+<script src="/js/mobile-detect.min.js"></script>
+<script>
+    var md = new MobileDetect(window.navigator.userAgent);
+    // ... see below
+</script>

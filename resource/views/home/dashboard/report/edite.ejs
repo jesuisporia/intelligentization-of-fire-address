@@ -1,0 +1,757 @@
+<% if(errors.length > 0) { %>
+<div class="alert alert-danger alert-dismissible">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span style="
+          color: black;
+      ">×</span>
+  </button>
+  <ol start="1">
+
+    <% errors.forEach(error => { %>
+    <li><%= error %></li>
+    <% }) %>
+  </ol>
+</div>
+<% } %>
+<style>
+  .alert-danger {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    position: absolute;
+    top: 83px;
+    left: 50px;
+    z-index: 99999;
+    direction: rtl;
+  }
+
+  ul,
+  ol {
+    margin-top: 0;
+    margin-bottom: 10px;
+    padding: 0;
+  }
+
+  .alert-dismissable .close,
+  .alert-dismissible .close {
+    position: relative;
+    top: -2px;
+    right: -21px;
+    color: inherit;
+    text-align: inherit;
+  }
+</style>
+<link rel="stylesheet" href="/css/kamadatepicker.min.css">
+<script src="/js/kamadatepicker.js"></script>
+
+<div class="progress">
+  <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"
+    style="width:100%">
+    <span class="sr-only"></span>
+  </div>
+</div>
+<div class="mask" id="mask">
+</div>
+<!-- Start Top Panel -->
+<div class="top-panel">
+  <div class="container">
+    <div class="row">
+
+      <!-- Start Menu -->
+      <div class="col-md-8">
+        <div class="user-menu">
+          <div class="user-name">
+            <a href="#"><%= auth.user.name %> </a>
+          </div>
+
+        </div>
+      </div>
+      <!-- End Menu -->
+      <div class="col-md-4">
+        <div class="icon-collapse" id="icon_collapse">
+          <div class="bar1"></div>
+          <div class="bar2"></div>
+          <div class="bar3"></div>
+        </div>
+        <img src="./img/logo.png" class="logo" alt="">
+        <h1 class="title">آتش نشانی</h1>
+        <h2 class="description">استان کرمانشاه</h2>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- End Top Panel -->
+
+<div id="break">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <nav class="break-nav box">
+          <div class="break-wrap">
+            <a href="#">صفحه اصلی</a>
+            <i></i>
+            پیشخوان
+          </div>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Start Main -->
+<main class="main">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md-9">
+        <div class="content plus">
+          <header class="title">
+            <h3>ویرایش گزارش</h3>
+            <!-- <hr> -->
+
+
+
+          </header>
+
+          <div class="row">
+
+            <form action="/dashboard/report/update/<%= reportregister.id %>" method="POST">
+
+
+              <div class="form-group flot-right col-sm-3 col-xs-12">
+                <label for="inputDepartment">تاریخ بروز حادثه</label>
+                <!-- <input type="date" name="incidenttime"> -->
+                <input type="text" id="data-input" tabindex="11" name="incidenttime"
+                  value="<%= reportregister.incidenttime %>" class="form-control" placeholder="تاریه بروز حادثه">
+
+              </div>
+              <div class="form-group flot-right col-sm-3 col-xs-12">
+                <label for="inputRelatedService">زمان بروز حادثه</label>
+                <input type="time" value="<%= reportregister.timetoannouncetheaccident %>"
+                  name="timetoannouncetheaccident">
+
+              </div>
+              <div class="form-group flot-right col-sm-3 col-xs-12">
+                <label for="inputPriority">تعداد مامورین اعزامی</label>
+                <input type="number" value="<%= reportregister.numberofdispatchofficers %>" min="1" max="15"
+                  name="numberofdispatchofficers">
+
+              </div>
+              <div class="form-group flot-right col-sm-3 col-xs-12">
+                <label for="inputRelatedService">زمان شروع عملیات</label>
+                <input type="time" value="<%= reportregister.timetostarttheoperation %>" id="timetostarttheoperation"
+                  onchange="one()" name="timetostarttheoperation">
+
+              </div>
+
+
+
+              <div class="form-group flot-right col-sm-6 col-xs-12">
+                <label for="inputRelatedService">زمان خاتمه عملیات</label>
+                <input type="time" id="timetoendtheoperation" value="<%= reportregister.timetoendtheoperation %>"
+                  onchange="two()" name="timetoendtheoperation">
+
+              </div>
+
+              <div class="form-group flot-right col-sm-6 col-xs-12">
+                <label for="inputRelatedService">مدت عملیات</label>
+                <input type="text" id="durationofoperation" value="<%= reportregister.durationofoperation %>"
+                  onclick="three()" name="durationofoperation">
+
+              </div>
+
+
+
+
+              <div class="form-group flot-right col-sm-12 col-xs-12">
+                <label for="inputRelatedService">محل وقوع حادثه</label>
+                <input type="text" name="accidentaddress" value="<%= reportregister.accidentaddress %>"
+                  placeholder="آدرس محل وقوع حادثه را وارد کنید">
+
+              </div>
+
+
+              <div class="form-group flot-right col-sm-6 col-xs-12">
+                <label for="inputRelatedService">خبر دهنده</label>
+                <input type="text" value="<%= reportregister.informant %>" name="informant" placeholder="خبر دهنده">
+
+              </div>
+
+
+              <div class="form-group flot-right col-sm-6 col-xs-12">
+                <label for="inputRelatedService">خبر گیرنده</label>
+                <input type="text" value="<%= reportregister.receivernews %>" name="receivernews"
+                  placeholder="خبر گیرنده">
+
+              </div>
+
+              <div class="form-group flot-right col-sm-6 col-xs-12">
+                <label for="inputRelatedService">روش خبر رسانی</label>
+                <input type="text" value="<%= reportregister.Newsmethod %>" name="Newsmethod"
+                  placeholder="روش خبر رسانی">
+
+              </div>
+
+              <div class="form-group flot-right col-sm-6 col-xs-12">
+                <label for="inputRelatedService">ایستگاه عملیات کننده</label>
+                <input placeholder="ایستگاه عملیات کننده" value="<%= station.name %>" class="form-control disabled"
+                  disabled="disabled" type="text">
+              </div>
+
+              <div class="form-group flot-right col-sm-6">
+                <label for="inputRelatedService">پرسنل شرکت کننده</label>
+                <select class="form-control form-control-chosen" id="fireman" name="fireman" multiple
+                  data-placeholder="پرسنل شرکت کننده">
+
+
+                  <% reportregister.fireman.forEach(station => { %>
+
+                  <option value="<%= station.id %>" selected><%= station.name %></option>
+
+
+                  <% }) %>
+
+                </select>
+              </div>
+
+
+
+              <div class="form-group flot-right col-sm-6">
+                <label for="inputRelatedService">شیفت</label>
+                <select name="inputRelatedService" class="form-control">
+                  
+
+                    <% if(reportregister.inputRelatedService == 'شهید جمالی') { %>
+                        <option selected value="شهید جمالی">شهید جمالی</option>
+                        <option value="شهید بهشتی">شهید بهشتی</option>    
+                        <option value="شهید امیری">شهید امیری</option>  
+                    <% } %>
+
+                    <% if(reportregister.inputRelatedService == 'شهید بهشتی') { %>
+                        <option selected value="شهید بهشتی">شهید بهشتی</option>
+                        <option value="شهید جمالی">شهید جمالی</option>    
+                        <option value="شهید امیری">شهید امیری</option>  
+                    <% } %>
+                    <% if(reportregister.inputRelatedService == 'شهید امیری') { %>
+
+                        <option selected value="شهید امیری">شهید امیری</option>
+                        <option value="شهید جمالی">شهید جمالی</option>    
+                        <option value="شهید بهشتی">شهید بهشتی</option> 
+                        <% } %>
+
+                        <% if(!reportregister.inputRelatedService) { %>
+
+                            <option value="شهید امیری">شهید امیری</option>
+                            <option value="شهید جمالی">شهید جمالی</option>    
+                            <option value="شهید بهشتی">شهید بهشتی</option> 
+                            <% } %>
+
+
+
+
+
+                </select>
+              </div>
+
+
+              <div class="form-group flot-right col-sm-6 col-xs-12" style="
+              display: none;
+          ">
+                <label for="inputRelatedService">ایستگاه عملیات کننده</label>
+                <input name="Operatingstation" placeholder="ایستگاه عملیات کننده" id="inputName"
+                  value="<%= station.id %>" class="form-control disabled" disabled="disabled" type="text">
+              </div>
+              <div class="form-group flot-right col-sm-4 col-xs-12">
+                <label for="inputRelatedService">مشخصات محل بروز حادثه</label>
+                <input type="text" value="<%= reportregister.Thelocationoftheaccident %>" name="Thelocationoftheaccident" placeholder="مورد کاربری">
+
+              </div>
+
+              <div class="form-group flot-right col-sm-4 col-xs-12">
+                <label for="inputRelatedService">تعداد طبقات</label>
+                <input type="text" value="<%= reportregister.Numberoffloors %>" name="Numberoffloors" placeholder="تعداد طبقات">
+
+              </div>
+
+              <div class="form-group flot-right col-sm-4 col-xs-12">
+                <label for="inputRelatedService">نوع ساختمان</label>
+                <input type="text" value="<%= reportregister.buildingtype %>" name="buildingtype" placeholder="نوع ساختمان">
+
+              </div>
+
+              <div class="form-group flot-right col-sm-6 col-xs-12">
+                <label for="inputRelatedService">نام مالک</label>
+                <input type="text" value="<%= reportregister.Theownername %>" name="Theownername" placeholder="نام مالک">
+
+              </div>
+
+
+              <div class="form-group flot-right col-sm-6 col-xs-12">
+                <label for="inputRelatedService">نام مستاجر یا مستاجرین</label>
+                <input type="text" value="<%= reportregister.Tenantname %>" name="Tenantname" placeholder="نام مستاجر یا مستاجرین">
+
+              </div>
+
+              <div class="form-group flot-right col-sm-12">
+                <label for="inputRelatedService">نوع حادثه</label>
+                <select name="Typeofaccident" id="inputRelatedService" class="form-control">
+                  <option value="Buildingfire" selected="selected">
+                    آتش سوزی ساختمان
+                  </option>
+                  <option value="ParkJungleFire">
+                    آتش سوزی پارک / جنگل
+                  </option>
+                  <option value="GardenFarmFire">
+                    آتش سوزی باغ / مزرعه
+                  </option>
+
+                  <option value="Landvehiclefire">
+                    آتش سوزی نقلیه زمینی
+                  </option>
+
+                  <option value="Airvehiclefire">
+                    آتش سوزی نقلیه هوایی
+                  </option>
+
+                  <option value="Bluevehiclefire">
+                    آتش سوزی نقلیه آبی
+                  </option>
+
+                  <option value="Fallingintothewell">
+                    سقوط در چاه
+                  </option>
+
+                  <option value="Debrisfalling">
+                    ریزش آوار
+                  </option>
+                  <option value="Fallingfromaheight">
+                    سقوط ار ارتفاع
+                  </option>
+                  <option value="Wellfall">
+                    ریزش چاه
+                  </option>
+                  <option value="MeatGrinder">
+                    چرخ گوشت
+                  </option>
+                  <option value="Elevator">
+                    آسانسور
+                  </option>
+
+
+                  <option value="Drown">
+                    غرق شدن
+                  </option>
+
+
+                  <option value="electrocution">
+                    برق گرفتگی
+                  </option>
+
+                  <option value="mountain">
+                    کوهستان
+                  </option>
+
+                  <option value="Caraccidentoroverturning">
+                    تصادف یا سرنگونگی خودرو
+                  </option>
+
+                  <option value="Gascylinderleaksandbursts">
+                    نشت و ترکدین کپسول گاز
+                  </option>
+
+
+                  <option value="Otherevents">
+                    سایر حوادث
+                  </option>
+
+                </select>
+              </div>
+
+
+              <div class="form-group flot-right col-sm-12 col-xs-12">
+                <label for="inputRelatedService">سایر حوادث با ذکر نام</label>
+                <textarea name="Otherevents" id="" cols="30" rows="10" style="
+              width: 100%;
+              height: 154px;
+          " placeholder="لطفا اگر نوع حادثه را در لیست بالا پیدا نکرده اید در این قسمت توضیحات لازمه رو بنویسید"><%= reportregister.Otherevents %></textarea>
+              </div>
+
+
+              <div class="form-group flot-right col-sm-12 col-xs-12">
+                <label for="inputRelatedService">توضیح علل بروز حادثه</label>
+                <textarea name="Explainthecausesoftheaccident" id="" cols="30" rows="10" style="
+              width: 100%;
+              height: 154px;
+          " placeholder="لطفا اگر اطلاعی در زمینه علل بروز حادثه ندارید در این قسمت بنویسید نیاز به کارشناسی دارد"><%= reportregister.Explainthecausesoftheaccident %></textarea>
+              </div>
+
+
+              <div class="form-group flot-right col-sm-12 col-xs-12">
+                <label for="inputRelatedService">توضیح اقدامات اولیه انجام شده</label>
+                <textarea name="Explaintheinitialstepstaken" id="" cols="30" rows="10" style="
+              width: 100%;
+              height: 154px;
+          " placeholder="لطفا توضیحات مربوط به اقدامات انجام شده را در این قسمت بنویسید"><%= reportregister.Explaintheinitialstepstaken %></textarea>
+              </div>
+
+
+              <div class="form-group flot-right col-sm-12 col-xs-12">
+                <label for="inputRelatedService">شرح عملیات مامورین اعزامی و وسایل</label>
+                <textarea name="DescriptionofOperation" id="" cols="30" rows="10" style="
+              width: 100%;
+              height: 154px;
+          " placeholder="شرح عملیات مامورین اعزامی و وسایل را در این قسمت بنویسید"><%= reportregister.DescriptionofOperation %></textarea>
+              </div>
+
+
+              <div class="form-group flot-right col-sm-12 col-xs-12">
+                <label for="inputRelatedService">شرح مشکلات حین انجام ماموریت</label>
+                <textarea name="Descriptionofproblems" id="" cols="30" rows="10" style="
+              width: 100%;
+              height: 154px;
+          " placeholder="شرح مشکلات حین انجام ماموریت"><%= reportregister.Descriptionofproblems %></textarea>
+              </div>
+
+
+              <div class="form-group flot-right col-sm-12 col-xs-12">
+                <label for="inputRelatedService">حضور و همکاری سایر ایستگاهها و مراکز و سازمانها</label>
+                <textarea name="Presenceandcooperationofotherstationscentersandorganizations" id="" cols="30" rows="10"
+                  style="
+              width: 100%;
+              height: 154px;
+          " placeholder="حضور و همکاری سایر ایستگاهها و مراکز و سازمانها"><%= reportregister.Presenceandcooperationofotherstationscentersandorganizations %></textarea>
+              </div>
+
+
+
+              <div class="form-group flot-right col-sm-12 col-xs-12">
+                <label for="inputRelatedService">مشخصات حادثه دیدگان</label>
+                <textarea name="Presenceofcooperationofotherstations" id="" cols="30" rows="10" style="
+              width: 100%;
+              height: 154px;
+          " placeholder="مشخصات حادثه دیدگان"><%= reportregister.Presenceofcooperationofotherstations %></textarea>
+              </div>
+
+
+
+              <div class="form-group flot-right col-sm-4">
+                <label for="inputRelatedService">شرایط جوی</label>
+                <select name="Atmosphericconditions" id="inputRelatedService" class="form-control">
+                  <option value="smooth" selected="selected">
+                    صاف </option>
+
+                  <option value="rainy">
+                    بارانی </option>
+
+
+                  <option value="Fog">
+                    مه </option>
+                  <option value="Snow">
+                    برف </option>
+                  <option value="Windandstorm">
+                    باد و طوفان </option>
+
+                </select>
+              </div>
+
+
+
+
+
+              <div class="form-group flot-right col-sm-2 col-xs-12">
+                <label for="inputRelatedService">جهت وزش باد</label>
+                <input type="text"  name="Winddirection" value="<%= reportregister.Winddirection %>" placeholder="جهت وزش باد">
+
+              </div>
+
+
+              <div class="form-group flot-right col-sm-2 col-xs-12">
+                <label for="inputRelatedService">سرعت باد</label>
+                <input type="text" name="windspeed" value="<%= reportregister.windspeed %>" placeholder="سرعت باد">
+
+              </div>
+
+
+              <div class="form-group flot-right col-sm-2 col-xs-12">
+                <label for="inputRelatedService">دمای هوا</label>
+                <input type="text" name="temperature" value="<%= reportregister.temperature %>" placeholder="دمای هوا">
+
+              </div>
+
+
+              <div class="form-group flot-right col-sm-2 col-xs-12">
+                <label for="inputRelatedService">رطوبت نسبی</label>
+                <input type="text" name="relativehumidity" value="<%= reportregister.relativehumidity %>" placeholder="رطوبت نسبی">
+
+              </div>
+
+              <!-- <label for="inputRelatedService">وسایل موتوری و تجهیزات مورد استفاده و مواد مصرفی</label> -->
+
+              <div class="form-group flot-right col-sm-4 col-xs-12">
+                <label for="inputPriority">خودرو آتش نشانی</label>
+                <input type="number" value="<%= reportregister.Firetruck %>" name="Firetruck" min="1" max="15">
+
+              </div>
+
+              <div class="form-group flot-right col-sm-4 col-xs-12">
+                <label for="inputPriority">خودرو حمل تجهیزات</label>
+                <input type="number" name="Carcarryingequipment" value="<%= reportregister.Carcarryingequipment %>" min="1" max="15">
+
+              </div>
+
+              <div class="form-group flot-right col-sm-4 col-xs-12">
+                <label for="inputPriority">خودروی نردبان ۳۲ متری</label>
+                <input type="number" name="meterladdercarthree" value="<%= reportregister.meterladdercarthree %>" min="1" max="15">
+
+              </div>
+              <div class="form-group flot-right col-sm-4 col-xs-12">
+                <label for="inputPriority">خودروی نردبان ۵۲ متری</label>
+                <input type="number" name="meterladdercarfive" value="<%= reportregister.meterladdercarfive %>" min="1" max="15">
+
+              </div>
+
+
+              <div class="form-group flot-right col-sm-4 col-xs-12">
+                <label for="inputPriority">بالابر هیدرولیکی</label>
+                <input type="number" name="Hydrauliclift" value="<%= reportregister.Hydrauliclift %>" min="1" max="15">
+
+              </div>
+
+
+
+
+              <div class="form-group flot-right col-sm-4 col-xs-12">
+                <label for="inputPriority">خودرو نجات</label>
+                <input type="number" name="Carrescue" value="<%= reportregister.Carrescue %>" min="1" max="15">
+
+              </div>
+
+
+
+
+              <div class="form-group flot-right col-sm-4 col-xs-12">
+                <label for="inputPriority">آمبولانس</label>
+                <input type="number" name="Ambulance" value="<%= reportregister.Ambulance %>" min="1" max="15">
+
+              </div>
+              <div class="form-group flot-right col-sm-4 col-xs-12">
+                <label for="inputPriority">لوله</label>
+                <input type="number" name="Pipe" value="<%= reportregister.Pipe %>" min="1" max="15">
+
+              </div>
+              <div class="form-group flot-right col-sm-4 col-xs-12">
+                <label for="inputPriority">سرلوله</label>
+                <input type="number" name="Headpipe" value="<%= reportregister.Headpipe %>" min="1" max="15">
+
+              </div>
+
+              <div class="form-group flot-right col-sm-4 col-xs-12">
+                <label for="inputPriority">کفساز</label>
+                <input type="number" name="Exporter" value="<%= reportregister.Exporter %>" min="1" max="15">
+
+              </div>
+              <div class="form-group flot-right col-sm-4 col-xs-12">
+                <label for="inputPriority">لباس نسوز</label>
+                <input type="number" name="Burntclothing" value="<%= reportregister.Burntclothing %>" min="1" max="15">
+
+              </div>
+
+              <div class="form-group flot-right col-sm-4 col-xs-12">
+                <label for="inputPriority">پودر</label>
+                <input type="number" name="Powder" value="<%= reportregister.Powder %>" min="1" max="15">
+
+              </div>
+
+              <div class="form-group flot-right col-sm-4 col-xs-12">
+                <label for="inputPriority">موتور پمپ پرتابل</label>
+                <input type="number" name="Portablemotorpump" value="<%= reportregister.Portablemotorpump %>" min="1" max="15">
+
+              </div>
+
+              <div class="form-group flot-right col-sm-4 col-xs-12">
+                <label for="inputPriority">دستگاه تنفسی</label>
+                <input type="number" name="Respiratorysystem" value="<%= reportregister.Respiratorysystem %>" min="1" max="15">
+
+              </div>
+              <div class="form-group flot-right col-sm-4 col-xs-12">
+                <label for="inputPriority">دستگاه برش</label>
+                <input type="number" name="Brushingmachine" value="<%= reportregister.Brushingmachine %>" min="1" max="15">
+
+              </div>
+              <div class="form-group flot-right col-sm-4 col-xs-12">
+                <label for="inputPriority">ژنراتور برق</label>
+                <input type="number" name="Electricgenerator" value="<%= reportregister.Electricgenerator %>" min="1" max="15">
+
+              </div>
+              <div class="form-group flot-right col-sm-4 col-xs-12">
+                <label for="inputPriority">کف</label>
+                <input type="number" name="Cuffs" value="<%= reportregister.Cuffs %>">
+
+              </div>
+
+              <div class="form-group flot-right col-sm-4 col-xs-12">
+                <label for="inputPriority">آب</label>
+                <input type="number" name="Water" value="<%= reportregister.Water %>">
+
+              </div>
+              <div class="form-group flot-right col-sm-12 col-xs-12">
+                <label for="inputRelatedService">سایر</label>
+                <textarea name="other" id="" cols="30" rows="10" style="
+              width: 100%;
+              height: 154px;
+          " placeholder="سایر"><%= reportregister.other %></textarea>
+              </div>
+
+
+              <div class="form-group flot-right col-sm-4">
+                <label for="inputRelatedService">آیا محل قبلا مورد بازدید قرار گرفته است؟</label>
+                <select name="whatLastvisitdate" id="inputRelatedService" class="form-control">
+
+
+
+                  <option value="yes" selected="selected">
+                    بله</option>
+                  <option value="no">
+                    خیر</option>
+
+
+
+                </select>
+              </div>
+
+
+
+              <div class="form-group flot-right col-sm-4">
+                <label for="inputRelatedService">نام بازدید کننده</label>
+                <input type="text" value="<%= reportregister.Visitorname %>" name="Visitorname" placeholder="نام بازدید کننده">
+              </div>
+
+              <div class="form-group flot-right col-sm-3 col-xs-12">
+                <label for="inputDepartment">تاریخ آخرین بازدید</label>
+                <!-- <input type="date" name="Lastvisitdate"> -->
+                <input type="text" id="data-es" tabindex="11" name="Lastvisitdate" value="<%= reportregister.Lastvisitdate %>"
+                  class="form-control" placeholder="تاریخ آخرین بازدید">
+
+              </div>
+
+              <button class="btn btn-primary" type="submit">ویرایش گزارش</button>
+          </div>
+
+
+
+          <!-- <div id="app"></div> -->
+          </form>
+
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <%- include(viewPath('/home/dashboard/menu')) -%>
+
+      </div>
+    </div>
+  </div>
+</main>
+<!-- End Main -->
+<!-- Start Footer -->
+
+<%- include(viewPath('/home/dashboard/footer')) -%>
+
+
+
+<script>
+  kamaDatepicker('data-input', {
+
+
+  });
+
+  kamaDatepicker('data-es', {
+
+
+  });
+</script>
+
+<script type="text/javascript">
+  var recipientNameValue1;
+  var recipientNameValue2;
+
+  function one() {
+    recipientNameValue1 = document.getElementById('timetostarttheoperation').value;
+  }
+
+  function two() {
+    recipientNameValue2 = document.getElementById('timetoendtheoperation').value;
+  }
+
+  function three() {
+
+    // document.getElementById('durationofoperation').value = recipientNameValue1 - recipientNameValue2;
+
+    // var diff = recipientNameValue1.split(':') - recipientNameValue2.split(':'); // this is a time in milliseconds
+    // var diff_as_date = new Date(diff);
+    // console.log(diff)
+  }
+
+
+
+
+
+
+
+
+  var myVar = setInterval(function () {
+    myTimer()
+  }, 1);
+  var count = 0;
+
+  function myTimer() {
+    if (count < 100) {
+      $('.progress').css('width', count + "%");
+      count += 0.05;
+      //  document.getElementById("demo").innerHTML = Math.round(count) +"%";
+      // code to do when loading
+    } else if (count > 99) {
+      // code to do after loading
+      // count = 0;
+
+
+    }
+  }
+</script>
+
+
+
+
+<script type="text/javascript">
+  window.onload = function () {
+    var mobilemenu = document.getElementById('sidebar-panel');
+    var iconcollapse = document.getElementById('icon_collapse');
+    var back = document.getElementById('mask');
+    back.onclick = hidemaster;
+
+    function hidemaster() {
+      mobilemenu.style.right = "0px"
+      back.style.display = "none";
+      mobilemenu.style.visibility = "hidden";
+
+    }
+    iconcollapse.onclick = showmaster;
+
+    function showmaster() {
+      back.style.display = "block";
+      mobilemenu.style.visibility = "visible";
+      mobilemenu.style.right = "0px"
+    }
+
+  }
+</script>
+
+
+
+
+
+<link rel="stylesheet" href="/css/component-chosen.min.css">
+<script src="/js/chosen.jquery.min.js"></script>
+<script>
+  $('.form-control-chosen').chosen({});
+</script>

@@ -1,0 +1,36 @@
+@font-face {
+  font-family: IRANSans;
+  font-style: normal;
+  font-weight: 400;
+  src: url(../fonts/eot/IRANSansWeb.eot);
+  src: url(../fonts/eot/IRANSansWeb.eot?#iefix) format("embedded-opentype"), url(../fonts/woff2/IRANSansWeb.woff2) format("woff2"), url(../fonts/woff/IRANSansWeb.woff) format("woff"), url(../fonts/ttf/IRANSansWeb.ttf) format("truetype")
+}
+
+
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  font-size: 10px;
+}
+
+body {
+  overflow: hidden;
+}
+
+#app {
+  width: 50%;
+  height: 50%;
+}
+
+.category-img img {
+  width: 175px;
+  transition: .5s ease-in-out;
+  height: 175px;
+}

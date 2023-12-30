@@ -1,0 +1,313 @@
+<section class="content">
+    <div class="container-fluid">
+
+
+        <div class="block-header">
+            <h2>بارگذاری تصویر</h2>
+        </div>
+
+        <!-- File Upload | Drag & Drop OR With Click & Choose -->
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="body">
+
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="/admin">
+                                <i class="material-icons">home</i> خانه
+                            </a>
+                        </li>
+                        <li class="active">
+                            <i class="material-icons">library_books</i> افزودن تصویر
+                        </li>
+                    </ol>
+
+                </div>
+            </div>
+            <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="header">
+                        <h2>
+                            بارگذاری تصویر جدید
+
+                        </h2>
+                        <small>حداکثر یک تصویر</small>
+                    </div>
+                    <div class="body">
+                        <form action="/admin/upload-image" id="a" class="dropzone dz-clickable" method="post">
+                            <div class="dz-message">
+                                <div class="drag-icon-cph">
+                                    <i class="material-icons">touch_app</i>
+                                    <div id="previewrm" class="dz-preview dz-processing dz-image-preview dz-success"
+                                        style="
+    float: right;
+">
+                                        <div class="dz-image"><img data-dz-thumbnail="" alt="col5-2.jpg"
+                                                src="<%= post.images %>"></div>
+                                    </div>
+                                </div>
+                                <h3>تصویر را در اینجا رها کنید یا برای بارگذاری کلیک کنید.</h3>
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            <form name="myForm" action="/admin/gallerypicture/create" onsubmit="return validateForm()" method="post">
+
+                <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                                مشخصات تصویر
+                            </h2>
+
+
+                        </div>
+                        <div class="body">
+
+                            <h2 class="card-inside-title">عنوان تصویر</h2>
+                            <div class="row clearfix">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" class="form-control" placeholder="عنوان تصویر"
+                                                id="titleSeo" name="title">
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+
+
+
+                            <h2 class="card-inside-title">توضیحات</h2>
+                            <div class="row clearfix">
+                                <div class="col-sm-12">
+
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" class="form-control" placeholder="توضیحات تصویر"
+                                                name="description">
+                                        </div>
+                                        <div class="help-info">حداقل 10 کاراکتر وارد کنید</div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5 col-md-12 col-sm-6 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                                انتخاب دسته بندی
+                            </h2>
+
+                        </div>
+                        <div class="body">
+                            <div class="row clearfix">
+                                <div class="col-md-12">
+
+                                    <div class="btn-group bootstrap-select"><button type="button"
+                                            class="btn dropdown-toggle btn-default" data-toggle="dropdown"
+                                            data-id="cars" title="Volvo"><span
+                                                class="filter-option pull-left">Volvo</span>&nbsp;<span
+                                                class="bs-caret"><span class="caret"></span></span></button>
+                                        <div class="dropdown-menu open">
+                                            <ul class="dropdown-menu inner" role="menu">
+                                                <li data-original-index="0" class="selected"><a tabindex="0" class=""
+                                                        style="" data-tokens="null"><span class="text">Volvo</span><span
+                                                            class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                                <li data-original-index="1"><a tabindex="0" class="" style=""
+                                                        data-tokens="null"><span class="text">Saab</span><span
+                                                            class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                                <li data-original-index="2"><a tabindex="0" class="" style=""
+                                                        data-tokens="null"><span class="text">Mercedes</span><span
+                                                            class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                                <li data-original-index="3"><a tabindex="0" class="" style=""
+                                                        data-tokens="null"><span class="text">Audi</span><span
+                                                            class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                            </ul>
+                                        </div><select id="cars" class="" tabindex="-98">
+                                            <option value="volvo">Volvo</option>
+                                            <option value="saab">Saab</option>
+                                            <option value="mercedes">Mercedes</option>
+                                            <option value="audi">Audi</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7 col-md-12 col-sm-6 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                                زمان بندی
+                            </h2>
+
+                        </div>
+                        <div class="body">
+                            <div class="row clearfix">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <div class="form-line">
+
+                                            <input id="min-date" name="timestamp" type="text"
+                                                class="datetimepicker form-control"
+                                                placeholder="لطفا زمان بندی انتشار را مشخص نمایید" data-dtp="dtp_HeOEi">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <input style="display: none" type="text" name="images" value="" id="images" />
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                    <button type="submit" class="btn btn-block btn-lg btn-primary waves-effect">ارسال</button>
+                </div>
+            </form>
+
+
+        </div>
+        <div class="block-header">
+            <h2>راهنما</h2>
+        </div>
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="header">
+                        <h2>
+                            بارگذاری تصویر
+
+                        </h2>
+                        <ul class="header-dropdown m-r--5">
+                            <li class="dropdown">
+                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"
+                                    role="button" aria-haspopup="true" aria-expanded="false">
+                                    <i class="material-icons">more_vert</i>
+                                </a>
+                                <ul class="dropdown-menu pull-right">
+                                    <li><a href="javascript:void(0);" class=" waves-effect waves-block">Action</a></li>
+                                    <li><a href="javascript:void(0);" class=" waves-effect waves-block">Another
+                                            action</a></li>
+                                    <li><a href="javascript:void(0);" class=" waves-effect waves-block">Something else
+                                            here</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="body">
+                        <p class="lead">
+                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
+                            Aenean massa.
+                        </p>
+                        <p>
+                            Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus
+                            ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer
+                            tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus.
+                            Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante,
+                            dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius
+                            laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur
+                            ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget
+                        </p>
+                        <p>
+                            Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante
+                            tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam
+                            sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh.
+                            Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus
+                            nunc.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>
+
+
+<div id="error" data-notify="container"
+    class="bootstrap-notify-container alert alert-dismissible alert-danger p-r-35 animated fadeInDown" role="alert"
+    data-notify-position="bottom-left"
+    style="display: none; margin: 0px auto; position: fixed; transition: all 0.5s ease-in-out 0s; z-index: 1031; bottom: 20px; left: 20px;">
+    <button type="button" aria-hidden="true" id="close" class="close" data-notify="dismiss"
+        style="position: absolute; right: 10px; top: 5px; z-index: 1033;">×</button><span data-notify="icon"></span>
+    <span data-notify="title"></span> <span data-notify="message">تمام فیلدها باید وارد شوند. </span><a href="#"
+        target="_blank" data-notify="url"></a></div>
+
+
+
+<script type="text/javascript">
+    var date = document.getElementById('min-date');
+    $('#min-date').bootstrapMaterialDatePicker({
+        format: 'YYYY-MM-DDTHH:mm',
+        lang: 'fa',
+        weekStart: 1,
+        cancelText: 'ANNULER'
+    });
+</script>
+
+
+<script>
+    var close = document.getElementById('close');
+
+    close.addEventListener("click", displaynone);
+
+    function displaynone() {
+        error.style.display = "none"
+    }
+
+    function validateForm() {
+        var error = document.getElementById("error");
+        var tit = document.forms["myForm"]["title"].value;
+        var des = document.forms["myForm"]["title"].value;
+        if (tit == "" || des == "") {
+            error.style.display = "block"
+            setInterval(function () {
+                error.style.display = "none"
+            }, 3000);
+            return false;
+        }
+
+    }
+
+
+
+    new Dropzone("#a", {
+
+
+
+
+        url: "/admin/upload-image",
+
+        init: function () {
+            this.on("success", function (file, responseText) {
+                var disnone = document.getElementById('previewrm');
+                disnone.style.display = "none"
+                document.getElementById("images").setAttribute("value", '/' + responseText.path
+                    .substring(7));
+                thisDropzone.options.thumbnail.call(thisDropzone, mockFile,
+                    "http://localhost:3000/images/user.png"
+                    ); //uploadsfolder is the folder where you have all those uploaded files
+
+                console.log(responseText.path.substring(7));
+                console.log(responseText.destination);
+                console.log(file);
+            });
+        }
+    });
+</script>

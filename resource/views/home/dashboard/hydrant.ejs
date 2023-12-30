@@ -1,0 +1,345 @@
+<div class="progress">
+  <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"
+    style="width:100%">
+    <span class="sr-only"></span>
+  </div>
+</div>
+<div class="mask" id="mask">
+</div>
+<!-- Start Top Panel -->
+<div class="top-panel">
+  <div class="container">
+    <div class="row">
+
+      <!-- Start Menu -->
+      <div class="col-md-8">
+        <div class="user-menu">
+          <div class="user-name">
+            <a href="#"><%= auth.user.name %> </a>
+          </div>
+
+        </div>
+      </div>
+      <!-- End Menu -->
+      <div class="col-md-4">
+        <div class="icon-collapse" id="icon_collapse">
+          <div class="bar1"></div>
+          <div class="bar2"></div>
+          <div class="bar3"></div>
+        </div>
+        <img src="./img/logo.png" class="logo" alt="">
+        <h1 class="title">آتش نشانی</h1>
+        <h2 class="description">استان کرمانشاه</h2>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- End Top Panel -->
+
+<div id="break">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <nav class="break-nav box">
+          <div class="break-wrap">
+            <a href="#">صفحه اصلی</a>
+            <i></i>
+            پیشخوان
+          </div>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Start Main -->
+<main class="main">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md-9">
+        <div class="content">
+          <header class="title">
+            <h3>نقشه تمام هیدرانت های سطح شهر</h3>
+            <!-- <hr> -->
+
+
+
+
+
+
+            <link rel="stylesheet" href="/build/ol.css" type="text/css">
+            <link rel="stylesheet" href="/build/samples.css" type="text/css" />
+
+            <style>
+              .map {
+                height: 100vh;
+                width: 100%;
+                margin-bottom: 200px;
+              }
+
+              .ol-attribution.ol-uncollapsible {
+                bottom: 0;
+                right: 0;
+                border-radius: 4px 0 0;
+                display: none !important;
+              }
+            </style>
+
+
+
+            <% hydrant.forEach(hydrant => { %>
+            <input type="number" class="hyd" style="display: none;"
+              value="<%= hydrant.latlng.lat %> <%= hydrant.latlng.lng %>">
+
+
+            <% }) %>
+
+            <div id="map" class="map" style="margin-bottom: 200px;"></div>
+            <div id="info" style="display: none;"></div>
+            <label for="track">
+              track position
+              <input style="position: absolute;" id="track" type="checkbox"/>
+            </label>
+            <p>
+          positionshowingtouser: <code id="positionshowingtouser1"></code>&nbsp;&nbsp;
+              position accuracy : <code id="accuracy"></code>&nbsp;&nbsp;
+              altitude : <code id="altitude"></code>&nbsp;&nbsp;
+              altitude accuracy : <code id="altitudeAccuracy"></code>&nbsp;&nbsp;
+              heading : <code id="heading"></code>&nbsp;&nbsp;
+              speed : <code id="speed"></code>
+            </p>
+          <button onclick="showPosition1()">Try It</button>
+        
+            <p id="demo"></p>
+
+
+
+
+            <script src="/build/ol.js"></script>
+            <!-- <script src="/build/OpenLayers.js"></script> -->
+
+
+
+
+            <script type="text/javascript">
+              // var vectorLayer = new ol.layer.Vector({ // VectorLayer({
+              //   source: new ol.source.Vector(),
+              // });
+              // var map = new ol.Map({
+              //   layers: [
+              //     new ol.layer.Tile({ // TileLayer({
+              //       source: new ol.source.OSM()
+              //     }),
+              //     vectorLayer,
+              //   ],
+              //   target: 'map',
+              //   view: new ol.View({
+              //     center: ol.proj.transform([47.10, 34.33], 'EPSG:4326', 'EPSG:3857'),
+              //     zoom: 12
+              //   })
+              // });
+
+
+
+              var attribution = new ol.control.Attribution({
+                collapsible: false
+              });
+
+              var map = new ol.Map({
+                controls: ol.control.defaults({
+                  attribution: false
+                }).extend([attribution]),
+                layers: [
+                  new ol.layer.Tile({
+                    source: new ol.source.OSM()
+                  })
+                ],
+                target: 'map',
+                view: new ol.View({
+                  center: ol.proj.fromLonLat([47.10, 34.33]),
+                  maxZoom: 18,
+                  zoom: 12
+                })
+              });
+
+
+
+
+              var hyd = document.querySelectorAll('.hyd');
+
+
+              function hydrant(latlng) {
+
+                var lat = 0;
+                var lng = 0;
+                lat = latlng.substring(0, 17);
+                lng = latlng.substring(18, 36);
+
+                var data1 = parseFloat(lat);
+                var data2 = parseFloat(lng);
+                // data.push(lat, lng)
+
+
+
+
+
+                var layer = new ol.layer.Vector({
+                  source: new ol.source.Vector({
+                    features: [
+                      new ol.Feature({
+                        geometry: new ol.geom.Point(ol.proj.fromLonLat([data1, data2]))
+
+                      })
+                    ]
+                  })
+                });
+                layer.setStyle(new ol.style.Style({
+                  image: new ol.style.Icon(({
+                    anchor: [0.5, 36],
+                    anchorXUnits: "fraction",
+                    anchorYUnits: "pixels",
+                    opacity: 1,
+                    src: "/hydrant.png"
+                  })),
+                }));
+                map.addLayer(layer);
+              }
+
+
+              for (var i = 0; i < hyd.length; i++) {
+
+                let lat = hyd[i].defaultValue;
+                let lng = 34.355654364658;
+                var lonLat = ol.proj.transform([lat, lng], 'EPSG:3857', 'EPSG:4326');
+                hydrant(hyd[i].defaultValue)
+
+                // console.log(time)
+
+                // addMarker(lonLat);
+
+
+
+              }
+
+
+
+
+
+
+
+
+              var view = new ol.View({
+        center: ol.proj.fromLonLat([51.3, 35.6]),
+          zoom: 10
+      });
+
+      var map = new ol.Map({
+        layers: [
+          new ol.layer.Tile({
+            source: new ol.source.OSM()
+          })
+        ],
+        target: 'map',
+        view: view
+      });
+
+      var geolocation = new ol.Geolocation({
+        // enableHighAccuracy must be set to true to have the heading value.
+        trackingOptions: {
+          enableHighAccuracy: true
+        },
+        projection: view.getProjection()
+      });
+
+      function el(id) {
+        return document.getElementById(id);
+      }
+
+      el('track').addEventListener('change', function() {
+        geolocation.setTracking(this.checked);
+      });
+
+      // update the HTML page when the position changes.
+      geolocation.on('change', function() {
+	    el('positionshowingtouser1').innerText = geolocation.getPosition();
+        el('accuracy').innerText = geolocation.getAccuracy() + ' [m]';
+        el('altitude').innerText = geolocation.getAltitude() + ' [m]';
+        el('altitudeAccuracy').innerText = geolocation.getAltitudeAccuracy() + ' [m]';
+        el('heading').innerText = geolocation.getHeading() + ' [rad]';
+        el('speed').innerText = geolocation.getSpeed() + ' [m/s]';
+      });
+
+      // handle geolocation error.
+      geolocation.on('error', function(error) {
+        var info = document.getElementById('info');
+        info.innerHTML = error.message;
+        info.style.display = '';
+      });
+
+      var accuracyFeature = new ol.Feature();
+      geolocation.on('change:accuracyGeometry', function() {
+        accuracyFeature.setGeometry(geolocation.getAccuracyGeometry());
+      });
+
+      var positionFeature = new ol.Feature();
+      positionFeature.setStyle(new ol.style.Style({
+        image: new ol.style.Circle({
+          radius: 6,
+          fill: new ol.style.Fill({
+            color: '#3399CC'
+          }),
+          stroke: new ol.style.Stroke({
+            color: '#fff',
+            width: 2
+          })
+        })
+      }));
+
+      geolocation.on('change:position', function() {
+        var coordinates = geolocation.getPosition();
+        positionFeature.setGeometry(coordinates ?
+          new ol.geom.Point(coordinates) : null);
+      });
+
+      new ol.layer.Vector({
+        map: map,
+        source: new ol.source.Vector({
+          features: [accuracyFeature, positionFeature]
+        })
+      });
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+
+          </header>
+
+
+          <div id="app"></div>
+
+
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <%- include(viewPath('/home/dashboard/menu')) -%>
+
+      </div>
+    </div>
+  </div>
+</main>
+<!-- End Main -->
+<%- include(viewPath('/home/dashboard/footer')) -%>

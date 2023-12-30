@@ -1,0 +1,189 @@
+<section class="content">
+    <%- include(viewPath('layouts/error-messages')) -%>
+
+    <div class="row clearfix">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="body">
+                <div class="block-header">
+                    <h2>افزودن دسته نوشته ها</h2>
+                </div>
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="/admin">
+                            <i class="material-icons">home</i> خانه
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="/admin/category">
+                            <i class="material-icons">library_books</i> دسته بندی نوشته ها
+                        </a>
+                    </li>
+                    <li class="active">
+                        <i class="material-icons">library_books</i> افزودن دسته نوشته 
+                    </li>
+                </ol>
+                
+            </div>
+        </div>
+
+        
+        
+        
+    </div>
+    <div class="row clearfix">
+
+
+        
+        <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="header">
+                    <h2>
+                        بارگذاری تصویر جدید
+
+                    </h2>
+                    <small>حداکثر یک تصویر</small>
+                </div>
+                <div class="body" style=" padding-bottom: 40px; ">
+                    <form action="/admin/upload-image" id="a" class="dropzone dz-clickable" method="post">
+                        <div class="dz-message">
+                            <div class="drag-icon-cph">
+                                <i class="material-icons">touch_app</i>
+                            </div>
+                            <h3>تصویر را در اینجا رها کنید یا برای بارگذاری کلیک کنید.</h3>
+                            <em>حداکثر اندازه پرونده برای بارگذاری: (<strong>100MB</strong>)</em>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        <form action="/admin/category/create" method="post">
+        
+        <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="header">
+                    <h2>
+                         عنوان دسته
+                    </h2>
+                    
+                </div>
+                <div class="body">
+                    <div class="row clearfix">
+                        <div class="col-md-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="name" name="name" type="text" class="form-control" value="<%= old('name') %>">
+                                    <label class="form-label">عنوان دسته</label>
+                                </div>
+                                <div class="help-info">حداقل ۳ کاراکتر وارد کنید</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="card">
+                <div class="header">
+                    <h2>
+                         آدرس دسته
+                    </h2>
+                    
+                </div>
+                <div class="body">
+                    <div class="row clearfix">
+                        <div class="col-md-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="slug" name="slug" value="<%= old('slug') %>" type="text" class="form-control" required="" aria-required="true">
+                                    <label class="form-label"> آدرس دسته</label>
+                                </div>
+                                <div class="help-info">آدرس دسته باید لاتین باشد</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+            
+        </div>
+
+
+
+        <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="header">
+                    <h2>
+                        توضیحات دسته                    </h2>
+                    
+                </div>
+                <div class="body">
+                    <div class="row clearfix">
+                        <div class="col-md-12">
+                            <div class="form-group form-float">
+                                <div class="form-line">
+                                    <input id="description" value="<%= old('description') %>" name="description" type="text" class="form-control" minlength="3" required="" aria-required="true">
+                                    <label class="form-label"> توضیحات دسته</label>
+                                </div>
+                                <div class="help-info">یه توضیحات کوتاه 100 کاراکتری وارد گردد</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="header">
+                    <h2 class="card-inside-title">دسته مادر</h2>
+
+                    
+                </div>
+
+                <div class="body" style=" padding-bottom: 45px; ">
+                    <div class="row clearfix">
+                        <div class="col-sm-12">
+                            <select name="parent" id="parent" class="form-control">
+                                <option value="none">دسته اصلی</option>
+
+                                <% category.forEach(cate => { %> 
+                                    <option value="<%= cate.id %>"<%= String(old('cate')) == String(cate._id) ? 'selected' : '' %></option>><%= cate.name %></option>
+                            <% }) %>
+                        </select>
+                        </div>
+ 
+                    </div>                                         
+                </div>
+            </div>
+            
+        </div>
+        <input style="display: none" type="text" name="images" value="" id="images" />
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+        <button style=" margin-bottom: 150px; " type="submit" class="btn btn-block btn-lg btn-primary waves-effect">افزودن</button>
+    
+        </div>
+    </form>
+        
+        
+    </div>
+</section>
+
+<script>
+    new Dropzone("#a", { 
+    url: "/admin/upload-image",
+
+    init: function () {
+      this.on("success", function (file, responseText) {
+      document.getElementById("images").setAttribute("value", '/'+responseText.path.substring(7));
+
+
+      });
+    }
+});
+
+</script>

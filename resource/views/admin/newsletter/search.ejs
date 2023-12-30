@@ -1,0 +1,172 @@
+<section class="content">
+    <div class="row clearfix">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="body">
+                <div class="block-header">
+                    <h2> جستجو برای <%= search %> </h2>
+                </div>
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="/admin">
+                            <i class="material-icons">home</i> خانه
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="/admin/category">
+                            <i class="material-icons">library_books</i> دسته بندی نوشته ها
+                        </a>
+                    </li>
+                    <li class="active">
+                        <i class="material-icons">library_books</i> جستجو دسته
+                    </li>
+                </ol>
+
+            </div>
+        </div>
+    </div>
+    <div class="row clearfix">
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="card">
+                <div class="header">
+                    <h2>
+                        دسته بندی
+
+                    </h2>
+                    <ul class="header-dropdown m-r--5">
+                        <li class="dropdown">
+                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                aria-haspopup="true" aria-expanded="false">
+                                <i class="material-icons">more_vert</i>
+                            </a>
+                            <ul class="dropdown-menu pull-right">
+    
+                                <li><a href="/admin/category" class=" waves-effect waves-block"> تمام دسته ها </a>
+                                </li>
+                                <li><a href="/admin/category/create" class=" waves-effect waves-block">
+                                        افزودن دسته بندی
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12 pull-right text-right">
+            <div class="body lablepicture" style="margin-bottom: 20px;">
+
+                <a href="/admin/category/create"><span class="label bg-light-blue"> افزودن دسته</span></a>
+
+            </div>
+        </div>
+
+        <div class="col-xs-5 col-sm-3 col-md-3 col-lg-3">
+            <div class="demo-google-material-icon">
+                <form action="/admin/category/search" method="get">
+    
+                <input id="search" name="search" value="<%= search %>" type="text" class="form-control" style=" direction: rtl; font-family: IRANSans; font-size: 12px; " placeholder="چی میخای فقط بنویس(:">
+                <button type="submit" class="btn bg-blue waves-effect">
+                    <i class="material-icons">search</i>
+                    <span>جستجو</span>
+                </button>
+            </form>
+    
+            </div>
+        </div>
+
+
+        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 pull-right text-right">
+            <form action="/admin/category/filter" method="post">
+    
+                <select name="category" id="parent" class="form-control">
+    
+                    <% category.forEach(cate => { %>
+                    <option value="<%= cate.id %>"><%= cate.name %></option>
+                    <% }) %>
+                </select>
+                <button type="submit" class="btn btn-primary waves-effect">فیلتر</button>
+            </form>
+        </div>
+
+
+        <div class="col-md-6">
+            <div class="body">
+                <nav>
+                    <%- include(viewPath('layouts/pagination') ,{ pagination : posts}) %>
+
+                </nav>
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+    <div class="row clearfix">
+
+
+        <!-- Task Info -->
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="card">
+                <div class="header">
+                    <h2>همه دسته ها</h2>
+
+                </div>
+                <div class="body">
+                    <div class="table-responsive">
+                        <table class="table table-hover dashboard-task-infos">
+                            <thead>
+                                <tr>
+                                    <th>تصویر</th>
+                                    <th>نام</th>
+                                    <th>نوع</th>
+                                    <th>تعداد محصول</th>
+                                    <th>ویرایش</th>
+                                    <th>حذف</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% posts.docs.forEach(post => { %>
+
+                                <tr>
+                                    <td><img src="<%= post.images %>"
+                                            style="width: 40px;height: 40px;border-radius: 50px;border: 2px solid #e9e9e9;">
+                                    </td>
+                                    <td><%= post.name %></td>
+                                    <td><%= post.parent ? post.parent.name : 'دسته اصلی' %></td>
+                                    <td><span class="label bg-green"><%= cunterproduct(post._id) %></span></td>
+
+                                    <td><a href="/admin/productcategory/edite/<%= post._id %>"><span
+                                        class="label bg-green">ویرایش</span></a></td>
+                                        <td><a href="/admin/productcategory/delete/<%= post._id %>"><span
+                                            class="label bg-red">حذف</span></a></td>
+
+
+
+                                </tr>
+                                <% }) %>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="body">
+                <nav>
+    
+                    <%- include(viewPath('layouts/pagination') ,{ pagination : posts}) %>
+                </nav>
+    
+            </div>
+        </div>
+
+    </div>
+</section>

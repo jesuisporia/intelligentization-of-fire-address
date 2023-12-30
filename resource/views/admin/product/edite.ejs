@@ -1,0 +1,689 @@
+<section class="content">
+    <div class="container-fluid">
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="body">
+
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="/admin">
+                                <i class="material-icons">home</i> خانه
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/admin/product">
+                                <i class="material-icons">home</i> محصولات
+                            </a>
+                        </li>
+                        <li class="active">
+                            <i class="material-icons">library_books</i> ویرایش محصول
+                        </li>
+                    </ol>
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- TinyMCE -->
+        <div class="row clearfix">
+            <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                    <div class="header">
+                        <h2>
+                            بارگذاری تصویر جدید
+
+                        </h2>
+                        <small>حداکثر یک تصویر</small>
+                    </div>
+                    <div class="body" style=" padding-bottom: 40px; ">
+                        <form action="/admin/upload-image" id="a" class="dropzone dz-clickable" method="post">
+                            <div class="dz-message">
+                                <div class="drag-icon-cph">
+                                    <i class="material-icons">touch_app</i>
+                                    <div id="previewrm"
+                                        class="dz-preview dz-processing dz-success dz-complete dz-image-preview" style="
+float: right;
+">
+                                        <div class="dz-image"><img data-dz-thumbnail="" alt="col5-2.jpg"
+                                                src="<%= post.images %>"></div>
+                                    </div>
+                                </div>
+                                <h3>تصویر را در اینجا رها کنید یا برای بارگذاری کلیک کنید.</h3>
+                                <em>حداکثر اندازه پرونده برای بارگذاری: (<strong>100MB</strong>)</em>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            <form action="/admin/product/edite/<%= post.id %>" method="post">
+
+                <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                                عنوان محصول
+                            </h2>
+
+                        </div>
+                        <div class="body">
+                            <div class="row clearfix">
+                                <div class="col-md-12">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <input id="title" name="title" type="text" class="form-control"
+                                                minlength="3" value=" <%= post.title %>" required=""
+                                                aria-required="true">
+                                            <label class="form-label">عنوان محصول</label>
+                                        </div>
+                                        <div class="help-info">حداقل ۳ کاراکتر وارد کنید</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                                قیمت
+                            </h2>
+                        </div>
+                        <div class="body">
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <input type="text" id="price" name="price" class="form-control"
+                                        value="<%= post.price %>">
+                                </div>
+                                <div class="help-info">قیمت به (ریال) وارد گردد</div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card" style=" margin-bottom: 0px; ">
+                        <div class="header">
+                            <h2>
+                                تخفیف
+                            </h2>
+
+                        </div>
+                        <div class="body">
+                            <div class="row clearfix">
+                                <div class="col-md-12">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <input type="number" id="off" value="<%= post.off %>" name="off" min="1" max="100">
+                                        </div>
+                                        <div class="help-info">تخفیف به درصد حساب میگردد</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                                تعداد محصول
+                            </h2>
+
+                        </div>
+                        <div class="body" style=" padding-bottom: 44px; ">
+                            <div class="row clearfix">
+                                <div class="col-md-12">
+                                    <input type="number" id="cash" value="<%= post.cash %>" name="cash">
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                                آدرس سایت
+                            </h2>
+
+                        </div>
+                        <div class="body">
+                            <div class="row clearfix">
+                                <div class="col-md-12">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <input id="slug" name="slug" type="text" class="form-control"
+                                                value="<%= post.slug %>">
+                                            <label class="form-label">آدرس سایت</label>
+                                        </div>
+                                        <div class="help-info">حتما آدرس سایت رو به لاتین وارد کنید</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                                انتخاب نوع محصول
+                            </h2>
+
+                        </div>
+                        <div class="body" style=" padding-bottom: 44px; ">
+                            <div class="row clearfix">
+                                <div class="col-md-12">
+
+                                    <select name="type" id="type" class="form-control">
+                                        <% if(post.condition === 0){ %>
+                                            <option value="0" selected>عادی</option>
+                                            <option value="1">ویژه</option>
+                                            <option value="2">تخفیف دار</option>
+    
+                                            <% } %>
+                                            <% if(post.condition === 1){ %>
+                                                <option value="0">عادی</option>
+    
+                                            <option value="1" selected>ویژه</option>
+                                            <option value="2">تخفیف دار</option>
+    
+                                            <% } %>
+                                            <% if(post.condition === 2){ %>
+                                            <option value="0">عادی</option>
+                                            <option value="1">ویژه</option>
+                                            <option value="2" selected>تخفیف دار</option>
+                                            <% } %>
+       
+
+                                    </select>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                                زمان بندی
+                            </h2>
+
+                        </div>
+                        <div class="body">
+                            <div class="row clearfix">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input name="timestamp" id="timestamp" value="<%= post.timestamp %>" type="text"
+                                                class="datetimepicker form-control"
+                                                placeholder="لطفا زمان بندی انتشار را مشخص نمایید" data-dtp="dtp_gEv1K">
+                                                <div class="help-info"> تاریخ امروز به شمسی <%= datenow %></div>
+                                                
+                                                <div class="help-info" style=" color: red; padding-right: 12px; "> تاریخ امروز به میلادی <%= miladi %></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                                وضعیت پست
+                            </h2>
+
+                        </div>
+                        <div class="body" style=" padding-bottom: 44px; ">
+                            <div class="row clearfix">
+                                <div class="col-md-12">
+                                    <select name="condition" id="condition" onchange="updatetimestamp()" class="form-control">
+                                        <% if(post.condition === 0){ %>
+                                            <option value="0" selected>پیش نویس</option>
+                                            <option value="1">منتشر شده</option>
+                                            <option value="2">زماندبندی شده</option>
+    
+                                            <% } %>
+                                            <% if(post.condition === 1){ %>
+                                            <option value="0">پیش نویس</option>
+    
+                                            <option value="1" selected>منتشر شده</option>
+                                            <option value="2">زماندبندی شده</option>
+    
+                                            <% } %>
+                                            <% if(post.condition === 2){ %>
+                                            <option value="0">پیش نویس</option>
+    
+                                            <option value="1">منتشر شده</option>
+                                            <option value="2" selected>زماندبندی شده</option>
+                                            <% } %>
+                                    </select>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+
+                    <div class="card">
+
+                        <div class="header">
+                            <h2>
+                                مشخصات فنی
+                            </h2>
+
+                        </div>
+
+                        <div class="body">
+
+                            <textarea id="tinymce" name="TechnicalSpecifications">
+                                
+                                <%= post.TechnicalSpecifications %>
+                            </textarea>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+
+                    <div class="card">
+
+                        <div class="header">
+                            <h2>
+                                متن محصول
+                            </h2>
+
+                        </div>
+
+                        <div class="body">
+
+                            <textarea id="tinymce" name="body">
+                                        <%= post.body %>
+                                                                   </textarea>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-lg-6 col-md-12 col-sm-6 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                                انتخاب دسته بندی
+                            </h2>
+
+                        </div>
+                        <div class="body">
+                            <div class="row clearfix">
+                                <div class="col-md-12">
+
+                                    <select name="categories" id="categories" class="form-control form-control-chosen"
+                                        data-placeholder="دسته بندی مورد نظر ..." multiple>
+                                        <% categories.forEach(cate => { %>
+                                        <option value="<%= cate.id %>"
+                                            <%= post.categories.indexOf(cate.id) !== -1 ? 'selected' : ''%>>
+                                            <%= cate.name %>
+                                        </option>
+                                        <% }) %>
+
+                                    </select>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-12 col-sm-6 col-xs-12">
+
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                                canonical
+                            </h2>
+
+                        </div>
+                        <div class="body">
+                            <div class="row clearfix">
+                                <div class="col-md-12">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <input id="canonical" name="canonical" type="text" class="form-control"
+                                                value="<%= post.canonical %>"">
+                                            <label class=" form-label">آدرس canonical</label>
+                                        </div>
+                                        <div class="help-info">اگر خالی باشد آدرس خود این صفحه به صورت خودکار قرار
+                                            میگیرد
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                                سئو
+                                <small>تنظیمات سئو</small>
+                            </h2>
+
+
+                        </div>
+                        <div class="body">
+                            <h2 class="card-inside-title">عنوان سئو</h2>
+                            <div class="row clearfix">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input name="titleSeo" type="text" class="form-control"
+                                                value="<%= post.titleSeo %>" placeholder="عنوان خود را وارد کنید"
+                                                id="titleSeo" name="titleSeo">
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <h2 class="card-inside-title">عبارت کلیدی کانونی</h2>
+                            <div class="row clearfix">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input name="keySeo" type="text" class="form-control"
+                                                value="<%= post.keySeo %>" placeholder="عبارت کلیدی کانونی"
+                                                name="keySeo">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+                            <h2 class="card-inside-title">توضیح متا </h2>
+                            <div class="row clearfix">
+                                <div class="col-sm-12">
+
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input name="metaDescription" type="text" class="form-control"
+                                                value="<%= post.metaDescription %>" placeholder="توضیح متا"
+                                                name="metaDescription">
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <input style="display: none" type="text" name="images" value="<%= post.images %>" id="images">
+
+                    <div class="gallerynonshow">
+            
+                        <select style="display: block" name="gallery" id="gallery" multiple>
+                            <% post.gallery.forEach(gal => { %>
+                                <option value="<%= gal %>" selected></option>
+                                <% }) %>
+                        </select>
+                    </div>
+                    <!-- #END# TinyMCE -->
+                    <button style=" margin-bottom: 33px; " type="submit"
+                        class="btn btn-block btn-lg btn-primary waves-effect">ویرایش محصول</button>
+                </div>
+        </div>
+
+
+    </div>
+
+    </form>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2>
+                    بارگذاری گالری محصول
+
+                </h2>
+                <small>حداقل یک تصویر</small>
+            </div>
+            <div class="body" style=" padding-bottom: 40px; ">
+                <form action="/admin/upload-image" id="b" class="dropzone dz-clickable" method="post">
+                    <div class="dz-message">
+                        <div class="drag-icon-cph">
+                            <i class="material-icons">touch_app</i>
+                            
+                            <% post.gallery.forEach(gal => { %>
+                                <a id="<%= gal %>" onclick="removeselect(this.id)">
+
+                            <div id="previewrm" class="dz-preview dz-processing dz-success dz-complete dz-image-preview"
+                                style="
+float: right;
+">
+    حذف
+
+                                <div class="dz-image"><img data-dz-thumbnail="" alt="col5-2.jpg"
+                                        src="<%= gal %>"></div>
+                            </div>
+                        </a>
+
+                            <% }) %>
+
+
+
+
+                        </div>
+                        <h3>تصویر را در اینجا رها کنید یا برای بارگذاری کلیک کنید.</h3>
+                        <em>حداکثر اندازه پرونده برای بارگذاری: (<strong>100MB</strong>)</em>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+</section>
+
+
+<script>
+    time = document.getElementById("timestamp");
+    time.disabled = true; 
+
+function updatetimestamp(){
+    d = document.getElementById("condition").value;
+    time = document.getElementById("timestamp");
+    timestamp
+    if(d ==0){
+        time.disabled = true; 
+    }
+    if(d ==1){
+        time.disabled = true; 
+    }
+    if(d ==2){
+        time.disabled = false; 
+    }
+}
+</script>
+<script>
+
+
+function removeselect(id){
+    var x = document.getElementById("gallery");
+    var elem = document.getElementById(id);
+
+    var i;
+    for (i = 0; i < x.length; i++) {
+        txt = x.options[i].value;
+        
+        if(id === txt){
+            elem.remove()
+            console.log('like')
+            x.remove(i)
+        }
+    }
+
+
+    console.log(id)
+}
+
+
+
+
+
+
+
+
+
+    var date = document.getElementById('min-date');
+    $('#min-date').bootstrapMaterialDatePicker({
+        format: 'YYYY-MM-DDTHH:mm',
+        lang: 'fa',
+        weekStart: 1,
+        cancelText: 'لغو'
+    });
+
+    new Dropzone("#a", {
+        url: "/admin/upload-image",
+        addRemoveLinks: true,
+        dictRemoveFile: 'حذف',
+        maxFiles: 1,
+        removedfile: function (file) {
+            file.previewElement.remove();
+            x = confirm('Do you want to delete?');
+            console.log('delete')
+            if (!x) return true;
+        },
+        init: function () {
+            this.on("success", function (file, responseText) {
+                document.getElementById("images").setAttribute("value", '/' + responseText.path
+                    .substring(7));
+
+                console.log(responseText.path.substring(7));
+                console.log(responseText.destination);
+                console.log(file);
+            });
+        }
+    });
+
+
+
+
+    new Dropzone("#b", {
+        url: "/admin/upload-image",
+        addRemoveLinks: true,
+        dictRemoveFile: 'حذف',
+        maxFiles: 10,
+
+        removedfile: function (file) {
+            file.previewElement.remove();
+            x = confirm('Do you want to delete?');
+            console.log('delete')
+            if (!x) return true;
+        },
+        init: function () {
+
+            this.on("success", function (file, responseText) {
+
+
+
+
+
+                var x = document.getElementById("gallery");
+                var OPT1 = document.createElement('OPTION');
+                OPT1.setAttribute("value", '/' + responseText.path
+                    .substring(7));
+                OPT1.setAttribute('selected', 'selected');
+
+                // document.getElementById("gallery").setAttribute("value", '/' + responseText.path
+                //     .substring(7));
+
+                x.add(OPT1);
+
+                console.log(OPT1);
+            });
+        }
+    });
+
+
+
+
+    tinymce.init({
+        selector: '#editor',
+        plugins: 'image code',
+        toolbar: 'undo redo | link image | code',
+        /* enable title field in the Image dialog*/
+        image_title: true,
+        /* enable automatic uploads of images represented by blob or data URIs*/
+        automatic_uploads: true,
+        /*
+          URL of our upload handler (for more details check: https://www.tiny.cloud/docs/configure/file-image-upload/#images_upload_url)
+          images_upload_url: 'postAcceptor.php',
+          here we add custom filepicker only to Image dialog
+        */
+        file_picker_types: 'image',
+        /* and here's our custom image picker*/
+        file_picker_callback: function (cb, value, meta) {
+            var input = document.createElement('input');
+            input.setAttribute('type', 'file');
+            input.setAttribute('accept', 'image/*');
+
+            /*
+              Note: In modern browsers input[type="file"] is functional without
+              even adding it to the DOM, but that might not be the case in some older
+              or quirky browsers like IE, so you might want to add it to the DOM
+              just in case, and visually hide it. And do not forget do remove it
+              once you do not need it anymore.
+            */
+
+            input.onchange = function () {
+                var file = this.files[0];
+
+                var reader = new FileReader();
+                reader.onload = function () {
+                    /*
+                      Note: Now we need to register the blob in TinyMCEs image blob
+                      registry. In the next release this part hopefully won't be
+                      necessary, as we are looking to handle it internally.
+                    */
+                    var id = 'blobid' + (new Date()).getTime();
+                    var blobCache = tinymce.activeEditor.editorUpload.blobCache;
+                    var base64 = reader.result.split(',')[1];
+                    var blobInfo = blobCache.create(id, file, base64);
+                    blobCache.add(blobInfo);
+
+                    /* call the callback and populate the Title field with the file name */
+                    cb(blobInfo.blobUri(), {
+                        title: file.name
+                    });
+                };
+                reader.readAsDataURL(file);
+            };
+
+            input.click();
+        }
+    });
+</script>

@@ -1,0 +1,259 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+    .swal-overlay--show-modal .swal-modal {
+        opacity: 1;
+        pointer-events: auto;
+        box-sizing: border-box;
+        -webkit-animation: showSweetAlert .3s;
+        animation: showSweetAlert .3s;
+        will-change: transform;
+        direction: rtl;
+    }
+</style>
+
+
+<div id="wrapper">
+
+    <div class="normalheader ">
+        <div class="hpanel">
+            <div class="panel-body">
+                <a class="small-header-action" href="#">
+                    <div class="clip-header">
+                        <i class="fa fa-arrow-up"></i>
+                    </div>
+                </a>
+
+                <div id="hbreadcrumb" class="pull-left m-t-lg">
+                    <ol class="hbreadcrumb breadcrumb">
+                        <li><a href="index-2.html">پیشخوان</a></li>
+                        <li>
+                            <span>دسته بندی حوادث</span>
+                        </li>
+                        <li class="active">
+                            <span>ویرایش دسته بندی حوادث</span>
+                        </li>
+                    </ol>
+                </div>
+                <h2 class="font-light m-b-xs">
+                    ویرایش دسته بندی حوادث                </h2>
+                <small>ویرایش دسته بندی حوادث
+                </small>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="content">
+
+
+        <div class="row">
+            <div class="col-lg-12">
+
+
+                <div class="hpanel">
+                    <div class="panel-heading">
+                        <div class="panel-tools">
+                            <a class="showhide"><i class="fa fa-chevron-up"></i></a>
+                            <a class="closebox"><i class="fa fa-times"></i></a>
+                        </div>
+                        ویرایش دسته بندی حوادث                    </div>
+                    <div class="panel-body">
+                        <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="card">
+                                        <div class="header">
+                                            <h4 class="title">ویرایش دسته بندی حوادث</h4>
+                                        </div>
+                                        <div class="content">
+                                            <form action="/admin/category/update/<%= incentivegroup.id %>?_method=put " method="POST">
+                                                <div class="row">
+             
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label>عنوان  دسته بندی</label>
+                                                            <input type="text" name="title" class="form-control"  value="<%= incentivegroup.title %>" placeholder="عنوان گروه تشویق - تنبیه">
+                                                        </div>
+                                                    </div>
+                                               
+                                                        
+                                                    <div class="col-md-12">
+                                              
+                                                        <select name="parent" id="parent" class="form-control">
+                                                            <option value="none">دسته اصلی</option>
+                                                            <% categories.forEach(cate => { %> 
+                                                                <option value="<%= cate.id %>" <%= String(old('categories' , incentivegroup.parent)) == String(cate.id) ? 'selected' : '' %> ><%= cate.title %></option>
+                                                            <% }) %>
+                                                        </select>
+                                                    </div>
+                
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label>توضیحات</label>
+                                                            <textarea rows="5" class="form-control"  name="description" placeholder="در این بخش توضیحاتی رو میتوانید برای هر گروه تشویقی ثبت کنید." ><%= incentivegroup.description %></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                
+                                                <button type="submit" style="
+                                                font-family: IRANSans;
+                                            " class="btn btn-info btn-fill pull-right">ویرایش  دسته بندی</button>
+                                                <div class="clearfix"></div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+
+<script>
+    function deletes() {
+        event.preventDefault(); // prevent form submit
+        var t = event.currentTarget.parentNode.parentNode
+        var url = event.currentTarget.href
+
+        swal({
+            title: "آیا شما اطمینان دارید برای حذف?",
+            text: "در صورت حذف اطلاعات دیگر قابل بازیابی نمیباشد!!!",
+            icon: "warning",
+            buttons: [
+                'لغو!',
+                'حذف'
+            ],
+            dangerMode: true,
+        }).then(function (isConfirm) {
+            if (isConfirm) {
+
+                const xhr = new XMLHttpRequest()
+
+                //3 
+                xhr.open('GET', url, true)
+
+                //4
+                xhr.onload = function () {
+                    if (this.status === 200) {
+                        var obj = JSON.parse(this.response)
+                        if(obj.i === 1){
+                            t.remove();
+
+                        }
+
+                        swal({
+                            title: obj.title,
+                            text: obj.text,
+                            icon: obj.icon,
+                            button: {
+                                text: "باشه!",
+                            },
+                        }).then(function () {
+
+                        });
+
+                        console.log(obj.title)
+
+                    }
+                }
+
+                // 5
+                xhr.send()
+
+                console.log(xhr)
+
+
+            } else {
+                swal({
+                    title: 'لغو شد!',
+                    text: 'فایل حذف نشد!!!',
+                    icon: 'error',
+                    button: {
+                        text: "باشه!",
+                    },
+                });
+            }
+        })
+
+        console.log('Deleted')
+    }
+</script>
+
+<!-- DataTables -->
+<script src="/vendor/datatables/media/js/jquery.dataTables.min.js"></script>
+<script src="/vendor/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<!-- DataTables buttons scripts -->
+<script src="/vendor/pdfmake/build/pdfmake.min.js"></script>
+<script src="/vendor/pdfmake/build/vfs_fonts.js"></script>
+<script src="/vendor/datatables.net-buttons/js/buttons.html5.min.js"></script>
+<script src="/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
+<script src="/vendor/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+<script src="/vendor/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+
+
+
+
+<script>
+    $(function () {
+
+        // Initialize Example 1
+        $('#example2').dataTable({
+            dom: "<'row'<'col-sm-4'l><'col-sm-4 text-center'B><'col-sm-4'f>>tp",
+            "lengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            buttons: [{
+                    extend: 'copy',
+                    className: 'btn-sm'
+                },
+
+                {
+                    extend: 'pdf',
+                    title: 'ExampleFile',
+                    className: 'btn-sm'
+                },
+                {
+                    extend: 'print',
+                    className: 'btn-sm'
+                }
+            ]
+        });
+
+        // Initialize Example 2
+        $('#example2').dataTable();
+
+    });
+</script>
+
+
+
+
+
+
+

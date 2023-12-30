@@ -1,0 +1,93 @@
+<section class="content">
+    <div class="row clearfix">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="body">
+                <div class="block-header">
+                    <h2>تمام دسته های نوشته ها</h2>
+                </div>
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="/admin">
+                            <i class="material-icons">home</i> خانه
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="/admin/category">
+                            <i class="material-icons">library_books</i> دسته بندی نوشته ها
+                        </a>
+                    </li>
+                    <li class="active">
+                        <i class="material-icons">library_books</i> تمام دسته ها
+
+                    </li>
+                </ol>
+
+            </div>
+        </div>
+    </div>
+
+    <%- include(viewPath('admin/newsletter/master')) %>
+
+    <div class="row clearfix">
+
+
+        <!-- Task Info -->
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="card">
+                <div class="header">
+                    <h2>همه دسته ها</h2>
+
+                </div>
+                <div class="body">
+                    <div class="table-responsive">
+                        <table class="table table-hover dashboard-task-infos">
+                            <thead>
+                                <tr>
+                                    <th>تصویر</th>
+                                    <th>نام</th>
+                                    <th>نوع</th>
+                                    <th>تعداد نوشته</th>
+                                    <th>ویرایش</th>
+                                    <th>حذف</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% newsletter.docs.forEach(post => { %>
+ 
+                                <tr>
+                                    <td><img src="<%= post.images %>"
+                                            style="width: 40px;height: 40px;border-radius: 50px;border: 2px solid #e9e9e9;">
+                                    </td>
+                                    <td><%= post.email %></td>
+                                    <td><%= post.parent ? post.parent.name : 'دسته اصلی' %></td>
+                                    <td><span class="label bg-green"><%= cunterproduct(post._id) %></span></td>
+
+                                    <td><a href="/admin/category/edite/<%= post._id %>"><span
+                                                class="label bg-green">ویرایش</span></a></td>
+                                    <td><a href="/admin/category/delete/<%= post._id %>"><span
+                                                class="label bg-red">حذف</span></a></td>
+
+
+
+                                </tr>
+                                <% }) %>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="body">
+                <nav>
+
+                    <%- include(viewPath('layouts/pagination') ,{ pagination : newsletter}) %>
+                </nav>
+
+            </div>
+        </div>
+
+    </div>
+</section>

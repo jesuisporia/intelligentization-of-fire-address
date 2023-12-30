@@ -1,0 +1,95 @@
+<div class="progress">
+  <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"
+    style="width:100%">
+    <span class="sr-only"></span>
+  </div>
+</div>
+<div class="mask" id="mask">
+</div>
+<!-- Start Top Panel -->
+<div class="top-panel">
+  <div class="container">
+    <div class="row">
+
+      <!-- Start Menu -->
+      <div class="col-md-8">
+        <div class="user-menu">
+          <div class="user-name">
+            <a href="#"><%= auth.user.name %> </a>
+          </div>
+
+        </div>
+      </div>
+      <!-- End Menu -->
+      <div class="col-md-4">
+        <div class="icon-collapse" id="icon_collapse">
+          <div class="bar1"></div>
+          <div class="bar2"></div>
+          <div class="bar3"></div>
+        </div>
+        <img src="./img/logo.png" class="logo" alt="">
+        <h1 class="title">آتش نشانی</h1>
+        <h2 class="description">استان کرمانشاه</h2>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- End Top Panel -->
+
+<div id="break">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <nav class="break-nav box">
+          <div class="break-wrap">
+            <a href="#">صفحه اصلی</a>
+            <i></i>
+            پیشخوان
+          </div>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Start Main -->
+<main class="main">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md-9">
+        <div class="content">
+          <header class="title">
+            <h3>ارتباط تصویری آنلاین با تمام ایستگاه ها</h3>
+            <!-- <hr> -->
+
+
+
+
+          </header>
+
+          <img id="image" >
+          
+
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <%- include(viewPath('/home/dashboard/menu')) -%>
+
+      </div>
+    </div>
+  </div>
+</main>
+<!-- End Main -->
+<%- include(viewPath('/home/dashboard/footer')) -%>
+
+<script src="/js/socket.io.js"></script>
+
+<script>
+  const socket = io();
+  socket.on('image',(image)=> {
+  const imageElm = document.getElementById('image');
+  imageElm.src = `data:image/jpeg;base64,${image}`;    
+  })
+</script>

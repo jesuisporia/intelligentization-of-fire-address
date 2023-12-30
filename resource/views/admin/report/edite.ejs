@@ -1,0 +1,668 @@
+
+
+<div id="wrapper">
+
+  <div class="normalheader ">
+      <div class="hpanel">
+          <div class="panel-body">
+              <a class="small-header-action" href="#">
+                  <div class="clip-header">
+                      <i class="fa fa-arrow-up"></i>
+                  </div>
+              </a>
+
+              <div id="hbreadcrumb" class="pull-left m-t-lg">
+                  <ol class="hbreadcrumb breadcrumb">
+                      <li><a href="index-2.html">پیشخوان</a></li>
+                      <li>
+                          <span> گزارش</span>
+                      </li>
+                      <li class="active">
+                          <span>ویرایش گزارش</span>
+                      </li>
+                  </ol>
+              </div>
+              <h2 class="font-light m-b-xs">
+                ویرایش گزارش
+              </h2>
+              <small>ویرایش گزارش
+              </small>
+          </div>
+      </div>
+  </div>
+
+
+  <div class="content">
+
+
+      <div class="row">
+          <div class="col-lg-12">
+
+
+              <div class="hpanel">
+                  <div class="panel-heading">
+                      <div class="panel-tools">
+                          <a class="showhide"><i class="fa fa-chevron-up"></i></a>
+                          <a class="closebox"><i class="fa fa-times"></i></a>
+                      </div>
+                      ویرایش گزارش
+                  </div>
+                  <div class="panel-body">
+                      <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+
+                        <div class="row">
+
+                          <form action="/dashboard/report/store" method="POST">
+                        
+                        
+                            <div class="form-group flot-right col-sm-3 col-xs-12">
+                              <label for="inputDepartment">تاریه بروز حادثه</label>
+                              <!-- <input type="date" name="incidenttime"> -->
+                              <input type="text"  id="data-input" tabindex="11" name="incidenttime" value="<%= old('incidenttime') %>"  class="form-control" placeholder="تاریه بروز حادثه">
+                                                     
+                            </div>
+                            <div class="form-group flot-right col-sm-3 col-xs-12">
+                              <label for="inputRelatedService">زمان بروز حادثه</label>
+                              <input type="time" name="timetoannouncetheaccident">
+                        
+                            </div>
+                            <div class="form-group flot-right col-sm-3 col-xs-12">
+                              <label for="inputPriority">تعداد مامورین اعزامی</label>
+                              <input type="number" value="3" min="1" max="15" name="numberofdispatchofficers">
+                        
+                            </div>
+                            <div class="form-group flot-right col-sm-3 col-xs-12">
+                              <label for="inputRelatedService">زمان شروع عملیات</label>
+                              <input type="time" id="timetostarttheoperation" onchange="one()" name="timetostarttheoperation">
+                        
+                            </div>
+                        
+                        
+                        
+                            <div class="form-group flot-right col-sm-6 col-xs-12">
+                              <label for="inputRelatedService">زمان خاتمه عملیات</label>
+                              <input type="time" id="timetoendtheoperation" onchange="two()" name="timetoendtheoperation">
+                        
+                            </div>
+                        
+                            <div class="form-group flot-right col-sm-6 col-xs-12">
+                              <label for="inputRelatedService">مدت عملیات</label>
+                              <input type="text" id="durationofoperation" onclick="three()" name="durationofoperation">
+                        
+                            </div>
+                        
+                        
+                        
+                        
+                            <div class="form-group flot-right col-sm-12 col-xs-12">
+                              <label for="inputRelatedService">محل وقوع حادثه</label>
+                              <input type="text" name="accidentaddress" placeholder="آدرس محل وقوع حادثه را وارد کنید">
+                        
+                            </div>
+                        
+                        
+                            <div class="form-group flot-right col-sm-6 col-xs-12">
+                              <label for="inputRelatedService">خبر دهنده</label>
+                              <input type="text" value="مرکز پیام" name="informant" placeholder="خبر دهنده">
+                        
+                            </div>
+                        
+                        
+                            <div class="form-group flot-right col-sm-6 col-xs-12">
+                              <label for="inputRelatedService">خبر گیرنده</label>
+                              <input type="text" name="receivernews" placeholder="خبر گیرنده">
+                        
+                            </div>
+                        
+                            <div class="form-group flot-right col-sm-6 col-xs-12">
+                              <label for="inputRelatedService">روش خبر رسانی</label>
+                              <input type="text" value="بی سیم" name="Newsmethod" placeholder="روش خبر رسانی">
+                        
+                            </div>
+                        
+                            <div class="form-group flot-right col-sm-6 col-xs-12" >
+                              <label for="inputRelatedService">ایستگاه عملیات کننده</label>
+                              <input placeholder="ایستگاه عملیات کننده"  value="<%= station.name %>"
+                                class="form-control disabled" disabled="disabled" type="text">
+                            </div>
+                        
+                            <div class="form-group flot-right col-sm-6">
+                              <label for="inputRelatedService">پرسنل شرکت کننده</label>
+                              <select class="form-control form-control-chosen" id="fireman" name="fireman" multiple data-placeholder="پرسنل شرکت کننده">
+                        
+                        
+                                  <% user.forEach(station => { %>
+                        
+                                    <option value="<%= station.id %>"><%= station.name %></option>
+                        
+                        
+                            <% }) %>
+                        
+                              </select>
+                            </div>
+                        
+                        
+                        
+                            <div class="form-group flot-right col-sm-6">
+                              <label for="inputRelatedService">شیفت</label>
+                              <select name="inputRelatedService" class="form-control">
+                        
+                        
+                                    <option value="شهید جمالی">شهید جمالی</option>
+                                    <option value="شهید امیری">شهید امیری</option>
+                                    <option value="شهید بهشتی">شهید بهشتی</option>
+                        
+                        
+                        
+                              </select>
+                            </div>
+                        
+                        
+                            <div class="form-group flot-right col-sm-6 col-xs-12" style="
+                            display: none;
+                        ">
+                              <label for="inputRelatedService">ایستگاه عملیات کننده</label>
+                              <input name="Operatingstation" placeholder="ایستگاه عملیات کننده" id="inputName" value="<%= station.id %>"
+                                class="form-control disabled" disabled="disabled" type="text">
+                            </div>
+                            <div class="form-group flot-right col-sm-4 col-xs-12">
+                              <label for="inputRelatedService">مشخصات محل بروز حادثه</label>
+                              <input type="text" name="Thelocationoftheaccident" placeholder="مورد کاربری">
+                        
+                            </div>
+                        
+                            <div class="form-group flot-right col-sm-4 col-xs-12">
+                              <label for="inputRelatedService">تعداد طبقات</label>
+                              <input type="text" name="Numberoffloors" placeholder="تعداد طبقات">
+                        
+                            </div>
+                        
+                            <div class="form-group flot-right col-sm-4 col-xs-12">
+                              <label for="inputRelatedService">نوع ساختمان</label>
+                              <input type="text" name="buildingtype" placeholder="نوع ساختمان">
+                        
+                            </div>
+                        
+                            <div class="form-group flot-right col-sm-6 col-xs-12">
+                              <label for="inputRelatedService">نام مالک</label>
+                              <input type="text" value="ندارد" name="Theownername" placeholder="نام مالک">
+                        
+                            </div>
+                        
+                        
+                            <div class="form-group flot-right col-sm-6 col-xs-12">
+                              <label for="inputRelatedService">نام مستاجر یا مستاجرین</label>
+                              <input type="text" value="ندارد" name="Tenantname" placeholder="نام مستاجر یا مستاجرین">
+                        
+                            </div>
+                        
+                            <div class="form-group flot-right col-sm-12">
+                              <label for="inputRelatedService">نوع حادثه</label>
+                              <select name="Typeofaccident" id="inputRelatedService" class="form-control">
+                                <option value="Buildingfire" selected="selected">
+                                  آتش سوزی ساختمان
+                                </option>
+                                <option value="ParkJungleFire">
+                                  آتش سوزی پارک / جنگل
+                                </option>
+                                <option value="GardenFarmFire">
+                                  آتش سوزی باغ / مزرعه
+                                </option>
+                        
+                                <option value="Landvehiclefire">
+                                  آتش سوزی نقلیه زمینی
+                                </option>
+                        
+                                <option value="Airvehiclefire">
+                                  آتش سوزی نقلیه هوایی
+                                </option>
+                        
+                                <option value="Bluevehiclefire">
+                                  آتش سوزی نقلیه آبی
+                                </option>
+                        
+                                <option value="Fallingintothewell">
+                                  سقوط در چاه
+                                </option>
+                        
+                                <option value="Debrisfalling">
+                                  ریزش آوار
+                                </option>
+                                <option value="Fallingfromaheight">
+                                  سقوط ار ارتفاع
+                                </option>
+                                <option value="Wellfall">
+                                  ریزش چاه
+                                </option>
+                                <option value="MeatGrinder">
+                                  چرخ گوشت
+                                </option>
+                                <option value="Elevator">
+                                  آسانسور
+                                </option>
+                        
+                        
+                                <option value="Drown">
+                                  غرق شدن
+                                </option>
+                        
+                        
+                                <option value="electrocution">
+                                  برق گرفتگی
+                                </option>
+                        
+                                <option value="mountain">
+                                  کوهستان
+                                </option>
+                        
+                                <option value="Caraccidentoroverturning">
+                                  تصادف یا سرنگونگی خودرو
+                                </option>
+                        
+                                <option value="Gascylinderleaksandbursts">
+                                  نشت و ترکدین کپسول گاز
+                                </option>
+                        
+                        
+                                <option value="Otherevents">
+                                  سایر حوادث
+                                </option>
+                        
+                              </select>
+                            </div>
+                        
+                        
+                            <div class="form-group flot-right col-sm-12 col-xs-12">
+                              <label for="inputRelatedService">سایر حوادث با ذکر نام</label>
+                              <textarea name="Otherevents" id="" cols="30" rows="10" style="
+                            width: 100%;
+                            height: 154px;
+                        " placeholder="لطفا اگر نوع حادثه را در لیست بالا پیدا نکرده اید در این قسمت توضیحات لازمه رو بنویسید"></textarea>
+                            </div>
+                        
+                        
+                            <div class="form-group flot-right col-sm-12 col-xs-12">
+                              <label for="inputRelatedService">توضیح علل بروز حادثه</label>
+                              <textarea name="Explainthecausesoftheaccident" id="" cols="30" rows="10" style="
+                            width: 100%;
+                            height: 154px;
+                        " placeholder="لطفا اگر اطلاعی در زمینه علل بروز حادثه ندارید در این قسمت بنویسید نیاز به کارشناسی دارد"></textarea>
+                            </div>
+                        
+                        
+                            <div class="form-group flot-right col-sm-12 col-xs-12">
+                              <label for="inputRelatedService">توضیح اقدامات اولیه انجام شده</label>
+                              <textarea name="Explaintheinitialstepstaken" id="" cols="30" rows="10" style="
+                            width: 100%;
+                            height: 154px;
+                        " placeholder="لطفا توضیحات مربوط به اقدامات انجام شده را در این قسمت بنویسید"></textarea>
+                            </div>
+                        
+                        
+                            <div class="form-group flot-right col-sm-12 col-xs-12">
+                              <label for="inputRelatedService">شرح عملیات مامورین اعزامی و وسایل</label>
+                              <textarea name="DescriptionofOperation" id="" cols="30" rows="10" style="
+                            width: 100%;
+                            height: 154px;
+                        " placeholder="شرح عملیات مامورین اعزامی و وسایل را در این قسمت بنویسید"></textarea>
+                            </div>
+                        
+                        
+                            <div class="form-group flot-right col-sm-12 col-xs-12">
+                              <label for="inputRelatedService">شرح مشکلات حین انجام ماموریت</label>
+                              <textarea name="Descriptionofproblems" id="" cols="30" rows="10" style="
+                            width: 100%;
+                            height: 154px;
+                        " placeholder="شرح مشکلات حین انجام ماموریت"></textarea>
+                            </div>
+                        
+                        
+                            <div class="form-group flot-right col-sm-12 col-xs-12">
+                              <label for="inputRelatedService">حضور و همکاری سایر ایستگاهها و مراکز و سازمانها</label>
+                              <textarea name="Presenceandcooperationofotherstationscentersandorganizations" id="" cols="30" rows="10"
+                                style="
+                            width: 100%;
+                            height: 154px;
+                        " placeholder="حضور و همکاری سایر ایستگاهها و مراکز و سازمانها"></textarea>
+                            </div>
+                        
+                        
+                        
+                            <div class="form-group flot-right col-sm-12 col-xs-12">
+                              <label for="inputRelatedService">مشخصات حادثه دیدگان</label>
+                              <textarea name="Presenceofcooperationofotherstations" id="" cols="30" rows="10" style="
+                            width: 100%;
+                            height: 154px;
+                        " placeholder="مشخصات حادثه دیدگان"></textarea>
+                            </div>
+                        
+                        
+                        
+                            <div class="form-group flot-right col-sm-4">
+                              <label for="inputRelatedService">شرایط جوی</label>
+                              <select name="Atmosphericconditions" id="inputRelatedService" class="form-control">
+                                <option value="smooth" selected="selected">
+                                  صاف </option>
+                        
+                                <option value="rainy">
+                                  بارانی </option>
+                        
+                        
+                                <option value="Fog">
+                                  مه </option>
+                                <option value="Snow">
+                                  برف </option>
+                                <option value="Windandstorm">
+                                  باد و طوفان </option>
+                        
+                              </select>
+                            </div>
+                        
+                        
+                        
+                        
+                        
+                            <div class="form-group flot-right col-sm-2 col-xs-12">
+                              <label for="inputRelatedService">جهت وزش باد</label>
+                              <input type="text" name="Winddirection" placeholder="جهت وزش باد">
+                        
+                            </div>
+                        
+                        
+                            <div class="form-group flot-right col-sm-2 col-xs-12">
+                              <label for="inputRelatedService">سرعت باد</label>
+                              <input type="text" name="windspeed" placeholder="سرعت باد">
+                        
+                            </div>
+                        
+                        
+                            <div class="form-group flot-right col-sm-2 col-xs-12">
+                              <label for="inputRelatedService">دمای هوا</label>
+                              <input type="text" name="temperature" placeholder="دمای هوا">
+                        
+                            </div>
+                        
+                        
+                            <div class="form-group flot-right col-sm-2 col-xs-12">
+                              <label for="inputRelatedService">رطوبت نسبی</label>
+                              <input type="text" name="relativehumidity" placeholder="رطوبت نسبی">
+                        
+                            </div>
+                        
+                            <!-- <label for="inputRelatedService">وسایل موتوری و تجهیزات مورد استفاده و مواد مصرفی</label> -->
+                        
+                            <div class="form-group flot-right col-sm-4 col-xs-12">
+                              <label for="inputPriority">خودرو آتش نشانی</label>
+                              <input type="number" value="1" name="Firetruck" min="1" max="15">
+                        
+                            </div>
+                        
+                            <div class="form-group flot-right col-sm-4 col-xs-12">
+                              <label for="inputPriority">خودرو حمل تجهیزات</label>
+                              <input type="number" name="Carcarryingequipment" min="1" max="15">
+                        
+                            </div>
+                        
+                            <div class="form-group flot-right col-sm-4 col-xs-12">
+                              <label for="inputPriority">خودروی نردبان ۳۲ متری</label>
+                              <input type="number" name="meterladdercarthree" min="1" max="15">
+                        
+                            </div>
+                            <div class="form-group flot-right col-sm-4 col-xs-12">
+                              <label for="inputPriority">خودروی نردبان ۵۲ متری</label>
+                              <input type="number" name="meterladdercarfive" min="1" max="15">
+                        
+                            </div>
+                        
+                        
+                            <div class="form-group flot-right col-sm-4 col-xs-12">
+                              <label for="inputPriority">بالابر هیدرولیکی</label>
+                              <input type="number" name="Hydrauliclift" min="1" max="15">
+                        
+                            </div>
+                        
+                        
+                        
+                        
+                            <div class="form-group flot-right col-sm-4 col-xs-12">
+                              <label for="inputPriority">خودرو نجات</label>
+                              <input type="number" name="Carrescue" min="1" max="15">
+                        
+                            </div>
+                        
+                        
+                        
+                        
+                            <div class="form-group flot-right col-sm-4 col-xs-12">
+                              <label for="inputPriority">آمبولانس</label>
+                              <input type="number" name="Ambulance" min="1" max="15">
+                        
+                            </div>
+                            <div class="form-group flot-right col-sm-4 col-xs-12">
+                              <label for="inputPriority">لوله</label>
+                              <input type="number" name="Pipe" min="1" max="15">
+                        
+                            </div>
+                            <div class="form-group flot-right col-sm-4 col-xs-12">
+                              <label for="inputPriority">سرلوله</label>
+                              <input type="number" name="Headpipe" min="1" max="15">
+                        
+                            </div>
+                        
+                            <div class="form-group flot-right col-sm-4 col-xs-12">
+                              <label for="inputPriority">کفساز</label>
+                              <input type="number" name="Exporter" min="1" max="15">
+                        
+                            </div>
+                            <div class="form-group flot-right col-sm-4 col-xs-12">
+                              <label for="inputPriority">لباس نسوز</label>
+                              <input type="number" name="Burntclothing" min="1" max="15">
+                        
+                            </div>
+                        
+                            <div class="form-group flot-right col-sm-4 col-xs-12">
+                              <label for="inputPriority">پودر</label>
+                              <input type="number" name="Powder" min="1" max="15">
+                        
+                            </div>
+                        
+                            <div class="form-group flot-right col-sm-4 col-xs-12">
+                              <label for="inputPriority">موتور پمپ پرتابل</label>
+                              <input type="number" name="Portablemotorpump" min="1" max="15">
+                        
+                            </div>
+                        
+                            <div class="form-group flot-right col-sm-4 col-xs-12">
+                              <label for="inputPriority">دستگاه تنفسی</label>
+                              <input type="number" name="Respiratorysystem" min="1" max="15">
+                        
+                            </div>
+                            <div class="form-group flot-right col-sm-4 col-xs-12">
+                              <label for="inputPriority">دستگاه برش</label>
+                              <input type="number" name="Brushingmachine" min="1" max="15">
+                        
+                            </div>
+                            <div class="form-group flot-right col-sm-4 col-xs-12">
+                              <label for="inputPriority">ژنراتور برق</label>
+                              <input type="number" name="Electricgenerator" min="1" max="15">
+                        
+                            </div>
+                            <div class="form-group flot-right col-sm-4 col-xs-12">
+                              <label for="inputPriority">کف</label>
+                              <input type="number" name="Cuffs" min="1" max="15">
+                        
+                            </div>
+                        
+                            <div class="form-group flot-right col-sm-4 col-xs-12">
+                              <label for="inputPriority">آب</label>
+                              <input type="number" name="Water" min="1" max="15">
+                        
+                            </div>
+                            <div class="form-group flot-right col-sm-12 col-xs-12">
+                              <label for="inputRelatedService">سایر</label>
+                              <textarea name="other" id="" cols="30" rows="10" style="
+                            width: 100%;
+                            height: 154px;
+                        " placeholder="سایر"></textarea>
+                            </div>
+                        
+                        
+                            <div class="form-group flot-right col-sm-4">
+                              <label for="inputRelatedService">آیا محل قبلا مورد بازدید قرار گرفته است؟</label>
+                              <select name="whatLastvisitdate" id="inputRelatedService" class="form-control">
+                        
+                        
+                        
+                                <option value="yes" selected="selected">
+                                  بله</option>
+                                <option value="no">
+                                  خیر</option>
+                        
+                        
+                        
+                              </select>
+                            </div>
+                        
+                        
+                        
+                            <div class="form-group flot-right col-sm-4">
+                              <label for="inputRelatedService">نام بازدید کننده</label>
+                              <input type="text" name="Visitorname" placeholder="نام بازدید کننده">
+                            </div>
+                        
+                            <div class="form-group flot-right col-sm-3 col-xs-12">
+                              <label for="inputDepartment">تاریخ آخرین بازدید</label>
+                              <!-- <input type="date" name="Lastvisitdate"> -->
+                              <input type="text"  id="data-es" tabindex="11" name="Lastvisitdate" value="<%= old('Lastvisitdate') %>"  class="form-control" placeholder="تاریخ آخرین بازدید">
+                                                    
+                            </div>
+                        
+                            <button class="btn btn-primary" type="submit">ویرایش گزارش</button>
+                        </div>
+                        
+
+                      </div>
+
+                  </div>
+              </div>
+          </div>
+
+      </div>
+
+      
+      <div class="row">
+        <div class="col-lg-12">
+
+
+            <div class="hpanel">
+                <div class="panel-heading">
+                    <div class="panel-tools">
+                        <a class="showhide"><i class="fa fa-chevron-up"></i></a>
+                        <a class="closebox"><i class="fa fa-times"></i></a>
+                    </div>
+                    جدول گزارشات
+                </div>
+                <div class="panel-body">
+                    <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table id="example2"
+                                    class="table table-striped table-bordered table-hover dataTable no-footer"
+                                    role="grid" aria-describedby="example2_info">
+                                    <thead>
+                                        <tr role="row">
+                                            <th class="sorting_asc" tabindex="0" aria-controls="example2"
+                                                rowspan="1" colspan="1" aria-sort="ascending"
+                                                aria-label="محل وقوع حادثه	: activate to sort column descending"
+                                                style="width: 150px;">محل وقوع حادثه	</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
+                                                colspan="1" aria-label="ایستگاه: activate to sort column ascending"
+                                                style="width: 246px;">ایستگاه</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
+                                                colspan="1" aria-label="شیفت: activate to sort column ascending"
+                                                style="width: 150px;">شیفت</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
+                                                colspan="1" aria-label="تعداد مامورین اعزامی	: activate to sort column ascending"
+                                                style="width: 119px;">تعداد مامورین اعزامی	</th>
+                                            
+                                           
+                                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
+                                                colspan="1"
+                                                aria-label="شروع تاریخ: activate to sort column ascending"
+                                                style="width: 109px;">جزئیات</th>
+                                              
+
+
+                                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
+                                                colspan="1" aria-label="حقوق: activate to sort column ascending"
+                                                style="width: 81px;">ویرایش</th>
+
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
+                                                colspan="1" aria-label="یبل: activate to sort column ascending"
+                                                style="width: 81px;">حذف</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+
+                                        <% logreportregister.forEach(report => { %>
+
+                                            <tr>
+                                              <td>
+                          
+                                                <h6 style="color: green;"><%= report.accidentaddress %></h6>
+                          
+                          
+                          
+                                              </td>
+                                              <td>
+                          
+                                                <h6 style="color: green;"><%= report.userid.name %></h6>
+                          
+                          
+                                              </td>
+                                              <td>
+                          
+                                                <h6 style="color: green;"><%= report.inputRelatedService %></h6>
+                          
+                          
+                          
+                                              </td>
+                  
+                                              <td><%= datas(report.createdAt).format('jD jMMMM jYYYY') %></td>
+                                              <td>
+                                                <%= datas(report.createdAt).fromNow() %>
+                                              </td>
+
+                                             
+                                        <td> <a href="/admin/report/<%= report._id %>/edit"
+                                                class="btn w-xs btn-info btn-xs">ویرایش</a></td>
+    
+                                            <td> <a href="/dashboard/report/<%= report.id %>"
+                                                class="btn w-xs btn-primary btn-xs">چاپ</a></td>
+                          
+                                            </tr>
+                          
+                          
+                                            <% }) %>
+
+
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+  </div>
+
+</div>
+

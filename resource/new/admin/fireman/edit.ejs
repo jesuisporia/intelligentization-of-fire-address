@@ -1,0 +1,159 @@
+<!-- Main Wrapper -->
+<div id="wrapper">
+
+    <div class="content">
+
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="hpanel">
+                    <div class="panel-heading">
+                        <div class="panel-tools">
+                            <a class="showhide"><i class="fa fa-chevron-up"></i></a>
+                            <a class="closebox"><i class="fa fa-times"></i></a>
+                        </div>
+                        ویرایش آتش نشان
+                    </div>
+                    <div class="panel-body">
+                        <form action="/admin/user/create" method="post" enctype="multipart/form-data"
+                            class="form-horizontal">
+
+                            <div class="form-group"><label class="col-sm-2 control-label">نام و نام خانوادگی</label>
+
+                                <div class="col-sm-10">
+                                    <input type="text" name="name" value="<%= user.name %>"
+                                        placeholder="لطفا نام ونام خانوادگی را وارد کنید"
+                                        class="form-control input-lg m-b">
+
+                                </div>
+                            </div>
+
+                            <div class="form-group"><label class="col-sm-2 control-label">شماره تلفن</label>
+
+                                <div class="col-sm-10"><input type="tel" value="<%= user.phone %>" name="phone"
+                                        placeholder="شماره تلفن آتش نشان" class="form-control input-lg m-b">
+
+                                </div>
+                            </div>
+
+                            <div class="form-group"><label class="col-sm-2 control-label">آدرس</label>
+
+                                <div class="col-sm-10"><input type="text" value="<%= user.address %>" name="address"
+                                        placeholder=" آدس آتش نشان" class="form-control input-lg m-b">
+
+                                </div>
+                            </div>
+
+                            <div class="form-group"><label class="col-sm-2 control-label">کد ملی</label>
+
+                                <div class="col-sm-10"><input type="number" value="<%= user.melicode %>" name="melicode"
+                                        placeholder="کد ملی آتش نشان" class="form-control input-lg m-b">
+
+                                </div>
+                            </div>
+
+
+                            <div class="form-group"><label class="col-sm-2 control-label">کد پرسنلی</label>
+
+                                <div class="col-sm-10"><input type="number" value="<%= user.personalcode %>"
+                                        name="personalcode" placeholder="کد پرسنلی آتش نشان"
+                                        class="form-control input-lg m-b">
+
+                                </div>
+                            </div>
+
+                            <div class="form-group"><label class="col-sm-2 control-label">عکس آتش نشان</label>
+
+                                <div class="col-sm-10"><input type="file" name="picture" placeholder=" عکس آتش نشان"
+                                        class="form-control input-lg m-b">
+
+                                </div>
+                            </div>
+
+
+                            <div class="form-group"><label class="col-sm-2 control-label">انتخاب ایستگاه</label>
+
+                                <div class="col-sm-10">
+
+
+
+                                    <select name="station" id="inputRelatedService" class="form-control">
+                                        
+                                        <% station.forEach(stat => { %>
+                                        <option value="<%= stat.id %>"
+                                            <%= stat.id.indexOf(user.station) !== -1 ? 'selected' : ''%>>
+                                            <%= stat.name %></option>
+                                        <% }) %>
+                                    </select>
+                                </div>
+
+
+
+                            </div>
+
+
+
+                            <div class="form-group"><label class="col-sm-2 control-label">انتخاب شیفت</label>
+
+                                <div class="col-sm-10">
+
+
+
+                                    <select name="shifte" id="inputRelatedService" class="form-control">
+                                        <% if(user.shifte == 'شهید جمالی') { %>
+                                            <option selected value="شهید جمالی">شهید جمالی</option>
+                                            <option value="شهید بهشتی">شهید بهشتی</option>    
+                                            <option value="شهید امیری">شهید امیری</option>  
+                                        <% } %>
+
+                                        <% if(user.shifte == 'شهید بهشتی') { %>
+                                            <option selected value="شهید بهشتی">شهید بهشتی</option>
+                                            <option value="شهید جمالی">شهید جمالی</option>    
+                                            <option value="شهید امیری">شهید امیری</option>  
+                                        <% } %>
+                                        <% if(user.shifte == 'شهید امیری') { %>
+
+                                            <option selected value="شهید امیری">شهید امیری</option>
+                                            <option value="شهید جمالی">شهید جمالی</option>    
+                                            <option value="شهید بهشتی">شهید بهشتی</option> 
+                                            <% } %>
+
+                                            <% if(!user.shifte) { %>
+
+                                                <option value="شهید امیری">شهید امیری</option>
+                                                <option value="شهید جمالی">شهید جمالی</option>    
+                                                <option value="شهید بهشتی">شهید بهشتی</option> 
+                                                <% } %>
+
+                                    </select>
+                                </div>
+
+
+
+                            </div>
+
+
+
+
+
+                            <div class="hr-line-dashed"></div>
+
+                            <button style="
+                            width: 100%;
+                        " class="btn btn-primary" type="submit">افزودن آتش نشان</button>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+</div>

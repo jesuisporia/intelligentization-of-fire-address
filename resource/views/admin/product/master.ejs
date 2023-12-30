@@ -1,0 +1,148 @@
+<div class="row clearfix">
+
+
+    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 pull-right" style=" width: 19.966667%; ">
+        <div class="info-box bg-cyan hover-expand-effect">
+            <div class="content">
+                <div class="text">همه </div>
+                <div class="number count-to" data-from="0" data-to="257" data-speed="1000" data-fresh-interval="20">
+                    <%= allproduct %></div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 pull-right" style=" width: 19.966667%; ">
+        <div class="info-box bg-light-green hover-expand-effect">
+            <div class="content">
+                <div class="text"> منتشر شده</div>
+                <div class="number count-to" data-from="0" data-to="243" data-speed="1000" data-fresh-interval="20">
+                    <%= allproductshow %></div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12 pull-right" style=" width: 19.966667%; ">
+        <div class="info-box bg-pink hover-expand-effect">
+            <div class="content">
+                <div class="text">پیش نویس</div>
+                <div class="number count-to" data-from="0" data-to="4" data-speed="100" data-fresh-interval="20">
+                    <%= allproductdraft%>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12 pull-right" style=" width: 19.966667%; ">
+        <div class="info-box bg-orange hover-expand-effect">
+            <div class="content">
+                <div class="text">زمانبندی شده</div>
+                <div class="number count-to" data-from="0" data-to="4" data-speed="100" data-fresh-interval="20">
+                    <%= allproductScheduled%>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 pull-right" style=" width: 19.966667%; ">
+        <div class="info-box bg-red hover-expand-effect">
+            <div class="content">
+                <div class="text">زباله دان</div>
+                <div class="number count-to" data-from="0" data-to="125" data-speed="15" data-fresh-interval="20">
+                    <%= allproductdelete%></div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+</div>
+
+
+<div class="row clearfix">
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+            <div class="header">
+                <h2>
+                    همه محصولات
+
+                </h2>
+                <ul class="header-dropdown m-r--5">
+                    <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                            aria-haspopup="true" aria-expanded="false">
+                            <i class="material-icons">more_vert</i>
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a href="/admin/product" class=" waves-effect waves-block">
+                                    همه محصولات</a>
+                            </li>
+                            <li><a href="/admin/productcategory" class=" waves-effect waves-block">دسته محصولات</a>
+                            </li>
+                            <li><a href="/admin/product/create" class=" waves-effect waves-block">افزودن
+                                    محصول جدید</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12 pull-right text-right">
+        <div class="body lablepicture" style=" line-height: 41px; ">
+
+            <a href="/admin/product"><span class="label bg-light-blue">همه محصولات</span></a>
+            <a href="/admin/product/show"><span class="label bg-light-green">محصولات منتشر شده</span></a>
+            <a href="/admin/product/draft"><span class="label bg-pink">محصولات پیش نویس</span></a>
+            <a href="/admin/product/scheduled"><span class="label bg-orange">محصولات زمانبندی شده</span></a>
+            <a href="/admin/product/trash"><span class="label bg-red">زباله دان</span></a>
+
+        </div>
+    </div>
+    <div class="col-xs-5 col-sm-3 col-md-3 col-lg-3">
+        <div class="demo-google-material-icon">
+            <form action="/admin/product/search" method="get">
+
+            <input id="search" name="search" type="text" class="form-control" style=" direction: rtl; font-family: IRANSans; font-size: 12px; " placeholder="چی میخای فقط بنویس(:">
+            <button type="submit" class="btn bg-blue waves-effect">
+                <i class="material-icons">search</i>
+                <span>جستجو</span>
+            </button>
+        </form>
+
+        </div>
+    </div>
+
+    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 pull-right text-right">
+        <form action="/admin/product/filter" method="post">
+
+            <select name="category" id="parent" class="form-control">
+
+                <% categories.forEach(cate => { %>
+                <option value="<%= cate.id %>"><%= cate.name %></option>
+                <% }) %>
+            </select>
+            <button type="submit" class="btn btn-primary waves-effect">فیلتر</button>
+        </form>
+    </div>
+
+    <div class="col-md-6">
+        <div class="body">
+            <nav>
+
+                <%- include(viewPath('layouts/pagination') ,{ pagination : posts}) %>
+            </nav>
+
+        </div>
+    </div>
+</div>

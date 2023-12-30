@@ -1,0 +1,424 @@
+<div class="progress">
+	<div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"
+		style="width:100%">
+		<span class="sr-only"></span>
+	</div>
+</div>
+<div class="mask" id="mask">
+</div>
+<!-- Start Top Panel -->
+<div class="top-panel">
+	<div class="container">
+		<div class="row">
+
+			<!-- Start Menu -->
+			<div class="col-md-8">
+				<div class="user-menu">
+					<div class="user-name">
+						<a href="#"><%= auth.user.name %> </a>
+					</div>
+
+				</div>
+			</div>
+			<!-- End Menu -->
+			<div class="col-md-4">
+				<div class="icon-collapse" id="icon_collapse">
+					<div class="bar1"></div>
+					<div class="bar2"></div>
+					<div class="bar3"></div>
+				</div>
+				<img src="./img/logo.png" class="logo" alt="">
+				<h1 class="title">آتش نشانی</h1>
+				<h2 class="description">استان کرمانشاه</h2>
+			</div>
+
+		</div>
+	</div>
+</div>
+<!-- End Top Panel -->
+
+<div id="break">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<nav class="break-nav box">
+					<div class="break-wrap">
+						<a href="#">صفحه اصلی</a>
+						<i></i>
+						پیشخوان
+					</div>
+				</nav>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Start Main -->
+<main class="main">
+	<div class="container">
+
+		<div class="row">
+
+			<div class="col-md-9">
+
+				<div class="content" style="
+		padding: 0;
+		height: inherit;
+		margin-bottom: 0;
+	">
+					<div class="col-md-3" style="
+			padding: 0;
+		">
+						<div class="hpanel" style="
+				margin-bottom: 0;
+			">
+							<div class="panel-body">
+								<div class="text-center">
+									<h2 class="m-b-xs">0</h2>
+									<p class="font-bold text-info">امتیازات کسب شده</p>
+									<div class="m">
+										<i class="pe-7s-display1 fa-5x"></i>
+									</div>
+									<p class="small">
+										برای نمایش تمام گزارشات ثبت شده بر روی دکمه زیر کلیک نمایید
+									</p>
+									<a style="
+							color: #fff;
+							font-weight: bold;
+						" class="btn btn-info btn-sm" href="/dashboard/report">نمایش گزارشات</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3" style="
+			padding: 0;
+		">
+						<div class="hpanel" style="
+				margin-bottom: 0;
+			">
+							<div class="panel-body">
+								<div class="text-center">
+									<h2 class="m-b-xs">0</h2>
+									<p class="font-bold text-success">حریق ثبت شده امروز</p>
+									<div class="m">
+										<i class="pe-7s-display1 fa-5x"></i>
+									</div>
+									<p class="small">
+										برای نمایش تمام گزارشات ثبت شده بر روی دکمه زیر کلیک نمایید
+									</p>
+									<a style="
+							color: #fff;
+							font-weight: bold;
+						" class="btn btn-success btn-sm" href="/dashboard/report">نمایش گزارشات</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3" style="
+			padding: 0;
+		">
+						<div class="hpanel" style="
+				margin-bottom: 0;
+			">
+							<div class="panel-body">
+								<div class="text-center">
+									<h2 class="m-b-xs"><%= numberreport %></h2>
+									<p class="font-bold text-danger">کل حریق ثبت شده</p>
+									<div class="m">
+										<i class="pe-7s-display1 fa-5x"></i>
+									</div>
+									<p class="small">
+										برای نمایش تمام گزارشات ثبت شده بر روی دکمه زیر کلیک نمایید
+									</p>
+									<a style="
+									color: #fff;
+									font-weight: bold;
+								" class="btn btn-danger btn-sm" href="/dashboard/report">نمایش گزارشات</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3" style="
+			padding: 0;
+		">
+						<div class="hpanel" style="
+				margin-bottom: 0;
+			">
+							<div class="panel-body">
+								<div class="text-center">
+									<h2 class="m-b-xs"><%= numberreport %></h2>
+									<p class="font-bold text-warning">گزارش ثبت شده</p>
+									<div class="m">
+										<i class="pe-7s-display1 fa-5x"></i>
+									</div>
+									<p class="small">
+										برای نمایش تمام گزارشات ثبت شده بر روی دکمه زیر کلیک نمایید
+									</p>
+									<a style="
+									color: #fff;
+									font-weight: bold;
+								" class="btn btn-warning btn-sm" href="/dashboard/report">نمایش گزارشات</a>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+
+
+				<div class="content" style="
+        height: unset;
+        margin-bottom: 0;
+    ">
+					<header class="title">
+						<h3>نمودار حریق</h3>
+						<!-- <hr> -->
+
+					</header>
+
+
+
+					<canvas id="canvas"></canvas>
+
+
+
+				</div>
+
+				<div class="content">
+					<header class="title">
+						<h3>نقشه آنلاین حریق</h3>
+						<!-- <hr> -->
+
+						<h6 style="
+            padding-right: 21px;
+            line-height: 26px;
+            font-size: 13px;
+        ">با سلام و خسته نباشید خدمت شما همکار گرامی</h6>
+						<h6 style="
+            padding-right: 21px;
+            line-height: 26px;
+            font-size: 13px;
+        ">این سیستم به صورت آزمایشی به مدت یک ماه در دسترس خواهد بود.امید است با هوشمند سازی آتش نشانی باعث بهتر شدن
+							مسیر یابی حریق و سهولت گزارش نویسی شده. هرگونه انتقاد یا پیشنهاد در زمینه بهتر شدن و کار آمد
+							شدن این سیستم با شماره زیر در میان بگذارید.</h6>
+						<h6 style="
+        padding-right: 21px;
+        line-height: 26px;
+        font-size: 13px;
+    ">۰۹۱۲۸۷۲۷۸۶۲</h6>
+						<h6 style="
+            padding-right: 21px;
+            line-height: 26px;
+            font-size: 13px;
+        ">به زودی ارتباط آنلاین بین ایستگاه ها و نمایش حریق به صورت زنده برنامه نویسی خواهد شد.</h6>
+
+						<h6 style="
+padding-right: 21px;
+line-height: 26px;
+font-size: 13px;
+">با توجه به نیاز سازمان دسترسی برای تمام ایستگاه ها فراهم شده که توانایی مشاهده گزارش حریق دیگر ایستگاه ها را داشته
+							باشند.</h6>
+
+						<a href="/dashboard/one" style="
+padding-right: 21px;
+line-height: 26px;
+font-size: 13px;
+"><button type="button" class="btn btn-primary" style="
+width: unset;
+">ایستگاه یک</button>
+						</a>
+
+						<a href="/dashboard/seven"><button type="button" class="btn btn-primary" style="
+  width: unset;
+">ایستگاه هفت</button>
+						</a>
+						<% if(fire.length > 0) { %> 
+
+						<p><%= fire[0].address %></p>
+						<p id="lat"><%= map[0].lat %></p>
+						<p id="lng"><%= map[0].lng %></p>
+						<p id="token"><%= map[0].token %></p>
+
+						<% } %>
+ 
+
+
+
+					</header>
+
+
+					<div id="app"></div>
+
+
+				</div>
+			</div>
+
+			<div class="col-md-3">
+				<%- include(viewPath('/home/dashboard/menu')) -%>
+
+			</div>
+		</div>
+	</div>
+</main>
+
+
+
+
+
+
+
+
+
+
+
+<!-- End Main -->
+<%- include(viewPath('/home/dashboard/footer')) -%>
+<script src="/js/Chart.js"></script>
+<script src="/js/utils.js"></script>
+
+
+
+
+
+<script>
+	var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October',
+		'November', 'December'
+	];
+	var config = {
+		type: 'line',
+		data: {
+			labels: ['۲۶−۸−۹۹', 'February', 'March', 'April', 'May', 'June', 'July'],
+			datasets: [{
+				label: 'تمام حریق های این ایستگاه',
+				backgroundColor: window.chartColors.red,
+				borderColor: window.chartColors.red,
+				data: [
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor()
+				],
+				fill: false,
+			}, {
+				label: 'تمام حریق های صورت گرفته',
+				fill: false,
+				backgroundColor: window.chartColors.blue,
+				borderColor: window.chartColors.blue,
+				data: [
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor(),
+					randomScalingFactor()
+				],
+			}]
+		},
+		options: {
+
+			legend: {
+            labels: {
+				fontFamily:'IRANSans'
+            }
+        },
+			responsive: true,
+
+			title: {
+				display: true,
+				text: 'نمودار آنلاین حریق'
+			},
+			tooltips: {
+				mode: 'index',
+				intersect: false,
+			},
+			hover: {
+				mode: 'nearest',
+				intersect: true
+			},
+			scales: {
+				xAxes: [{
+					display: true,
+					scaleLabel: {
+						display: true,
+						labelString: 'تاریخ'
+					}
+				}],
+				yAxes: [{
+					display: true,
+					scaleLabel: {
+						display: true,
+						labelString: 'تعداد'
+					}
+				}]
+			}
+		}
+	};
+
+	window.onload = function () {
+		var ctx = document.getElementById('canvas').getContext('2d');
+		window.myLine = new Chart(ctx, config ,options);
+	};
+
+	document.getElementById('randomizeData').addEventListener('click', function () {
+		config.data.datasets.forEach(function (dataset) {
+			dataset.data = dataset.data.map(function () {
+				return randomScalingFactor();
+			});
+
+		});
+
+		window.myLine.update();
+	});
+
+	var colorNames = Object.keys(window.chartColors);
+	document.getElementById('addDataset').addEventListener('click', function () {
+		var colorName = colorNames[config.data.datasets.length % colorNames.length];
+		var newColor = window.chartColors[colorName];
+		var newDataset = {
+			label: 'Dataset ' + config.data.datasets.length,
+			backgroundColor: newColor,
+			borderColor: newColor,
+			data: [],
+			fill: false
+		};
+
+		for (var index = 0; index < config.data.labels.length; ++index) {
+			newDataset.data.push(randomScalingFactor());
+		}
+
+		config.data.datasets.push(newDataset);
+		window.myLine.update();
+	});
+
+	document.getElementById('addData').addEventListener('click', function () {
+		if (config.data.datasets.length > 0) {
+			var month = MONTHS[config.data.labels.length % MONTHS.length];
+			config.data.labels.push(month);
+
+			config.data.datasets.forEach(function (dataset) {
+				dataset.data.push(randomScalingFactor());
+			});
+
+			window.myLine.update();
+		}
+	});
+
+	document.getElementById('removeDataset').addEventListener('click', function () {
+		config.data.datasets.splice(0, 1);
+		window.myLine.update();
+	});
+
+	document.getElementById('removeData').addEventListener('click', function () {
+		config.data.labels.splice(-1, 1); // remove the label first
+
+		config.data.datasets.forEach(function (dataset) {
+			dataset.data.pop();
+		});
+
+		window.myLine.update();
+	});
+</script>

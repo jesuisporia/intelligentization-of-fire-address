@@ -1,0 +1,119 @@
+<link href="/vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
+<!-- Custom Stylesheet -->
+<link href="/vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
+<link href="/css/style.css" rel="stylesheet">
+
+
+<div class="content-body" style="min-height: 788px;">
+    <div class="container-fluid">
+        <div class="page-titles">
+            <h4 style="
+            font-size: 18px;
+        ">تمام فعالیت کاربران</h4>
+            <ol class="breadcrumb">
+                <li style="
+    font-size: 14px;
+" class="breadcrumb-item"><a href="javascript:void(0)">تمام فعالیت کاربران</a></li>
+                <li style="
+    font-size: 14px;
+" class="breadcrumb-item active"><a href="javascript:void(0)">لیست تمام فعالیت کاربران</a></li>
+            </ol>
+        </div> 
+        <div class="page-titles form-head d-flex flex-wrap justify-content-between align-items-center mb-4">
+
+      
+
+            <!-- Modal -->
+
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+
+
+
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">لیست تمام فعالیت کاربران</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="content table-responsive table-full-width">
+                            <table id="example" class="display min-w850">
+                                <thead>
+                                    <tr>
+                                        
+                                        <th>ردیف</th>
+                                        <th>نام کاربر</th>
+                                        <th>آدرس مک</th>
+                                        <th> دسته فعالیت</th>
+                                        <th>شرح  فعالیت</th>
+
+                                        <th>نوع فعالیت</th>
+
+                                        <th>ناریخ فعالیت</th>                   
+                                        <th>زمان فعالیت</th>                   
+    
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <%  var i=1; activity.forEach(activity => { %>
+                                    <tr>
+                                        <td><%= i %></td>
+
+                                        <td><%= activity.username %></td>
+                                        <td><%= activity.mac %></td>
+                                        <td><%= activity.statement %></td>
+                                        <td><%= activity.description %></td>
+                                        <td>
+                                            <% if(activity.typractivity == 0) { %> <span class="badge light badge-success">ایجاد</span> <% } %>
+                                            <% if(activity.typractivity == 1) { %> <span class="badge light badge-warning">ویرایش</span>  <% } %>
+                                            <% if(activity.typractivity == 2) { %> <span class="badge light badge-danger">حذف</span>  <% } %>
+                                            
+                                            
+                                        </td>
+                                        <td>
+                                            <%= datas(activity.createdAt).format('jD / jM / jYYYY') %>
+                                            </td>
+                                            <td><%= datas(activity.createdAt).fromNow() %></td>
+
+
+                                    </tr>
+
+                                    <% i++;})  %>
+
+
+                                </tbody>
+                                <tfoot>
+                                    <tr style="
+                                    font-size: 12px;
+                                ">
+                             <th>ردیف</th>
+                             <th>نام کاربر</th>
+                             <th>آدرس مک</th>
+
+                             <th>شرح  فعالیت</th>
+                             <th>نوع فعالیت</th>
+
+                             <th>ناریخ فعالیت</th>                   
+                             <th>زمان فعالیت</th>                   
+
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+      
+
+        </div>
+         
+            </div>
+
+        </div>
+
+
+  
+
+

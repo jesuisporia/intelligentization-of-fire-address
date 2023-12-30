@@ -1,0 +1,237 @@
+
+
+
+  <div class="progress">
+    <div class="progress-bar" role="progressbar" aria-valuenow="70"
+    aria-valuemin="0" aria-valuemax="100" style="width:100%">
+      <span class="sr-only"></span>
+    </div>
+  </div>
+  <div class="mask" id="mask">
+  </div>
+   <!-- Start Top Panel -->
+ <div class="top-panel">
+   <div class="container">
+     <div class="row">
+ 
+             <!-- Start Menu -->
+             <div class="col-md-8">
+               <div class="user-menu">
+                 <div class="user-name">
+                  <a href="#"><%= auth.user.name %> </a>
+                </div>
+              
+               </div>
+             </div>
+             <!-- End Menu -->
+       <div class="col-md-4">
+        <div class="icon-collapse" id="icon_collapse">
+          <div class="bar1"></div>
+          <div class="bar2"></div>
+          <div class="bar3"></div>
+        </div>
+         <img src="./img/logo.png" class="logo" alt="">
+         <h1 class="title">آتش نشانی</h1>
+         <h2 class="description">استان کرمانشاه</h2>
+       </div>
+ 
+     </div>
+   </div>
+ </div>
+   <!-- End Top Panel -->
+ 
+ <div id="break">
+   <div class="container">
+     <div class="row">
+       <div class="col-md-12">
+         <nav class="break-nav box">
+           <div class="break-wrap">
+             <a href="#">صفحه اصلی</a>
+             <i></i>
+             پیشخوان
+           </div>
+         </nav>
+       </div>
+     </div>
+   </div>
+ </div>
+   <!-- Start Main -->
+ <main class="main">
+   <div class="container">
+     <div class="row">
+ 
+       <div class="col-md-9">
+         <div class="content">
+           <header class="title">
+
+
+
+
+
+
+
+           </header>
+ 
+           <header class="title">
+             <h3>نقشه آنلاین حریق
+             </h3>
+             <!-- <hr> -->
+           </header>
+           <% if (map) { %>
+            <div id="app"></div>
+            <div class="endofoperation" id="endofoperation">
+              <a href="/dashboard/endofoperation/<%= map.token %>">پایان عملیات</a>
+            </div>
+             <p id="lat"><%= map.lat %></p>
+             <p id="lng"><%= map.lng %></p>
+             <p id="token" style="display: none;"><%= map.token %></p>
+             <% } else{ %>  
+
+              <h5 style="
+              padding-right: 20px;
+          ">هیچ حریقی فعلا موجود نمیباشد.</h5>
+  <h6 style="
+  padding-right: 21px;
+  line-height: 26px;
+  font-size: 13px;
+  ">با توجه به نیاز سازمان دسترسی برای تمام ایستگاه ها فراهم شده که توانایی مشاهده گزارش حریق دیگر ایستگاه ها را داشته باشند.</h6>
+  
+  <a href="/dashboard/one" style="
+  padding-right: 21px;
+  line-height: 26px;
+  font-size: 13px;
+  "><button type="button" class="btn btn-primary">ایستگاه یک</button>
+  </a>
+  
+  <a href="/dashboard/seven"><button type="button" class="btn btn-primary">ایستگاه هفت</button>
+  </a>
+  <% } %>
+         
+         </div>
+       </div>
+ 
+       <div class="col-md-3">
+        <%- include(viewPath('/home/dashboard/menu')) -%>
+
+       </div>
+     </div>
+   </div>
+ </main>
+   <!-- End Main -->
+ <!-- Start Footer -->
+ <footer id="panel-footer" class="clear-fix">
+                     <div class="container">
+                       <div class="row">
+                         <div class="col-md-12">
+                           <div class="pull-left">طراحی شده توسط پوریا یاوری</div>
+                           <div class="pull-right">امروز سه شنبه | 26 خردا 99 | ساعت : 14:25</div>
+ 
+                         </div>
+                       </div>
+                     </div>
+                     </footer>
+ 
+
+
+        
+
+      
+
+
+
+
+                     <script>
+                       $(document).ready(function() {
+  var app = new Mapp({
+    element: '#app',
+    presets: {
+        latlng: {
+        lat: 34.33124590429275,
+      lng: 47.08259582519532,
+      },
+      zoom: 11
+    },
+    apiKey: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImU4YzlhNWM4N2FiMWRkNjYwZGFlOTFhNDA2YmY2MjVmODRiNzQ3ZDNlMzg3ZjU4OGVhODE0OTVmZmMyNWYwMDhiOTdiMmU4ZjEzMjIxMGEwIn0.eyJhdWQiOiI5NjQ1IiwianRpIjoiZThjOWE1Yzg3YWIxZGQ2NjBkYWU5MWE0MDZiZjYyNWY4NGI3NDdkM2UzODdmNTg4ZWE4MTQ5NWZmYzI1ZjAwOGI5N2IyZThmMTMyMjEwYTAiLCJpYXQiOjE1OTE5NTgyMjgsIm5iZiI6MTU5MTk1ODIyOCwiZXhwIjoxNTk0NTUwMjI4LCJzdWIiOiIiLCJzY29wZXMiOlsiYmFzaWMiXX0.aoZxJWSnDeyT-g9cCLnGNX2vbawUxBsRrzu11jvqiEcVKuP59mm2h8awL9gIOjvjjIO5DriOmaLKSNsD06MTSxG324jaU4WdMjb28NLD1gieAfPTn4FBxib9Okm5o3Ia0O2UqcbzLwVsPZZwB9Xguj_9maHfKrZx5ka8xGMNnfwlPvnoe6jySukY2nEftHCrM0l_qXngDiUC9hfHX9HiQaQc1--wG287k8trXcGHI6Yh4DQ5ule04fpSqSXko87gwaNEOK6O_WnQgv-3Zz8mYd3Znz9nHISYGZffKNtq7_gB-PQuBaUczqeQGZ84dK-apzaElwQyX0C6C6CHKjMQ5w'
+  });
+  var lat = document.getElementById('lat').innerHTML;
+  var lng = document.getElementById('lng').innerHTML;
+  app.addLayers();
+
+
+  app.drawRoute({
+      
+    start: [34.377994760133234, 47.106961011886604],
+    end: [lat, lng],
+    mode: 'car',
+    draggable: true,
+    fit: true,
+  });
+
+  app.groups.route.icons.bindPopup(popup, {
+    closeButton: false,
+  }).openPopup();
+  app.map.on('click', function(){
+    app.colorRoute({
+      colors: ['#3F51B5', '#4CAF50'],
+    });
+  });
+  app.addLogo({
+        url: '/img/logo.png',
+    });
+
+});
+                      </script>
+                      
+
+
+
+ 
+ <script type="text/javascript">
+ var myVar=setInterval(function(){myTimer()},1);
+ var count = 0;
+ function myTimer() {
+ if(count < 100){
+ $('.progress').css('width', count + "%");
+ count += 0.05;
+ //  document.getElementById("demo").innerHTML = Math.round(count) +"%";
+  // code to do when loading
+ }
+ 
+ else if(count > 99){
+     // code to do after loading
+ // count = 0;
+ 
+ 
+ }
+ }
+ </script>
+
+
+
+
+<script type="text/javascript">
+
+
+  window.onload = function () {
+            var mobilemenu = document.getElementById('sidebar-panel');
+            var iconcollapse = document.getElementById('icon_collapse');
+            var back = document.getElementById('mask');
+            back.onclick = hidemaster;
+  
+            function hidemaster() {
+              mobilemenu.style.right = "0px"
+              back.style.display = "none";
+              mobilemenu.style.visibility = "hidden";
+  
+            }
+            iconcollapse.onclick = showmaster;
+  
+            function showmaster() {
+              back.style.display = "block";
+              mobilemenu.style.visibility = "visible";
+              mobilemenu.style.right = "0px"
+            }
+  
+        }
+  
+  </script>

@@ -1,0 +1,27 @@
+
+<section class="cat">
+    <div class="tite">
+      <h2>محصولات ما</h2>   
+  </div>
+    <div class="cat-container">
+  
+      <% subcategory.forEach(post => { %> 
+  
+        <a href="/product/<%= post.slug %>">
+  
+      <div class="item">
+      
+          <div class="content">
+          <img src="<%= post.images %>" alt="Notebook">
+
+            <h1><%= post.name %></h1>
+            <p><%= post.description %></p>
+          </div>
+      </div>
+  </a>
+  
+      <% }) %>
+  
+    </div>
+  
+  </section>
