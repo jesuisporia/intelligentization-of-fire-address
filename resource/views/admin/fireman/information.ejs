@@ -47,17 +47,14 @@
                         </div>
                         <h2 class="m-t-none">جزئیات آتش نشان </h2>
                         <small>
-                            در نمودار زیر جزئیات عملیاتهایی را مشاهده میکنید که آتش نشان <%= fireman.name %> در آن شرکت
+                            در نمودار زیر جزئیات عملیاتهایی را مشاهده میکنید که آتش نشان  در آن شرکت
                             داشته. برای مشاهده اطلاعات بیشتر میتوانید از اطلاعات کادر سمت چپ استفاده نمایید یا در پایین
                             همین صفحه جزئیات را مشاهده نمایید. همچنین در آینده قابلیت ارسال پیام خصوصی برای کاربران
                             ایجاد میشود.این بخش در حال تکمیل شده میباشد.
                         </small>
                         <div class="small m-t-xs">
-                            <strong>نام آتش نشان:</strong><%= fireman.name %><br>
-                            <% if(lastreportinformation.length > 0) { %> 
+                            <strong>نام آتش نشان:</strong><br>
 
-                                <strong>آخرین عملیات:</strong> <%= datas(lastreportinformation[0].createdAt).fromNow() %>
-                                <% } %>
         
                         </div>
 
@@ -84,12 +81,12 @@
 
                         <div>
                             <strong>تعداد کل عملیات شرکت کرده</strong>
-                            <h1 class="m-xs text-success"> <%= count %></h1>
+                            <h1 class="m-xs text-success"> </h1>
                         </div>
 
                         <p>
                             در کادر زیر خلاصه ای از وضعیت <strong>تعداد عملیات</strong> شرکت کرده آتش نشان
-                            <%= fireman.name %> را مشاهده میکنید. برای اطلاعات بیشتر به پایین همین صفحه مراجعه نمایید.
+                           را مشاهده میکنید. برای اطلاعات بیشتر به پایین همین صفحه مراجعه نمایید.
                         </p>
                         <div class="row">
                             <div class="col-xs-6">
@@ -129,42 +126,13 @@
                     <div class="panel-body">
 
                         <p>
-                            در جدول زیر لیست کامل عملیاتهای انجام شده توسط آتش نشان <strong><%= fireman.name %></strong>
+                            در جدول زیر لیست کامل عملیاتهای انجام شده توسط آتش نشان <strong></strong>
                             را مشاهده میکنید. بخش جست و جو در حال تکمیل شده میباشد.
                         </p>
 
                         <div class="table-responsive">
                             <table class="table table-hover table-bordered table-striped">
-                                <tbody>
-                                    <% reportinformation.docs.forEach(report => { %>
-
-                                    <tr>
-                                        <td>
-                                            <span class="label label-success">انجام شده</span>
-                                        </td>
-                                        <td class="issue-info">
-                                            <a href="#">
-                                                <%= auth.user.name %>
-                                            </a>
-                                            <br>
-                                            <small>
-                                                <%= report.accidentaddress %>
-                                            </small>
-                                        </td>
-                                        <td><%= datas(report.createdAt).format('jD jMMMM jYYYY') %></td>
-                                        <td>
-                                            <%= datas(report.createdAt).fromNow() %>
-                                        </td>
-                                        <td class="text-right">
-                                            <button class="btn btn-default btn-xs"> چاپ گزارش</button>
-                                        </td>
-                                    </tr>
-
-                                    <%     }) %>
-
-
-
-                                </tbody>
+                   
                             </table>
                         </div>
                     </div>

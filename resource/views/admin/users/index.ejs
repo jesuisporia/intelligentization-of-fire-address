@@ -147,76 +147,7 @@
                                     <th>جزئیات</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <% posts.docs.forEach(post => { %>
-
-                                <tr>
-                                    <td><img src="<%= avatart(post.email) %>"
-                                            style="width: 40px;height: 40px;border-radius: 50px;border: 2px solid #e9e9e9;">
-                                    </td>
-                                    <td><%= post.name.substr(0,6) %></td>
-                                    <td>
-
-                                        <% if(post.roles){ %>
-
-                                        <% post.roles.forEach(role => { %>
-
-                                        <div class="btn-group" role="group" aria-label="Third group">
-                                            <button type="button" class="btn btn-default waves-effect"
-                                                style=" font-size: 11px; "><%= role.name.substr(0,5) %>
-                                            </button>
-                                        </div>
-
-                                        <% }) %>
-                                        <% } %>
-
-                                    </td>
-                                    <td><a href="/admin/user/createpayam/<%= post.id%>"><span
-                                                class="label bg-blue">ارسال پیام</span></a></td>
-                                    <td>
-                                        <form action="/admin/users/<%= post.id %>?_method=DELETE" method="post">
-                                            <div class="btn-group btn-group-sm" style=" box-shadow: none; ">
-                                                <a href="/admin/users/<%= post.id %>/toggleadmin">
-
-                                                    <span
-                                                        class="label bg-light-blue"><%= post.admin ? 'لغو مدیریت' : 'مدیریت' %></span>
-
-
-                                                </a>
-                                                <% if(post.admin) { %>
-
-
-                                                <a href="/admin/users/<%= post.id %>/addrole"><span
-                                                        class="label bg-light-green">اعمال سطح دسترسی</span></a>
-                                                <% } %>
-                                            </div>
-                                        </form>
-                                    </td>
-                                    <td><button type="button" class="btn bg-green  btn-xs waves-effect">ویرایش</button>
-                                    </td>
-                                    <td>
-
-
-
-                                        <form action="/admin/users/<%= post.id %>?_method=DELETE" method="post">
-
-                                            <button type="submit" class="btn bg-red  btn-xs waves-effect">حذف</button>
-
-                                        </form>
-
-
-
-
-                                    </td>
-                                    <td><button type="button" class="btn bg-info  btn-xs waves-effect">جزئیات</button>
-                                    </td>
-
-
-                                </tr>
-                                <% }) %>
-
-
-                            </tbody>
+        
                         </table>
                     </div>
                 </div>

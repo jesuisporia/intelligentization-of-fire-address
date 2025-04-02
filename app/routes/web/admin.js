@@ -8,6 +8,7 @@ const widgetController = require('./../../http/controllers/admin/widgetControlle
 const gisController = require('./../../http/controllers/admin/gisController');
 const firemanController = require('./../../http/controllers/admin/firemanController');
 const managerController = require('./../../http/controllers/admin/managerController')
+const firefighterController = require('./../../http/controllers/admin/firefighterController')
 
 const categoryController = require('./../../http/controllers/admin/categoryController')
 const sharvandController = require('./../../http/controllers/admin/sharvandController');
@@ -19,6 +20,12 @@ const roleController = require('./../../http/controllers/admin/roleController');
 const accidentController = require('./../../http/controllers/admin/accidentController')
 const daragatController = require('./../../http/controllers/admin/daragatController')
 const activityController = require('./../../http/controllers/admin/activityController')
+const { isFirefighter, isStationChief } = require('./../../http/middleware/auth');
+const OperationController = require('./../../http/controllers/admin/operationController');
+const AuthMiddleware = require('./../../http/middleware/auth');
+
+const { assignShift, getShiftsForDate } = require('./../../http/controllers/admin/shiftController');
+
 
 const Activity = require('../../models/activity');
 
@@ -48,10 +55,44 @@ router.use((req , res , next) => {
     next();
 })
 
+
+
+
+
+
+router.get('/firefighter/:id' , firefighterController.info)
+
+
+
+
+
 router.get('/gis/info' , gisController.info)
 router.get('/gis/information' , gisController.information)
 router.get('/gis/hydrant' , gisController.hydrant)
 router.post('/gis/hydrant/store' , gisController.store)
+
+
+
+
+
+// router.post('/start', AuthMiddleware.isAuthenticated, OperationController.startOperation);
+// router.post('/end', AuthMiddleware.isAuthenticated, OperationController.endOperation);
+// router.get('/report/:operationId', AuthMiddleware.isAuthenticated, OperationController.getOperationReportLink);
+// router.get('/report/view/:linkId', OperationController.getReportByLink);
+
+router.post('/start', OperationController.startOperation);
+router.post('/end', OperationController.endOperation);
+router.get('/report/:operationId', OperationController.getOperationReportLink);
+router.get('/report/view/:linkId', OperationController.getReportByLink);
+
+
+
+// تخصیص شیفت به آتش‌نشان
+router.post('/shift/assign', isStationChief, assignShift);
+
+// دریافت شیفت‌ها برای تاریخ خاص
+router.get('/shift/:date', getShiftsForDate);
+
 
 // category Controller
 router.get('/category'   ,categoryController.index);
@@ -160,12 +201,13 @@ router.post('/report-registration',adminController.storereportRegistration);
 
 
 
-router.get('/station' ,  stationController.index);
+router.get('/list/stations' ,  stationController.index);
+router.get('/stations/:id/details' ,stationController.details);
+
 router.get('/station/create' , stationController.create);
 router.get('/station/:id/edit' , stationController.edit);
 router.post('/station/update/:id' , stationController.update);
 
-router.get('/station/:id/information' ,stationController.information);
 router.post('/station/create' , stationController.store);
 router.get('/station/createpayam/:id' , stationController.createpayam);
 router.post('/station/sendpayam',stationController.sendpayam);

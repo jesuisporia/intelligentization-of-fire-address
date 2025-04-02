@@ -1,7 +1,8 @@
 const controller = require('../controller');
-const Station = require('../../../models/station');
-const Role = require('../../../models/role');
-const Payam = require('../../../models/payam');
+const Station = require('./../../../models/station');
+const Firefighter = require('./../../../models/firefighter');
+const Reports = require('./../../../models/report');
+
 
 const User = require('./../../../models/user')
 
@@ -9,11 +10,10 @@ class stationController extends controller {
     async index(req, res , next) {
         try {
 
-            let station = await User.find({admin:true });
- 
+            const stations = await Station.find();  // گرفتن تمامی ایستگاه‌ها از دیتابیس
             res.render('admin/station/index', {
                 title: 'لیست تمام ایستگاه ها',
-                station
+                stations
             });
         } catch (err) {
             next(err);
@@ -21,13 +21,50 @@ class stationController extends controller {
     }
 
 
-    async information(req, res , next) {
+    async details(req, res , next) {
         try {
-            let station = await User.findById(req.params.id);
 
+            const stationId = req.params.id; // ایستگاه را از URL می‌گیریم
+            const page = parseInt(req.query.page) || 1; // صفحه‌بندی: صفحه فعلی را از کوئری می‌گیریم
+            const limit = 10; // تعداد موارد در هر صفحه
+            const firefighters = await Firefighter.find({ stations: stationId });
+            const reports = await Reports.find({ stationIds: stationId });
+
+            // ایستگاه را با اطلاعات پرسنل، عملیات‌ها و گزارش‌ها پیدا می‌کنیم
+            const station = await Station.findById(stationId)
+                .populate('personnel')
+                .populate('operations')
+                .populate('reports');
+            
+            // بررسی می‌کنیم که ایستگاه پیدا شده باشد
+            if (!station) {
+                return res.status(404).send('ایستگاه پیدا نشد');
+            }
+    
+            // بررسی وجود عملیات‌ها و گزارش‌ها
+            const operations = station.operations || []; // اگر عملیات‌ها موجود نبود، به طور پیش‌فرض آرایه خالی قرار می‌دهیم
+            // const reports = station.reports || []; // اگر گزارش‌ها موجود نبود، به طور پیش‌فرض آرایه خالی قرار می‌دهیم
+    
+            // صفحه‌بندی عملیات‌ها
+            const totalOperations = operations.length;
+            const totalOperationsPages = Math.ceil(totalOperations / limit);
+            const pagedOperations = operations.slice((page - 1) * limit, page * limit);
+    
+            // صفحه‌بندی گزارش‌ها
+            const totalReports = reports.length;
+            const totalReportsPages = Math.ceil(totalReports / limit);
+            const pagedReports = reports.slice((page - 1) * limit, page * limit);
+            // ارسال داده‌ها به EJS
+            console.log(pagedReports)
             res.render('admin/station/information', {
                 title: 'جزییات ایستگاه',
-                station
+                station: station,
+                operations: pagedOperations,
+                reports: pagedReports,
+                totalOperationsPages: totalOperationsPages,
+                totalReportsPages: totalReportsPages,
+                currentPage: page,
+                firefighters
             });
         } catch (err) {
             next(err);

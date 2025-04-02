@@ -1,3 +1,17 @@
+1.25.0 / 2022-09-21
+
+* fixed: windows support #846, #774, #594, #524, #528, #559, #652, #682 [piotr-cz](https://github.com/piotr-cz)
+* docs; improvements from #821 [agokhale](https://github.com/agokhale)
+* docs; improvements #801 [aarongarciah](https://github.com/aarongarciah)
+
+1.24.0 / 2022-09-18
+
+* fixed: infering format of buffered or streamed ico files #429 freund17
+* fixed; preserve color info duing autoOrient() #714, #844 reco
+* tests; switch to Github Actions
+* docs; fix links #834 delesseps
+* docs; clarify install directions #689 PatrykMiszczak
+* refactor; clean up compare.js #788 LongTengDao
 
 1.23.1 / 2017-12-27
 

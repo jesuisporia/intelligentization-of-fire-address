@@ -99,35 +99,7 @@
                                                     style="width: 81px;">حذف</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-
-
-
-
-                                            <% user.forEach(fireman => {  %>
-
-                                            <tr>
-                                                <td> <%= fireman.name %> </td>
-                                                <td> <%= fireman.phone %> </td>
-                                                <!-- <td> <%= fireman.name %> </td> -->
-                                                <td> <%= fireman.shifte %> </td>
-                                                <td> <a href="/admin/user/<%= fireman._id %>/information"
-                                                        class="btn w-xs btn-primary btn-xs">جزيیات</a></td>
-                                                <td> <a href="/admin/user/<%= fireman._id %>/edit"
-                                                        class="btn w-xs btn-info btn-xs">ویرایش</a></td>
-                                                <td>
-                                                    
-                                                    <a href="/admin/user/<%= fireman._id %>/delete" title="حذف"
-                                                        class="btn btn-danger btn-simple btn-xs" onclick="deletes()">
-                                                        حذف
-                                                    </a>
-                                                    </td>
-                                            </tr>
-
-                                            <% })  %>
-
-
-                                        </tbody>
+                               
                                     </table>
                                 </div>
                             </div>

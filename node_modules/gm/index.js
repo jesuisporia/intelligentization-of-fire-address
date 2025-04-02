@@ -74,6 +74,11 @@ function gm (source, height, color) {
     var inputFromStdin = this.sourceStream || this.sourceBuffer;
     var ret = inputFromStdin ? '-' : this.source;
 
+    const fileNameProvied = typeof height === 'string';
+    if (inputFromStdin && fileNameProvied && /\.ico$/i.test(this.source)) {
+      ret = `ico:-`;
+    }
+
     if (ret && this.sourceFrames) ret += this.sourceFrames;
 
     src.length = 0;

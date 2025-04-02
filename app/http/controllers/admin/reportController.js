@@ -10,14 +10,22 @@ const ReportRegistration = require('../../../models/reportRegistration');
 const Map = require('../../../models/map');
 const Fire = require('../../../models/fire');
 const User = require('../../../models/user');
+const Report = require('../../../models/report');
 const logReportRegistration = require('../../../models/logreportRegistration');
 
 class reportController extends controller {
 
    async index(req, res) {
       let page = req.query.page || 1;
-      var reportregister = await ReportRegistration.find({}).populate('userid').sort({createdAt : -1});
-
+      const reportregister = await Report.find()
+      .sort({ createdAt: -1 }) // مرتب‌سازی بر اساس جدیدترین گزارشات
+      .limit(1) // محدود به 10 گزارش آخر
+      .populate('driver')        // اینجا populate می‌شود
+      .populate('firefighters')  // اینجا populate می‌شود
+      .populate('stationId');    // اگر نیاز دارید ایستگاه هم populate شود
+      console.log(reportregister)
+    //   var reportregister = await ReportRegistration.find({}).populate('userid').sort({createdAt : -1});
+    console.log(reportregister)
       res.render('admin/report',{reportregister})
    }
 

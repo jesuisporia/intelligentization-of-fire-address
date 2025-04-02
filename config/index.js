@@ -10,7 +10,7 @@ module.exports = {
     service,
     pagination: 20,
     debug : true,
-    port : 3000,
+    port : 4000,
     cookie_secretkey : process.env.COOKIE_SECRETKEY
 }
 

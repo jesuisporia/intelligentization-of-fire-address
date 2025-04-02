@@ -50,97 +50,50 @@
 
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <table id="example2"
-                                        class="table table-striped table-bordered table-hover dataTable no-footer"
-                                        role="grid" aria-describedby="example2_info">
-                                        <thead>
-                                            <tr role="row">
-                                                <th class="sorting_asc" tabindex="0" aria-controls="example2"
-                                                    rowspan="1" colspan="1" aria-sort="ascending"
-                                                    aria-label="محل وقوع حادثه	: activate to sort column descending"
-                                                    style="width: 150px;">محل وقوع حادثه	</th>
-                                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                                    colspan="1" aria-label="ایستگاه: activate to sort column ascending"
-                                                    style="width: 246px;">ایستگاه</th>
-                                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                                    colspan="1" aria-label="شیفت: activate to sort column ascending"
-                                                    style="width: 150px;">شیفت</th>
-                                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                                    colspan="1" aria-label="تعداد مامورین اعزامی	: activate to sort column ascending"
-                                                    style="width: 119px;">تعداد مامورین اعزامی	</th>
-                                                
-                                               
-                                                    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                                    colspan="1"
-                                                    aria-label="شروع تاریخ: activate to sort column ascending"
-                                                    style="width: 109px;">جزئیات</th>
-                                                  
 
-
-                                                    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                                    colspan="1" aria-label="حقوق: activate to sort column ascending"
-                                                    style="width: 81px;">ویرایش</th>
-
-                                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                                    colspan="1" aria-label="یبل: activate to sort column ascending"
-                                                    style="width: 81px;">حذف</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-
-                                            <% reportregister.forEach(report => { %>
- 
+                                    <% if (reportregister.length > 0) { %>
+                                        <table border="1">
+                                            <thead>
                                                 <tr>
-                                                  <td>
-                              
-                                                    <h6 style="color: green;"><%= report.accidentaddress %></h6>
-                              
-                              
-                              
-                                                  </td>
-                                                  <td>
-                              
-                                                    <h6 style="color: green;"><%= report.userid.name %></h6>
-                              
-                              
-                                                  </td>
-                                                  <td>
-                              
-                                                    <h6 style="color: green;"><%= report.inputRelatedService %></h6>
-                              
-                              
-                              
-                                                  </td>
-                      
-                                                  <td><%= datas(report.createdAt).format('jD jMMMM jYYYY') %></td>
-                                                  <td>
-                                                    <%= datas(report.createdAt).fromNow() %>
-                                                  </td>
-
-                                                 
-                                            <td> <a href="/admin/report/<%= report._id %>/edit"
-                                                    class="btn w-xs btn-info btn-xs">ویرایش</a></td>
-                                            <td>
-                                                
-                                                <a href="/admin/report/<%= report._id %>/delete" title="حذف"
-                                                    class="btn btn-danger btn-simple btn-xs" onclick="deletes()">
-                                                    حذف
-                                                </a>
-                                                </td>
-                                                <td> <a href="/dashboard/report/<%= report.id %>"
-                                                    class="btn w-xs btn-primary btn-xs">چاپ</a></td>
-                              
+                                                    <th>تاریخ</th>
+                                                    <th>ایستگاه</th>
+                                                    <th>شیفت</th>
+                                                    <th>راننده</th>
+                                                    <th>آتش‌نشان‌ها</th>
+                                                    <th>گزارش</th>
                                                 </tr>
-                              
-                              
-                                                <% }) %>
-
-
-
-
-                                        </tbody>
-                                    </table>
+                                            </thead>
+                                            <tbody>
+                                                <% reportregister.forEach(function(report) { %>
+                                                    <tr>
+                                                        <td><%= report.createdAt %></td>
+                                                        <td><%= report.stationId ? report.stationId.name : 'نامشخص' %></td>
+                                                        <td><%= report.shift %></td>
+                                                        <td>
+                                                            <% if (report.driver) { %>
+                                                                <%= report.driver.firstName %> <%= report.driver.lastName %>
+                                                            <% } else { %>
+                                                                <span>راننده مشخص نیست</span>
+                                                            <% } %>
+                                                        </td>
+                                                        <td>
+                                                            <% if (report.firefighters && report.firefighters.length > 0) { %>
+                                                                <% report.firefighters.forEach(function(firefighter) { %>
+                                                                    <%= firefighter.firstName %> <%= firefighter.lastName %><br>
+                                                                <% }); %>
+                                                            <% } else { %>
+                                                                <span>آتش‌نشان‌ها مشخص نیستند</span>
+                                                            <% } %>
+                                                        </td>
+                                                        <td><%= report.reportText %></td>
+                                                    </tr>
+                                                <% }); %>
+                                            </tbody>
+                                        </table>
+                                    <% } else { %>
+                                        <p>گزارشی برای نمایش وجود ندارد.</p>
+                                    <% } %>
+                                
                                 </div>
                             </div>
 

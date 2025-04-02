@@ -1,0 +1,203 @@
+<!-- 
+<script type="text/javascript">
+  var osm_default = new ol.layer.Tile({
+    source: new ol.source.OSM()
+  });
+
+
+
+
+
+
+
+
+  var map = new ol.Map({
+    layers: [osm_default],
+    target: 'map',
+    view: new ol.View({
+      center: ol.proj.transform([47.10, 34.33], 'EPSG:4326', 'EPSG:3857'),
+      zoom: 12.5
+    })
+  });
+
+
+
+
+  function add_map_point(lat, lng, name) {
+
+    var layer = new ol.layer.Vector({
+      source: new ol.source.Vector({
+        features: [
+          new ol.Feature({
+            geometry: new ol.geom.Point(ol.proj.fromLonLat([lat, lng]))
+          })
+        ]
+      }),
+      style: new ol.style.Style({
+        image: new ol.style.Icon({
+          anchor: [0.5, 0.5],
+          anchorXUnits: "fraction",
+          anchorYUnits: "fraction",
+          src: "/fireimg.png"
+        })
+      }),
+
+
+
+    });
+
+    layer.on("click", function (e) {
+      console.log('aaaaaaa')
+    })
+    var s = layer.set('name', name);
+    map.addLayer(layer);
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+  var layer = new ol.layer.Vector({
+      source: new ol.source.Vector({
+        features: [
+          new ol.Feature({
+            geometry: new ol.geom.Point(ol.proj.fromLonLat([47.07, 34.35]))
+          })
+        ]
+      }),
+      style: new ol.style.Style({
+        image: new ol.style.Icon({
+          anchor: [0.5, 0.5],
+          anchorXUnits: "fraction",
+          anchorYUnits: "fraction",
+          src: "/fireimg.png"
+        })
+      }),
+
+
+
+    });
+
+
+    var s = layer.set('name', name);
+    map.addLayer(layer);
+
+
+    layer.on("click", function (e) {
+      console.log('aaaaaaa')
+    })
+
+    layer.on('select', function(e) {
+    let featureSelected = e.selected[0];
+    let layer = selectClick.getLayer(featureSelected);
+    console.log('JJJJJJJJJJJJJJJJJJJJJJJJJJ'); // here you have the selected layer
+});
+
+
+  // add_map_point(47.07, 34.35, 'a');
+  // add_map_point(47.05, 34.36, 'b');
+  // add_map_point(47.08, 34.33, 'c');
+  // add_map_point(47.04, 34.32, 'd');
+  // add_map_point(47.11, 34.38, 'e');
+  // add_map_point(47.11, 34.36, 'f');
+  // add_map_point(47.02, 34.34, 'j');
+  // add_map_point(47.07, 34.31, 'h');
+
+
+
+
+  marker = new ol.Feature({
+    geometry: new ol.geom.Point([47.07, 34.35]),
+    name: "Location Marker"
+  });
+  console.log(marker)
+
+  markerStyle = new ol.style.Style({
+    image: new ol.style.Icon({
+      anchor: [0.5, 0.5],
+      anchorXUnits: "fraction",
+      anchorYUnits: "fraction",
+      src: "/fireimg.png"
+    })
+  })
+
+  marker.setStyle(markerStyle);
+  marker.on("click", function (e) {
+    console.log('WWWWWWWWWWWWWWWWWWWWWWWWWWW')
+
+  }, marker);
+  map.addOverlay(marker);
+
+  //   var layer = new ol.layer.Vector({
+  //      source: new ol.source.Vector({
+  //          features: [
+  //              new ol.Feature({
+  //                  geometry: new ol.geom.Point(ol.proj.fromLonLat([47.05, 34.33]))
+  //              })
+  //          ]
+  //      })
+  //  });
+  //  map.addLayer(layer);
+
+
+
+
+
+
+
+
+
+</script> -->
+<script>
+  var id, target, options;
+
+function success(pos) {
+  var crd = pos.coords;
+
+  if (target.latitude === crd.latitude && target.longitude === crd.longitude) {
+    console.log('Congratulations, you reached the target');
+    navigator.geolocation.clearWatch(id);
+  }
+}
+
+function error(err) {
+  console.warn('ERROR(' + err.code + '): ' + err.message);
+}
+
+target = {
+  latitude : 0,
+  longitude: 0
+};
+
+options = {
+  enableHighAccuracy: false,
+  timeout: 5000,
+  maximumAge: 0
+};
+
+id = navigator.geolocation.watchPosition(success, error, options);
+console.log(id)
+</script>
+  <script>
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.watchPosition(showPosition);
+      } else {
+        console.log('hwyyyyyyyyyyyyyyyyyyyyy')
+      }
+    }
+
+    getLocation()
+
+    function showPosition(position) {
+      console.log(position)
+    }
+  </script>

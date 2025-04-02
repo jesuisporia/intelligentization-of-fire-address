@@ -1,421 +1,141 @@
+<!-- صفحه نمایش جزئیات ایستگاه -->
 <!-- Main Wrapper -->
 <div id="wrapper">
 
     <div class="content">
 
-
         <div class="row">
-            <div class="col-lg-12">
-                <div class="hpanel">
-                    <div class="panel-heading">
-                        <div class="panel-tools">
-                            <a class="showhide"><i class="fa fa-chevron-up"></i></a>
-                            <a class="closebox"><i class="fa fa-times"></i></a>
-                        </div>
-                        جزییات ایستگاه
-                    </div>
-                    <div class="panel-body">
-                        <div class="col-md-12">
+            <div class="station-details">
+                <h2>جزئیات ایستگاه - <%= station.name %></h2>
 
-                            <div class="content" style="
-                    padding: 0;
-                    height: inherit;
-                    margin-bottom: 0;
-                ">
-                                <div class="col-md-3" style="
-                        padding: 0;
-                    ">
-                                    <div class="hpanel" style="
-                            margin-bottom: 0;
-                        ">
-                                        <div class="panel-body" style="
-                                        margin: 10px;
-                                    ">
-                                            <div class="text-center">
-                                                <h2 class="m-b-xs">0</h2>
-                                                <p class="font-bold text-info">امتیازات کسب شده</p>
-                                                <div class="m">
-                                                    <i class="pe-7s-display1 fa-5x"></i>
-                                                </div>
-                                                <p class="small">
-                                                    برای نمایش تمام گزارشات ثبت شده بر روی دکمه زیر کلیک نمایید
-                                                </p>
-                                                <a style="
-                                        color: #fff;
-                                        font-weight: bold;
-                                    " class="btn btn-info btn-sm" href="/dashboard/report">نمایش گزارشات</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3" style="
-                        padding: 0;
-                    ">
-                                    <div class="hpanel" style="
-                            margin-bottom: 0;
-                        ">
-                                        <div class="panel-body" style="
-                                        margin: 10px;
-                                    ">
-                                            <div class="text-center">
-                                                <h2 class="m-b-xs">0</h2>
-                                                <p class="font-bold text-success">حریق ثبت شده امروز</p>
-                                                <div class="m">
-                                                    <i class="pe-7s-display1 fa-5x"></i>
-                                                </div>
-                                                <p class="small">
-                                                    برای نمایش تمام گزارشات ثبت شده بر روی دکمه زیر کلیک نمایید
-                                                </p>
-                                                <a style="
-                                        color: #fff;
-                                        font-weight: bold;
-                                    " class="btn btn-success btn-sm" href="/dashboard/report">نمایش گزارشات</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3" style="
-                        padding: 0;
-                    ">
-                                    <div class="hpanel" style="
-                            margin-bottom: 0;
-                        ">
-                                        <div class="panel-body" style="
-                                        margin: 10px;
-                                    ">
-                                            <div class="text-center">
-                                                <h2 class="m-b-xs">0</h2>
-                                                <p class="font-bold text-danger">کل حریق ثبت شده</p>
-                                                <div class="m">
-                                                    <i class="pe-7s-display1 fa-5x"></i>
-                                                </div>
-                                                <p class="small">
-                                                    برای نمایش تمام گزارشات ثبت شده بر روی دکمه زیر کلیک نمایید
-                                                </p>
-                                                <a style="
-                                                color: #fff;
-                                                font-weight: bold;
-                                            " class="btn btn-danger btn-sm" href="/dashboard/report">نمایش گزارشات</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3" style="
-                        padding: 0;
-                    ">
-                                    <div class="hpanel" style="
-                            margin-bottom: 0;
-                        ">
-                                        <div class="panel-body" style="
-                                        margin: 10px;
-                                    ">
-                                            <div class="text-center">
-                                                <h2 class="m-b-xs">0</h2>
-                                                <p class="font-bold text-warning">گزارش ثبت شده</p>
-                                                <div class="m">
-                                                    <i class="pe-7s-display1 fa-5x"></i>
-                                                </div>
-                                                <p class="small">
-                                                    برای نمایش تمام گزارشات ثبت شده بر روی دکمه زیر کلیک نمایید
-                                                </p>
-                                                <a style="
-                                                color: #fff;
-                                                font-weight: bold;
-                                            " class="btn btn-warning btn-sm" href="/dashboard/report">نمایش گزارشات</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                <!-- نمایش لیست عملیات‌ها -->
+                <div class="operations-section">
+                    <h3>آخرین عملیات‌ها</h3>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>عنوان عملیات</th>
+                                <th>تاریخ</th>
+                                <th>وضعیت</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% if (station.operations.length > 0) { %>
+                                <% station.operations.forEach(operation => { %>
+                                    <tr>
+                                        <td><%= operation.operationId %></td>
+                                        <td><%= operation.operationName %></td>
+                                        <td><%= operation.operationStatus %></td>
+                                        
+                                        <!-- بررسی و تبدیل تاریخ به فرمت ISO -->
+                                        <td>
+                                            <% if (operation.startDateTime instanceof Date) { %>
+                                                <%= operation.startDateTime.toISOString().substring(0, 10) %>
+                                            <% } else { %>
+                                                <%= operation.startDateTime %>
+                                            <% } %>
+                                        </td>
+                                        
+                                        <td>
+                                            <% if (operation.endDateTime instanceof Date) { %>
+                                                <%= operation.endDateTime.toISOString().substring(0, 10) %>
+                                            <% } else { %>
+                                                <%= operation.endDateTime %>
+                                            <% } %>
+                                        </td>
+                                    </tr>
+                                <% }); %>
+                            <% } else { %>
+                                <tr>
+                                    <td colspan="5">هیچ عملیاتی یافت نشد</td>
+                                </tr>
+                            <% } %>
+                            
+                        </tbody>
+                    </table>
 
-                            </div>
-
-
-
-                  
-                        </div>
-                    </div>
+                    <!-- صفحه‌بندی عملیات‌ها -->
+                    <nav>
+                        <ul class="pagination">
+                            <% for (let i = 1; i <= totalOperationsPages; i++) { %>
+                            <li class="<%= i === currentPage ? 'active' : '' %>">
+                                <a href="/station/<%= station._id %>?page=<%= i %>"><%= i %></a>
+                            </li>
+                            <% } %>
+                        </ul>
+                    </nav>
                 </div>
-                <div class="hpanel">
-                    <div class="panel-heading">
-                        <div class="panel-tools">
-                            <a class="showhide"><i class="fa fa-chevron-up"></i></a>
-                            <a class="closebox"><i class="fa fa-times"></i></a>
-                        </div>
-                        جزییات ایستگاه
-                    </div>
 
-                    <div class="panel-body">
+                <!-- نمایش لیست گزارش‌ها -->
+                <div class="reports-section">
+                    <h3>آخرین گزارش‌ها</h3>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>عنوان گزارش</th>
+                                <th>تاریخ</th>
+                                <th>وضعیت</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% if (reports.length > 0) { %>
+                            <% reports.forEach(report => { %>
+                            <tr>
+                                <td><%= report.operationType %></td>
+                                <td><%= report.duration %></td>
+                                <td><%= report.recommendations %></td>
+                            </tr>
+                            <% }) %>
+                            <% } else { %>
+                            <tr>
+                                <td colspan="3">هیچ گزارشی یافت نشد</td>
+                            </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
 
-
-
-                        <canvas id="canvas"></canvas>
-
-                    </div>
-                    <div class="panel-footer">
-                        این بخش در حال تکمیل شدن می باشد. </div>
+                    <!-- صفحه‌بندی گزارش‌ها -->
+                    <nav>
+                        <ul class="pagination">
+                            <% for (let i = 1; i <= totalReportsPages; i++) { %>
+                            <li class="<%= i === currentPage ? 'active' : '' %>">
+                                <a href="/station/<%= station._id %>?page=<%= i %>"><%= i %></a>
+                            </li>
+                            <% } %>
+                        </ul>
+                    </nav>
                 </div>
             </div>
-        </div>
 
+            <!-- نمایش لیست پرسنل ایستگاه -->
+            <div class="personnel-section">
+                <h3>پرسنل ایستگاه</h3>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>نام</th>
+                            <th>سمت</th>
+                            <th>وضعیت</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% if (firefighters) { %>
+                        <% firefighters.forEach(person => { %>
+                        <tr>
+                            <td><a href="/admin/firefighter/<%= person.id %>"><%= person.firstName %></a></td>
+                            <td><%= person.lastName %></td>
+                            <td><%= person.fatherName %></td>
+                        </tr>
+                        <% }) %>
+                        <% } else { %>
+                        <tr>
+                            <td colspan="3">پرسنلی برای این ایستگاه وجود ندارد</td>
+                        </tr>
+                        <% } %>
+                    </tbody>
 
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="hpanel">
-                    <div class="panel-heading">
-                        <div class="panel-tools">
-                            <a class="showhide"><i class="fa fa-chevron-up"></i></a>
-                            <a class="closebox"><i class="fa fa-times"></i></a>
-                        </div>
-                        آتش نشانان برتر
-                    </div>
-                    <div class="panel-body list">
-                        <div class="table-responsive project-list">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-
-                                        <th>نام</th>
-                                        <th>تکمیل شده</th>
-                                        <th>وظیفه</th>
-                                        <th>تاریخ</th>
-                                        <th>فعال</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        
-                                        <td>پوریا یاوری
-                                            <br>
-                                        </td>
-                                        <td>
-                                            <span class="pie">1/5</span>
-                                        </td>
-                                        <td><strong>۲۰%</strong></td>
-                                        <td>۱۲ خرداد ۹۶</td>
-                                        <td><a href="#"><i class="fa fa-check text-success"></i></a></td>
-                                    </tr>
-                                    <tr>
-                                        
-                                        <td>وحید رستمی
-                                            <br>
-                                        </td>
-                                        <td>
-                                            <span class="pie">1/4</span>
-                                        </td>
-                                        <td><strong>۴۰%</strong></td>
-                                        <td>۱۴ خرداد ۹۶</td>
-                                        <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-                                    </tr>
-                                    <tr>
-                                        
-                                        <td>سید یزدان صالح
-                                            <br>
-                                        </td>
-                                        <td>
-                                            <span class="pie">0.52/1.561</span>
-                                        </td>
-                                        <td><strong>۷۵%</strong></td>
-                                        <td>۲۰ خرداد ۹۶</td>
-                                        <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-                                    </tr>
-                                    <tr>
-                                        
-                                        <td>پدرام نظری
-                                            <br>
-                                        </td>
-                                        <td>
-                                            <span class="pie">226/360</span>
-                                        </td>
-                                        <td><strong>۱۶%</strong></td>
-                                        <td>۲۲ خرداد ۹۶</td>
-                                        <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+                </table>
             </div>
         </div>
-
     </div>
-
-
-
 </div>
-
-<script src="/js/Chart.js"></script>
-<script src="/js/utils.js"></script>
-<script>
-    var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October',
-        'November', 'December'
-    ];
-    var config = {
-        type: 'line',
-        data: {
-            labels: ['۲۶−۸−۹۹', 'February', 'March', 'April', 'May', 'June', 'July'],
-            datasets: [{
-                label: 'تمام حریق های این ایستگاه',
-                backgroundColor: window.chartColors.red,
-                borderColor: window.chartColors.red,
-                data: [
-                    randomScalingFactor(),
-                    randomScalingFactor(),
-                    randomScalingFactor(),
-                    randomScalingFactor(),
-                    randomScalingFactor(),
-                    randomScalingFactor(),
-                    randomScalingFactor()
-                ],
-                fill: false,
-            }, {
-                label: 'تمام حریق های صورت گرفته',
-                fill: false,
-                backgroundColor: window.chartColors.blue,
-                borderColor: window.chartColors.blue,
-                data: [
-                    randomScalingFactor(),
-                    randomScalingFactor(),
-                    randomScalingFactor(),
-                    randomScalingFactor(),
-                    randomScalingFactor(),
-                    randomScalingFactor(),
-                    randomScalingFactor()
-                ],
-            }]
-        },
-        options: {
-
-            legend: {
-                labels: {
-                    fontFamily: 'IRANSans'
-                }
-            },
-            responsive: true,
-
-            title: {
-                display: true,
-                text: 'نمودار آنلاین حریق'
-            },
-            tooltips: {
-                mode: 'index',
-                intersect: false,
-            },
-            hover: {
-                mode: 'nearest',
-                intersect: true
-            },
-            scales: {
-                xAxes: [{
-                    display: true,
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'تاریخ'
-                    }
-                }],
-                yAxes: [{
-                    display: true,
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'تعداد'
-                    }
-                }]
-            }
-        }
-    };
-
-    window.onload = function () {
-        var ctx = document.getElementById('canvas').getContext('2d');
-        window.myLine = new Chart(ctx, config, options);
-    };
-
-    document.getElementById('randomizeData').addEventListener('click', function () {
-        config.data.datasets.forEach(function (dataset) {
-            dataset.data = dataset.data.map(function () {
-                return randomScalingFactor();
-            });
-
-        });
-
-        window.myLine.update();
-    });
-
-    var colorNames = Object.keys(window.chartColors);
-    document.getElementById('addDataset').addEventListener('click', function () {
-        var colorName = colorNames[config.data.datasets.length % colorNames.length];
-        var newColor = window.chartColors[colorName];
-        var newDataset = {
-            label: 'Dataset ' + config.data.datasets.length,
-            backgroundColor: newColor,
-            borderColor: newColor,
-            data: [],
-            fill: false
-        };
-
-        for (var index = 0; index < config.data.labels.length; ++index) {
-            newDataset.data.push(randomScalingFactor());
-        }
-
-        config.data.datasets.push(newDataset);
-        window.myLine.update();
-    });
-
-    document.getElementById('addData').addEventListener('click', function () {
-        if (config.data.datasets.length > 0) {
-            var month = MONTHS[config.data.labels.length % MONTHS.length];
-            config.data.labels.push(month);
-
-            config.data.datasets.forEach(function (dataset) {
-                dataset.data.push(randomScalingFactor());
-            });
-
-            window.myLine.update();
-        }
-    });
-
-    document.getElementById('removeDataset').addEventListener('click', function () {
-        config.data.datasets.splice(0, 1);
-        window.myLine.update();
-    });
-
-    document.getElementById('removeData').addEventListener('click', function () {
-        config.data.labels.splice(-1, 1); // remove the label first
-
-        config.data.datasets.forEach(function (dataset) {
-            dataset.data.pop();
-        });
-
-        window.myLine.update();
-    });
-</script>
-
-<script>
-    var id, target, options;
-
-    function success(pos) {
-        var crd = pos.coords;
-
-        if (target.latitude === crd.latitude && target.longitude === crd.longitude) {
-            console.log('Congratulations, you reached the target');
-            navigator.geolocation.clearWatch(id);
-        }
-    }
-
-    function error(err) {
-        console.warn('ERROR(' + err.code + '): ' + err.message);
-    }
-
-    target = {
-        latitude: 0,
-        longitude: 0
-    };
-
-    options = {
-        enableHighAccuracy: false,
-        timeout: 5000,
-        maximumAge: 0
-    };
-
-    id = navigator.geolocation.watchPosition(success, error, options);
-    console.log(id)
-</script>

@@ -13,10 +13,10 @@
 
   <link rel="stylesheet" href="/app/css/app.css">
   <link href="/css/bootstrap.css" rel="stylesheet">
-  <script src="/js/jquery.min.js"></script>
   <script src="/js/bootstrap.min.js"></script>
-  <link href="/css/font-awesome.css" rel="stylesheet">
   <link href="/css/style.css" rel="stylesheet">
+  
+  <script src="/js/socket.io.min.js"></script>
 
   <%- style %>
 
@@ -35,9 +35,9 @@
 
 
   <%- body %>
-  <script type="text/javascript" src="/dist/js/jquery-3.2.1.min.js"></script>
-  <script type="text/javascript" src="/dist/js/mapp.env.js"></script>
-  <script type="text/javascript" src="/dist/js/mapp.min.js"></script>
+  <!-- <script type="text/javascript" src="/dist/js/jquery-3.2.1.min.js"></script> -->
+  <!-- <script type="text/javascript" src="/dist/js/mapp.env.js"></script> -->
+  <!-- <script type="text/javascript" src="/dist/js/mapp.min.js"></script> -->
 
 
 
@@ -45,51 +45,6 @@
 
   <%- script %>
 
-<script>
-  var id, target, options;
-
-function success(pos) {
-  var crd = pos.coords;
-
-  if (target.latitude === crd.latitude && target.longitude === crd.longitude) {
-    console.log('Congratulations, you reached the target');
-    navigator.geolocation.clearWatch(id);
-  }
-}
-
-function error(err) {
-  console.warn('ERROR(' + err.code + '): ' + err.message);
-}
-
-target = {
-  latitude : 0,
-  longitude: 0
-};
-
-options = {
-  enableHighAccuracy: false,
-  timeout: 5000,
-  maximumAge: 0
-};
-
-id = navigator.geolocation.watchPosition(success, error, options);
-console.log(id)
-</script>
-  <script>
-    function getLocation() {
-      if (navigator.geolocation) {
-        navigator.geolocation.watchPosition(showPosition);
-      } else {
-        console.log('hwyyyyyyyyyyyyyyyyyyyyy')
-      }
-    }
-
-    getLocation()
-
-    function showPosition(position) {
-      console.log(position)
-    }
-  </script>
 
 
 </body>

@@ -202,7 +202,7 @@ class userController extends controller {
             createdAt: -1
         });
         let reportRegistration = await ReportRegistration.find({
-            userid: req.user.id
+            // userid: req.user.id
         }).sort({
             createdAt: -1
         });
